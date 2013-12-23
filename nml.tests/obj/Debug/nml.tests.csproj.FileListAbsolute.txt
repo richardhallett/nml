@@ -1,0 +1,7 @@
+D:\projects\nlm\nml.tests\bin\Debug\nml.tests.dll
+D:\projects\nlm\nml.tests\bin\Debug\nml.tests.pdb
+D:\projects\nlm\nml.tests\obj\Debug\nml.tests.csprojResolveAssemblyReference.cache
+D:\projects\nlm\nml.tests\obj\Debug\nml.tests.dll
+D:\projects\nlm\nml.tests\obj\Debug\nml.tests.pdb
+D:\projects\nlm\nml.tests\bin\Debug\nlm.dll
+D:\projects\nlm\nml.tests\bin\Debug\nlm.pdb

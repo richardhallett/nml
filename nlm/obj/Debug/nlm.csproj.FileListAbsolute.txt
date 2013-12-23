@@ -1,0 +1,10 @@
+E:\Personal\nlm\nlm\bin\Debug\nlm.dll
+E:\Personal\nlm\nlm\bin\Debug\nlm.pdb
+E:\Personal\nlm\nlm\obj\Debug\nlm.csprojResolveAssemblyReference.cache
+E:\Personal\nlm\nlm\obj\Debug\nlm.dll
+E:\Personal\nlm\nlm\obj\Debug\nlm.pdb
+D:\projects\nlm\nlm\bin\Debug\nlm.dll
+D:\projects\nlm\nlm\bin\Debug\nlm.pdb
+D:\projects\nlm\nlm\obj\Debug\nlm.csprojResolveAssemblyReference.cache
+D:\projects\nlm\nlm\obj\Debug\nlm.dll
+D:\projects\nlm\nlm\obj\Debug\nlm.pdb
