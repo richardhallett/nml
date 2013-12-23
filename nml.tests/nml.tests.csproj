@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\nlm\nml.csproj">
+    <ProjectReference Include="..\nml\nml.csproj">
       <Project>{0e988aca-48b8-40e8-ad71-1a52b0b00ccc}</Project>
       <Name>nml</Name>
     </ProjectReference>
