@@ -1,12 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace nml.tests
 {
-    [TestClass]
     public class Vector2Tests
     {        
-        [TestMethod]
+        [Fact]
         public void Vector2ArrayIndexTest()
         {
             var a = new Vector2(5.0f, 2.0f);
@@ -14,47 +13,47 @@ namespace nml.tests
             float x = a[0];
             float y = a[1];
 
-            Assert.AreEqual<float>(5.0f, x);
-            Assert.AreEqual<float>(2.0f, y);
+            Assert.Equal<float>(5.0f, x);
+            Assert.Equal<float>(2.0f, y);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2ZeroTest()
         {
             var a = Vector2.Zero;
             var expectedResult = new Vector2(0.0f, 0.0f);            
 
-            Assert.AreEqual<Vector2>(expectedResult, a);
+            Assert.Equal<Vector2>(expectedResult, a);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2OneTest()
         {
             var a = Vector2.One;
             var expectedResult = new Vector2(1.0f, 1.0f);
 
-            Assert.AreEqual<Vector2>(expectedResult, a);
+            Assert.Equal<Vector2>(expectedResult, a);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2UnitXTest()
         {
             var a = Vector2.UnitX;
             var expectedResult = new Vector2(1.0f, 0.0f);
 
-            Assert.AreEqual<Vector2>(expectedResult, a);
+            Assert.Equal<Vector2>(expectedResult, a);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2UnitYTest()
         {
             var a = Vector2.UnitY;
             var expectedResult = new Vector2(0.0f, 1.0f);
 
-            Assert.AreEqual<Vector2>(expectedResult, a);
+            Assert.Equal<Vector2>(expectedResult, a);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2AddTest()
         {
             var a = new Vector2(6.0f, -2.0f);
@@ -63,10 +62,10 @@ namespace nml.tests
 
             var r = a + b;
 
-            Assert.AreEqual<Vector2>(expectedResult, r);
+            Assert.Equal<Vector2>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2SubtractTest()
         {
             var a = new Vector2(6.0f, -2.0f);
@@ -75,10 +74,10 @@ namespace nml.tests
 
             var r = a - b;
 
-            Assert.AreEqual<Vector2>(expectedResult, r);
+            Assert.Equal<Vector2>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2MultiplyTest()
         {
             var a = new Vector2(6.0f, -2.0f);
@@ -87,10 +86,10 @@ namespace nml.tests
 
             var r = a * scalar;
 
-            Assert.AreEqual<Vector2>(expectedResult, r);
+            Assert.Equal<Vector2>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2DivideTest()
         {
             var a = new Vector2(6.0f, -2.0f);
@@ -99,10 +98,10 @@ namespace nml.tests
 
             var r = a / scalar;
 
-            Assert.AreEqual<Vector2>(expectedResult, r);
+            Assert.Equal<Vector2>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2DotTest()
         {
             var a = new Vector2(6.0f, -2.0f);
@@ -111,10 +110,10 @@ namespace nml.tests
 
             var r = Vector2.Dot(a, b);
 
-            Assert.AreEqual<float>(expectedResult, r);
+            Assert.Equal<float>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2LengthTest()
         {
             var a = new Vector2(3.0f, 4.0f);
@@ -122,10 +121,10 @@ namespace nml.tests
 
             var r = a.Length;
 
-            Assert.AreEqual<float>(expectedResult, r);
+            Assert.Equal<float>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Vector2LengthSquaredTest()
         {
             var a = new Vector2(3.0f, 4.0f);
@@ -133,7 +132,7 @@ namespace nml.tests
 
             var r = a.LengthSquared;
 
-            Assert.AreEqual<float>(expectedResult, r);
+            Assert.Equal<float>(expectedResult, r);
         }
     }
 }

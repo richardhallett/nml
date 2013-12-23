@@ -1,12 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace nml.tests
 {
-    [TestClass]
     public class Matrix4Tests
     {
-        [TestMethod]
+        [Fact]
         public void Matrix4ArrayIndexTest()
         {
             var a = new Matrix4();
@@ -17,11 +16,11 @@ namespace nml.tests
             float x = a[0, 1];
             float y = a[3, 2];
 
-            Assert.AreEqual<float>(1.0f, x);
-            Assert.AreEqual<float>(5.0f, y);
+            Assert.Equal<float>(1.0f, x);
+            Assert.Equal<float>(5.0f, y);
         }
 
-        [TestMethod]
+        [Fact]
         public void Matrix4MultiplyScalarTest()
         {
             var a = new Matrix4(new float[] { 
@@ -39,10 +38,10 @@ namespace nml.tests
 
             var r = a * scalar;
 
-            Assert.AreEqual<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Matrix4DivideScalarTest()
         {
             var a = new Matrix4(new float[] { 
@@ -60,11 +59,11 @@ namespace nml.tests
 
             var r = a / scalar;
 
-            Assert.AreEqual<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4>(expectedResult, r);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void Matrix4AdditionTest()
         {
             var a = new Matrix4(new float[] { 
@@ -81,10 +80,10 @@ namespace nml.tests
 
             var r = a + a;
 
-            Assert.AreEqual<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4>(expectedResult, r);
         }
 
-        [TestMethod]
+        [Fact]
         public void Matrix4SubtractionTest()
         {
             var a = new Matrix4(new float[] { 
@@ -97,11 +96,11 @@ namespace nml.tests
 
             var r = a - a;
 
-            Assert.AreEqual<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4>(expectedResult, r);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void Matrix4TransposeTest()
         {
             var a = new Matrix4(new float[] { 
@@ -118,7 +117,7 @@ namespace nml.tests
 
             a.Transpose();
 
-            Assert.AreEqual<Matrix4>(expectedResult, a);
+            Assert.Equal<Matrix4>(expectedResult, a);
         }
     }
 }
