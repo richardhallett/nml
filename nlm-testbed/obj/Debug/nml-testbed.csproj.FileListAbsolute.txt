@@ -1,8 +1,0 @@
-D:\projects\nlm\nlm-testbed\bin\Debug\nlm-testbed.exe.config
-D:\projects\nlm\nlm-testbed\bin\Debug\nlm-testbed.exe
-D:\projects\nlm\nlm-testbed\bin\Debug\nlm-testbed.pdb
-D:\projects\nlm\nlm-testbed\bin\Debug\nlm.dll
-D:\projects\nlm\nlm-testbed\bin\Debug\nlm.pdb
-D:\projects\nlm\nlm-testbed\obj\Debug\nml-testbed.csprojResolveAssemblyReference.cache
-D:\projects\nlm\nlm-testbed\obj\Debug\nlm-testbed.exe
-D:\projects\nlm\nlm-testbed\obj\Debug\nlm-testbed.pdb

@@ -281,6 +281,41 @@ namespace nml
             });
         }
 
+        /// <summary>
+        /// Swap all elements, rows become columns, columns become rows.
+        /// </summary>
+        /// <param name="matrix">The matrix to tranpose.</param>
+        /// <param name="result">The transposed matrix</param>
+        public static Matrix4 Transpose(Matrix4 matrix)
+        {
+            Matrix4 tMatrix = new Matrix4();
+            tMatrix[0, 0] = matrix[0, 0];
+            tMatrix[0, 1] = matrix[1, 0];
+            tMatrix[0, 2] = matrix[2, 0];
+            tMatrix[0, 3] = matrix[3, 0];
+
+            tMatrix[1, 0] = matrix[0, 1];
+            tMatrix[1, 1] = matrix[1, 1];
+            tMatrix[1, 2] = matrix[2, 1];
+            tMatrix[1, 3] = matrix[3, 1];
+
+            tMatrix[2, 0] = matrix[0, 2];
+            tMatrix[2, 1] = matrix[1, 2];
+            tMatrix[2, 2] = matrix[2, 2];
+            tMatrix[2, 3] = matrix[3, 2];
+
+            tMatrix[3, 0] = matrix[0, 3];
+            tMatrix[3, 1] = matrix[1, 3];
+            tMatrix[3, 2] = matrix[2, 3];
+            tMatrix[3, 3] = matrix[3, 3];
+
+            return tMatrix;
+        }
+
+        public void Transpose()
+        {
+            this = Matrix4.Transpose(this);
+        }
 
         /// <summary>
         /// Multiply matrix components by scalar.

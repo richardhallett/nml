@@ -1,5 +1,0 @@
-D:\projects\nlm\nlm\bin\Debug\nlm.dll
-D:\projects\nlm\nlm\bin\Debug\nlm.pdb
-D:\projects\nlm\nlm\obj\Debug\nml.csprojResolveAssemblyReference.cache
-D:\projects\nlm\nlm\obj\Debug\nlm.dll
-D:\projects\nlm\nlm\obj\Debug\nlm.pdb
