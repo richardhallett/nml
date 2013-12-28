@@ -19,6 +19,12 @@ namespace nml_testbed
             m[3, 2] = 3.0f;
 
             Console.WriteLine(m);
+
+            var a = new Vector2(3.0f, 4.0f);
+
+            a.Normalise();
+
+            Console.WriteLine(a);
         }
     }
 }

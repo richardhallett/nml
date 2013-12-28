@@ -115,6 +115,17 @@ namespace nml
         }
 
         /// <summary>
+        /// Is this vector a unit vector.
+        /// </summary>
+        public bool IsNormalised
+        {
+            get 
+            {
+                return Math.Abs(this.LengthSquared - 1.0f) < 1e-6f;
+            }
+        }
+
+        /// <summary>
         /// Returns a <see cref="Vector2"/> with zeros in all component values.
         /// </summary>
         public static Vector2 Zero { get { return new Vector2(); } }
@@ -187,6 +198,38 @@ namespace nml
         public static float Dot(Vector2 a, Vector2 b)
         {
             return (a.x * b.x) + (a.y * b.y);
+        }
+
+        /// <summary>
+        /// Normalise passed in vector
+        /// </summary>
+        /// <param name="a">The vector to normalise</param>
+        /// <returns>The normalised vector.</returns>
+        public static Vector2 Normalise(Vector2 a)
+        {
+            float length = a.LengthSquared;
+            if (length > 1e-6f)
+            {
+                float inv = 1.0f / a.Length;
+                float x = a.x * inv;
+                float y = a.y * inv;
+
+                return new Vector2(x, y);
+            }
+            else
+            {
+                // If the length is greater than the tolerance then we just force a return of a unit vector.
+                // Not 100% sure on this.
+                return new Vector2(1.0f, 0.0f);
+            }
+        }
+
+        /// <summary>
+        /// Normalise this vector
+        /// </summary>
+        public void Normalise()
+        {
+            this = Vector2.Normalise(this);
         }
 
         /// <summary>

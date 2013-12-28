@@ -134,5 +134,29 @@ namespace nml.tests
 
             Assert.Equal<float>(expectedResult, r);
         }
+
+        [Fact]
+        public void Vector2NormaliseTest()
+        {
+            var a = new Vector2(3.0f, 4.0f);
+            var expectedResult = new Vector2(0.6f, 0.8f);
+
+            a.Normalise();
+
+            Assert.Equal<Vector2>(expectedResult, a);
+        }
+
+        [Fact]
+        public void Vector2IsNormaliseTest()
+        {
+            var a = new Vector2(3.0f, 4.0f);
+            var expectedResult = true;
+
+            a.Normalise();
+
+            var r = a.IsNormalised;
+
+            Assert.Equal<bool>(expectedResult, r);
+        }
     }
 }
