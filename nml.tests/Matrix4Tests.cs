@@ -140,6 +140,44 @@ namespace nml.tests
 
             Assert.Equal<Matrix4>(expectedResult, r);
         }
-    
+
+        [Fact]
+        public void Matrix4DeterminantTest()
+        {
+            // Although i've been using this elsewhere as I like ordered numbers, as it turns out works pretty well for getting a zero based determinant (singular matrix, i.e. no inverse)
+            var a = new Matrix4(new float[] { 
+                                            1.0f, 2.0f, 3.0f, 4.0f,
+                                            5.0f, 6.0f, 7.0f, 8.0f,
+                                            9.0f, 10.0f, 11.0f, 12.0f,
+                                            13.0f, 14.0f, 15.0f, 16.0f});
+
+
+            var expectedResult = 0.0f;
+
+            var r = a.Determinant;
+
+            Assert.Equal<float>(expectedResult, r);
+        }
+
+        [Fact]
+        public void Matrix4InvertTest()
+        {            
+            var a = new Matrix4(new float[] { 
+                                            1.0f, 1.0f, 0.0f, 0.0f,
+                                            1.0f, 1.0f, 1.0f, 0.0f,
+                                            0.0f, 1.0f, 1.0f, 0.0f,
+                                            0.0f, 0.0f, 0.0f, 1.0f});
+
+
+            var expectedResult = new Matrix4(new float[] { 
+                                            0.0f, 1.0f, -1.0f, 0.0f,
+                                            1.0f, -1.0f, 1.0f, 0.0f,
+                                            -1.0f, 1.0f, 0.0f, 0.0f,
+                                            0.0f, 0.0f, 0.0f, 1.0f});
+
+            var r = Matrix4.Invert(a);
+
+            Assert.Equal<Matrix4>(expectedResult, r);
+        }
     }
 }

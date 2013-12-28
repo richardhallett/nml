@@ -143,6 +143,42 @@ namespace nml
         }
 
         /// <summary>
+        /// Calculate the determinant of the matrix.
+        /// </summary>
+        /// <returns>The determinant of the matrix.</returns>
+        public float Determinant
+        {
+            get
+            {
+                float l11 = this.m11;
+                float l12 = this.m12;
+                float l13 = this.m13;
+                float l14 = this.m14;
+                float l21 = this.m21;
+                float l22 = this.m22;
+                float l23 = this.m23;
+                float l24 = this.m24;
+                float l31 = this.m31;
+                float l32 = this.m32;
+                float l33 = this.m33;
+                float l34 = this.m34;
+                float l41 = this.m41;
+                float l42 = this.m42;
+                float l43 = this.m43;
+                float l44 = this.m44;
+                float c1 = (l33 * l44) - (l34 * l43);
+                float c2 = (l32 * l44) - (l34 * l42);
+                float c3 = (l32 * l43) - (l33 * l42);
+                float c4 = (l31 * l44) - (l34 * l41);
+                float c5 = (l31 * l43) - (l33 * l41);
+                float c6 = (l31 * l42) - (l32 * l41);
+                return ((((l11 * (((l22 * c1) - (l23 * c2)) + (l24 * c3))) - (l12 * (((l21 * c1) -
+                (l23 * c4)) + (l24 * c5)))) + (l13 * (((l21 * c2) - (l22 * c4)) + (l24 * c6)))) -
+                (l14 * (((l21 * c3) - (l22 * c5)) + (l23 * c6))));
+            }
+        }
+
+        /// <summary>
         /// Multiply matrix components by scalar.
         /// </summary>
         /// <param name="matrix">The matrix to scale.</param>
@@ -353,6 +389,79 @@ namespace nml
             tMatrix[3, 3] = matrix[3, 3];
 
             return tMatrix;
+        }
+
+        public static Matrix4 Invert(Matrix4 matrix)
+        {     
+            // All the local variables are because it's generally faster in C#.
+            // Todo: Potentially add optional inverse performance tricks that only work on certain kinds of matrices e.g. affine transforms. Based on GPU gems code.
+
+            float l1 = matrix[0, 0];
+            float l2 = matrix[0, 1];
+            float l3 = matrix[0, 2];
+            float l4 = matrix[0, 3];
+            float l5 = matrix[1, 0];
+            float l6 = matrix[1, 1];
+            float l7 = matrix[1, 2];
+            float l8 = matrix[1, 3];
+            float l9 = matrix[2, 0];
+            float l10 = matrix[2, 1];
+            float l11 = matrix[2, 2];
+            float l12 = matrix[2, 3];
+            float l13 = matrix[3, 0];
+            float l14 = matrix[3, 1];
+            float l15 = matrix[3, 2];
+            float l16 = matrix[3, 3];
+
+            float l17 = (l11 * l16) - (l12 * l15);
+            float l18 = (l10 * l16) - (l12 * l14);
+            float l19 = (l10 * l15) - (l11 * l14);
+            float l20 = (l9 * l16) - (l12 * l13);
+            float l21 = (l9 * l15) - (l11 * l13);
+            float l22 = (l9 * l14) - (l10 * l13);
+            float l23 = ((l6 * l17) - (l7 * l18)) + (l8 * l19);
+            float l24 = -(((l5 * l17) - (l7 * l20)) + (l8 * l21));
+            float l25 = ((l5 * l18) - (l6 * l20)) + (l8 * l22);
+            float l26 = -(((l5 * l19) - (l6 * l21)) + (l7 * l22));
+            float l27 = 1f / ((((l1 * l23) + (l2 * l24)) + (l3 * l25)) + (l4 * l26));
+            float l28 = (l7 * l16) - (l8 * l15);
+            float l29 = (l6 * l16) - (l8 * l14);
+            float l30 = (l6 * l15) - (l7 * l14);
+            float l31 = (l5 * l16) - (l8 * l13);
+            float l32 = (l5 * l15) - (l7 * l13);
+            float l33 = (l5 * l14) - (l6 * l13);
+            float l34 = (l7 * l12) - (l8 * l11);
+            float l35 = (l6 * l12) - (l8 * l10);
+            float l36 = (l6 * l11) - (l7 * l10);
+            float l37 = (l5 * l12) - (l8 * l9);
+            float l38 = (l5 * l11) - (l7 * l9);
+            float l39 = (l5 * l10) - (l6 * l9);
+
+            var invertedMatrix = new Matrix4();
+
+            invertedMatrix[0, 0] = l23 * l27;
+            invertedMatrix[1, 0] = l24 * l27;
+            invertedMatrix[2, 0] = l25 * l27;
+            invertedMatrix[3, 0] = l26 * l27;
+            invertedMatrix[0, 1] = -(((l2 * l17) - (l3 * l18)) + (l4 * l19)) * l27;
+            invertedMatrix[1, 1] = (((l1 * l17) - (l3 * l20)) + (l4 * l21)) * l27;
+            invertedMatrix[2, 1] = -(((l1 * l18) - (l2 * l20)) + (l4 * l22)) * l27;
+            invertedMatrix[3, 1] = (((l1 * l19) - (l2 * l21)) + (l3 * l22)) * l27;
+            invertedMatrix[0, 2] = (((l2 * l28) - (l3 * l29)) + (l4 * l30)) * l27;
+            invertedMatrix[1, 2] = -(((l1 * l28) - (l3 * l31)) + (l4 * l32)) * l27;
+            invertedMatrix[2, 2] = (((l1 * l29) - (l2 * l31)) + (l4 * l33)) * l27;
+            invertedMatrix[3, 2] = -(((l1 * l30) - (l2 * l32)) + (l3 * l33)) * l27;
+            invertedMatrix[0, 3] = -(((l2 * l34) - (l3 * l35)) + (l4 * l36)) * l27;
+            invertedMatrix[1, 3] = (((l1 * l34) - (l3 * l37)) + (l4 * l38)) * l27;
+            invertedMatrix[2, 3] = -(((l1 * l35) - (l2 * l37)) + (l4 * l39)) * l27;
+            invertedMatrix[3, 3] = (((l1 * l36) - (l2 * l38)) + (l3 * l39)) * l27;
+
+            return invertedMatrix;
+        }
+
+        public void Invert()
+        {
+            this = Matrix4.Invert(this);
         }
 
         public void Transpose()
