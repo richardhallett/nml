@@ -252,43 +252,6 @@ namespace nml
         }
 
         /// <summary>
-        /// Divide matrix components by scalar.
-        /// </summary>
-        /// <param name="matrix">The matrix to scale.</param>
-        /// <param name="scalar">The value you want to scale the matrix by.</param>
-        /// <returns>The resulting division of the matrix</returns>
-        public static Matrix4 Divide(Matrix4 matrix, float scalar)
-        {
-            throw new NotImplementedException(); // Broken...
-            float l11 = matrix[0, 0] / scalar;
-            float l12 = matrix[0, 1] / scalar;
-            float l13 = matrix[0, 2] / scalar;
-            float l14 = matrix[0, 3] / scalar;
-
-            float l21 = matrix[1, 0] / scalar;
-            float l22 = matrix[1, 1] / scalar;
-            float l23 = matrix[1, 2] / scalar;
-            float l24 = matrix[1, 3] / scalar;
-
-            float l31 = matrix[2, 0] / scalar;
-            float l32 = matrix[2, 1] / scalar;
-            float l33 = matrix[2, 2] / scalar;
-            float l34 = matrix[2, 3] / scalar;
-
-            float l41 = matrix[3, 0] / scalar;
-            float l42 = matrix[3, 1] / scalar;
-            float l43 = matrix[3, 2] / scalar;
-            float l44 = matrix[3, 3] / scalar;
-
-            return new Matrix4(new float[] {
-                                        l11, l12, l13, l14,
-                                        l21, l22, l23, l24,
-                                        l31, l32, l33, l34,
-                                        l41, l42, l43, l44,
-            });
-        }
-
-        /// <summary>
         /// Add two matrices together.
         /// </summary>
         /// <param name="a">The first matrix.</param>
@@ -478,19 +441,7 @@ namespace nml
         public static Matrix4 operator *(Matrix4 matrix, float scalar)
         {
             return Matrix4.Multiply(matrix, scalar);
-        }
-
-        /// <summary>
-        /// Divide matrix components by scalar.
-        /// </summary>
-        /// <param name="matrix">The matrix to scale.</param>
-        /// <param name="scalar">The value you want to scale the matrix by.</param>
-        /// <returns>The resulting division of the matrix</returns>
-        public static Matrix4 operator /(Matrix4 matrix, float scalar)
-        {
-            return Matrix4.Divide(matrix, scalar);
-        }
-
+        }     
 
         /// <summary>
         /// Multiply two matrices and return product.
@@ -551,6 +502,15 @@ namespace nml
         public override string ToString()
         {
             return base.ToString() + String.Format(": \n[{0}, {1}, {2}, {3}]\n[{4}, {5}, {6}, {7}]\n[{8}, {9}, {10}, {11}]\n[{12}, {13}, {14}, {15}]", m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44);
+        }
+
+        /// <summary>
+        /// Returns the elements of a matrix in an array.
+        /// </summary>
+        /// <returns>An array of all sixteen matrix elements.</returns>
+        public float[] ToArray()
+        {
+            return new float[] { m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44 };
         }
 
         /// <summary>

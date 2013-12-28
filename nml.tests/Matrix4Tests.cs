@@ -42,28 +42,6 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4DivideScalarTest()
-        {
-            var a = new Matrix4(new float[] { 
-                                            1.0f, 2.0f, 3.0f, 4.0f,
-                                            5.0f, 6.0f, 7.0f, 8.0f,
-                                            9.0f, 10.0f, 11.0f, 12.0f,
-                                            13.0f, 14.0f, 15.0f, 16.0f});
-            float scalar = 2.0f;
-
-            var expectedResult = new Matrix4(new float[] {  
-                                            0.5f, 1.0f, 1.5f, 2.0f,
-                                            2.5f, 3.0f, 3.5f, 4.0f,
-                                            4.5f, 5.0f, 5.5f, 6.0f,
-                                            6.5f, 7.0f, 7.5f, 8.0f});
-
-            var r = a / scalar;
-
-            Assert.Equal<Matrix4>(expectedResult, r);
-        }
-
-
-        [Fact]
         public void Matrix4AdditionTest()
         {
             var a = new Matrix4(new float[] { 
