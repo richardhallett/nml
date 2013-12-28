@@ -9,6 +9,11 @@ namespace nml
     public struct Matrix4 : IEquatable<Matrix4>
     {
         /// <summary>
+        /// A 4x4 identity matrix.
+        /// </summary>
+        public static readonly Matrix4 Identity = new Matrix4() { m11 = 1.0f, m22 = 1.0f, m33 = 1.0f, m44 = 1.0f };
+
+        /// <summary>
         /// Creates a new instance of <see cref="Matrix4"/> with scalar.
         /// </summary>
         /// <param name="value">A scalar value that will be assigned to all components.</param>
@@ -102,10 +107,10 @@ namespace nml
                     case 12: m41 = value; break;
                     case 13: m42 = value; break;
                     case 14: m43 = value; break;
-                    case 15: m44 = value; break;                        
-                }
+                    case 15: m44 = value; break;
 
-                throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException();
+                }                
             }
         }
 
@@ -174,6 +179,43 @@ namespace nml
         }
 
         /// <summary>
+        /// Multiply two matrices and return product.
+        /// </summary>
+        /// <param name="a">First matrix</param>
+        /// <param name="b">Second matrix</param>
+        /// <returns>The product of the two matrices.</returns>
+        /// 
+        public static Matrix4 Multiply(Matrix4 a, Matrix4 b)
+        {
+            float l11 = (a[0, 0] * b[0, 0]) + (a[0, 1] * b[1, 0]) + (a[0, 2] * b[2, 0]) + (a[0, 3] * b[3, 0]);
+            float l12 = (a[0, 0] * b[0, 1]) + (a[0, 1] * b[1, 1]) + (a[0, 2] * b[2, 1]) + (a[0, 3] * b[3, 1]);
+            float l13 = (a[0, 0] * b[0, 2]) + (a[0, 1] * b[1, 2]) + (a[0, 2] * b[2, 2]) + (a[0, 3] * b[3, 2]);
+            float l14 = (a[0, 0] * b[0, 3]) + (a[0, 1] * b[1, 3]) + (a[0, 2] * b[2, 3]) + (a[0, 3] * b[3, 3]);
+
+            float l21 = (a[1, 0] * b[0, 0]) + (a[1, 1] * b[1, 0]) + (a[1, 2] * b[2, 0]) + (a[1, 3] * b[3, 0]);
+            float l22 = (a[1, 0] * b[0, 1]) + (a[1, 1] * b[1, 1]) + (a[1, 2] * b[2, 1]) + (a[1, 3] * b[3, 1]);
+            float l23 = (a[1, 0] * b[0, 2]) + (a[1, 1] * b[1, 2]) + (a[1, 2] * b[2, 2]) + (a[1, 3] * b[3, 2]);
+            float l24 = (a[1, 0] * b[0, 3]) + (a[1, 1] * b[1, 3]) + (a[1, 2] * b[2, 3]) + (a[1, 3] * b[3, 3]);
+
+            float l31 = (a[2, 0] * b[0, 0]) + (a[2, 1] * b[1, 0]) + (a[2, 2] * b[2, 0]) + (a[2, 3] * b[3, 0]);
+            float l32 = (a[2, 0] * b[0, 1]) + (a[2, 1] * b[1, 1]) + (a[2, 2] * b[2, 1]) + (a[2, 3] * b[3, 1]);
+            float l33 = (a[2, 0] * b[0, 2]) + (a[2, 1] * b[1, 2]) + (a[2, 2] * b[2, 2]) + (a[2, 3] * b[3, 2]);
+            float l34 = (a[2, 0] * b[0, 3]) + (a[2, 1] * b[1, 3]) + (a[2, 2] * b[2, 3]) + (a[2, 3] * b[3, 3]);
+
+            float l41 = (a[3, 0] * b[0, 0]) + (a[3, 1] * b[1, 0]) + (a[3, 2] * b[2, 0]) + (a[3, 3] * b[3, 0]);
+            float l42 = (a[3, 0] * b[0, 1]) + (a[3, 1] * b[1, 1]) + (a[3, 2] * b[2, 1]) + (a[3, 3] * b[3, 1]);
+            float l43 = (a[3, 0] * b[0, 2]) + (a[3, 1] * b[1, 2]) + (a[3, 2] * b[2, 2]) + (a[3, 3] * b[3, 2]);
+            float l44 = (a[3, 0] * b[0, 3]) + (a[3, 1] * b[1, 3]) + (a[3, 2] * b[2, 3]) + (a[3, 3] * b[3, 3]);
+
+            return new Matrix4(new float[] {
+                                        l11, l12, l13, l14,
+                                        l21, l22, l23, l24,
+                                        l31, l32, l33, l34,
+                                        l41, l42, l43, l44,
+            });
+        }
+
+        /// <summary>
         /// Divide matrix components by scalar.
         /// </summary>
         /// <param name="matrix">The matrix to scale.</param>
@@ -181,6 +223,7 @@ namespace nml
         /// <returns>The resulting division of the matrix</returns>
         public static Matrix4 Divide(Matrix4 matrix, float scalar)
         {
+            throw new NotImplementedException(); // Broken...
             float l11 = matrix[0, 0] / scalar;
             float l12 = matrix[0, 1] / scalar;
             float l13 = matrix[0, 2] / scalar;
@@ -338,6 +381,19 @@ namespace nml
         {
             return Matrix4.Divide(matrix, scalar);
         }
+
+
+        /// <summary>
+        /// Multiply two matrices and return product.
+        /// </summary>
+        /// <param name="a">First matrix</param>
+        /// <param name="b">Second matrix</param>
+        /// <returns>The product of the two matrices.</returns>
+        /// 
+        public static Matrix4 operator *(Matrix4 a, Matrix4 b)
+        {
+            return Matrix4.Multiply(a, b);
+        }         
 
         /// <summary>
         /// Subtract one matrix from another.
