@@ -102,10 +102,10 @@ namespace nml
                     case 12: m41 = value; break;
                     case 13: m42 = value; break;
                     case 14: m43 = value; break;
-                    case 15: m44 = value; break;
-
-                        throw new IndexOutOfRangeException();
+                    case 15: m44 = value; break;                        
                 }
+
+                throw new IndexOutOfRangeException();
             }
         }
 
