@@ -193,7 +193,7 @@ namespace nml.tests
         [Fact]
         public void Matrix4ScaleTest()
         {
-            var a = Matrix4.Scaling(2, 4, 6);
+            var a = Matrix4.Scale(2, 4, 6);
 
             var b = new Vector4(3, 4, 5, 1);
 

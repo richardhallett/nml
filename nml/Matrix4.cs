@@ -459,7 +459,7 @@ namespace nml
         /// <param name="y">Y scale.</param>
         /// <param name="z">Z scale.</param>
         /// <returns></returns>
-        public static Matrix4 Scaling(float x, float y, float z)
+        public static Matrix4 Scale(float x, float y, float z)
         {
             return new Matrix4(new float[] { x, 0.0f, 0.0f, 0.0f,
                                              0.0f, y, 0.0f, 0.0f,
@@ -472,9 +472,9 @@ namespace nml
         /// </summary>
         /// <param name="vec"><see cref="Vector3"/> to use for scaling.</param>
         /// <returns></returns>
-        public static Matrix4 Scaling(Vector3 vec)
+        public static Matrix4 Scale(Vector3 vec)
         {
-            return Matrix4.Scaling(vec.x, vec.y, vec.z);
+            return Matrix4.Scale(vec.x, vec.y, vec.z);
         }
 
         /// <summary>
@@ -482,9 +482,9 @@ namespace nml
         /// </summary>
         /// <param name="scale">The value to uniformly scale by.</param>
         /// <returns></returns>
-        public static Matrix4 Scaling(float scale)
+        public static Matrix4 Scale(float scale)
         {
-            return Matrix4.Scaling(scale, scale, scale);
+            return Matrix4.Scale(scale, scale, scale);
         }
 
         /// <summary>
