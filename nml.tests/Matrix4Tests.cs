@@ -185,7 +185,7 @@ namespace nml.tests
 
             var expectedResult = new Vector4(5, 8, 11, 1);
 
-            var r = a.Transform(b);
+            var r = a * b;
 
             Assert.Equal<Vector4>(expectedResult, r);
         }

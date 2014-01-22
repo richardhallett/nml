@@ -550,7 +550,18 @@ namespace nml
         public static Matrix4 operator *(Matrix4 a, Matrix4 b)
         {
             return Matrix4.Multiply(a, b);
-        }         
+        }
+
+        /// <summary>
+        /// Transform a vector by a matrix, M*v
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="vec"></param>
+        /// <returns></returns>
+        public static Vector4 operator *(Matrix4 matrix, Vector4 vec)
+        {
+            return matrix.Transform(vec);
+        }     
 
         /// <summary>
         /// Subtract one matrix from another.
