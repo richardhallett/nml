@@ -157,5 +157,51 @@ namespace nml.tests
 
             Assert.Equal<Matrix4>(expectedResult, r);
         }
+
+        [Fact]
+        public void Matrix4TransformTest()
+        {
+            var a = new Matrix4(new float[] { 
+                                            1.0f, 0.0f, 0.0f, 2.0f,
+                                            0.0f, 1.0f, 0.0f, 4.0f,
+                                            0.0f, 0.0f, 1.0f, 6.0f,
+                                            0.0f, 0.0f, 0.0f, 1.0f});
+
+            var b = new Vector4(3,4,5,1);
+
+            var expectedResult = new Vector4(5, 8, 11, 1);
+
+            var r = a.Transform(b);
+            
+            Assert.Equal<Vector4>(expectedResult, r);
+        }
+
+        [Fact]
+        public void Matrix4TranslateTest()
+        {
+            var a = Matrix4.Translate(2, 4, 6);
+
+            var b = new Vector4(3, 4, 5, 1);
+
+            var expectedResult = new Vector4(5, 8, 11, 1);
+
+            var r = a.Transform(b);
+
+            Assert.Equal<Vector4>(expectedResult, r);
+        }
+
+        [Fact]
+        public void Matrix4ScaleTest()
+        {
+            var a = Matrix4.Scaling(2, 4, 6);
+
+            var b = new Vector4(3, 4, 5, 1);
+
+            var expectedResult = new Vector4(6, 16, 30, 1);
+
+            var r = a.Transform(b);
+
+            Assert.Equal<Vector4>(expectedResult, r);
+        }
     }
 }

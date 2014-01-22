@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace nml
 {
+    /// <summary>
+    /// This is a 4x4 matrix, it is a generic case for working with transformations in 3d space.
+    /// The data is stored in row-major order, as per C# arrays, e.g. m12 refers to first row second column.
+    /// The mathmatical operations on vector transforms are for column major vectors i.e. M*v.
+    /// </summary>
     public struct Matrix4 : IEquatable<Matrix4>
     {
         /// <summary>
@@ -420,6 +425,98 @@ namespace nml
             invertedMatrix[3, 3] = (((l1 * l36) - (l2 * l38)) + (l3 * l39)) * l27;
 
             return invertedMatrix;
+        }
+
+        /// <summary>
+        /// Creates a new translation matrix with the specified axis offset.
+        /// </summary>
+        /// <param name="x">X translation.</param>
+        /// <param name="y">Y translation.</param>
+        /// <param name="z">Z translation.</param>
+        /// <returns>The resulting translation matrix.</returns>
+        public static Matrix4 Translate(float x, float y, float z)
+        {
+            return new Matrix4(new float[] { 1.0f, 0.0f, 0.0f, x,
+                                             0.0f, 1.0f, 0.0f, y,
+                                             0.0f, 0.0f, 1.0f, z,
+                                             0.0f, 0.0f, 0.0f, 1.0f});
+        }
+
+        /// <summary>
+        /// Creates a new translation matrix using a <see cref="Vector3"/>
+        /// </summary>
+        /// <param name="vec"><see cref="Vector3"/> to use for translation.</param>
+        /// <returns>The resulting translation matrix.</returns>
+        public static Matrix4 Translate(Vector3 vec)
+        {
+            return Matrix4.Translate(vec.x, vec.y, vec.z);
+        }
+
+        /// <summary>
+        /// Creates a scaling matrix with the specified axis values.
+        /// </summary>
+        /// <param name="x">X scale.</param>
+        /// <param name="y">Y scale.</param>
+        /// <param name="z">Z scale.</param>
+        /// <returns></returns>
+        public static Matrix4 Scaling(float x, float y, float z)
+        {
+            return new Matrix4(new float[] { x, 0.0f, 0.0f, 0.0f,
+                                             0.0f, y, 0.0f, 0.0f,
+                                             0.0f, 0.0f, z, 0.0f,
+                                             0.0f, 0.0f, 0.0f, 1.0f});
+        }
+
+        /// <summary>
+        /// Creates a scaling matrix with the specified axis values.
+        /// </summary>
+        /// <param name="vec"><see cref="Vector3"/> to use for scaling.</param>
+        /// <returns></returns>
+        public static Matrix4 Scaling(Vector3 vec)
+        {
+            return Matrix4.Scaling(vec.x, vec.y, vec.z);
+        }
+
+        /// <summary>
+        /// Creates a scaling matrix with the specified value for uniformly scaling each axis.
+        /// </summary>
+        /// <param name="scale">The value to uniformly scale by.</param>
+        /// <returns></returns>
+        public static Matrix4 Scaling(float scale)
+        {
+            return Matrix4.Scaling(scale, scale, scale);
+        }
+
+        /// <summary>
+        /// Transform a <see cref="Vector4"/> by this matrix.
+        /// </summary>
+        /// <param name="vec"></param>
+        /// <returns>The resulting <see cref="Vector4"/> transformed by this matrix i.e. M * (x, y, z, w)</returns>
+        public Vector4 Transform(Vector4 vec)
+        {
+            float l11 = this.m11;
+            float l12 = this.m12;
+            float l13 = this.m13;
+            float l14 = this.m14;
+            float l21 = this.m21;
+            float l22 = this.m22;
+            float l23 = this.m23;
+            float l24 = this.m24;
+            float l31 = this.m31;
+            float l32 = this.m32;
+            float l33 = this.m33;
+            float l34 = this.m34;
+            float l41 = this.m41;
+            float l42 = this.m42;
+            float l43 = this.m43;
+            float l44 = this.m44;
+
+            return new Vector4(
+                Vector4.Dot(new Vector4(l11, l12, l13, l14), vec),
+                Vector4.Dot(new Vector4(l21, l22, l23, l24), vec),
+                Vector4.Dot(new Vector4(l31, l32, l33, l34), vec),
+                Vector4.Dot(new Vector4(l41, l42, l43, l44), vec)
+            );
         }
 
         public void Invert()
