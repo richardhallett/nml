@@ -140,10 +140,9 @@ namespace nml.tests
         {
             var a = new Vector4(3.0f, 4.0f, 1.0f, 2.0f);
             var expectedResult = 5.477226f;
-
             var r = a.Length;
 
-            Assert.Equal<float>(expectedResult, r);
+            Assert.True(Math.Abs(r - expectedResult) < 0.0001f);
         }
 
         [Fact]
@@ -165,7 +164,10 @@ namespace nml.tests
 
             a.Normalise();
 
-            Assert.Equal<Vector4>(expectedResult, a);
+            Assert.True(Math.Abs(a.x - 0.5477226f) < 0.0001f);
+            Assert.True(Math.Abs(a.y - 0.730296731f) < 0.0001f);
+            Assert.True(Math.Abs(a.z - 0.182574183f) < 0.0001f);
+            Assert.True(Math.Abs(a.w - 0.365148365f) < 0.0001f);
         }
 
         [Fact]
