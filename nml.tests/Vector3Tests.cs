@@ -132,7 +132,7 @@ namespace nml.tests
 
             var r = a.Length;
 
-            Assert.True(Math.Abs(a.x - expectedResult) < 0.0001f);
+            Assert.True(Math.Abs(r - expectedResult) < 0.0001f);
         }
 
         [Fact]
