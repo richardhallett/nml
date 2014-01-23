@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace nml
     /// The data is stored in row-major order, as per C# arrays, e.g. m12 refers to first row second column.
     /// The mathmatical operations on vector transforms are for column major vectors i.e. M*v.
     /// </summary>
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
     public struct Matrix4 : IEquatable<Matrix4>
     {
         /// <summary>
@@ -147,6 +150,66 @@ namespace nml
             }
         }
 
+        public float M11 { get { return this.m11; } set { this.m11 = value; } }
+        public float M12 { get { return this.m12; } set { this.m12 = value; } }
+        public float M13 { get { return this.m13; } set { this.m13 = value; } }
+        public float M14 { get { return this.m14; } set { this.m14 = value; } }
+        public float M21 { get { return this.m21; } set { this.m21 = value; } }
+        public float M22 { get { return this.m22; } set { this.m22 = value; } }
+        public float M23 { get { return this.m23; } set { this.m23 = value; } }
+        public float M24 { get { return this.m24; } set { this.m24 = value; } }
+        public float M31 { get { return this.m31; } set { this.m31 = value; } }
+        public float M32 { get { return this.m32; } set { this.m32 = value; } }
+        public float M33 { get { return this.m33; } set { this.m33 = value; } }
+        public float M34 { get { return this.m34; } set { this.m34 = value; } }
+        public float M41 { get { return this.m41; } set { this.m41 = value; } }
+        public float M42 { get { return this.m42; } set { this.m42 = value; } }
+        public float M43 { get { return this.m43; } set { this.m43 = value; } }
+        public float M44 { get { return this.m44; } set { this.m44 = value; } }
+
+        /// <summary>
+        /// Set all elements.
+        /// </summary>
+        /// <param name="m11">Row 1 Column 1</param>
+        /// <param name="m12">Row 1 Column 2</param>
+        /// <param name="m13">Row 1 Column 3</param>
+        /// <param name="m14">Row 1 Column 4</param>
+        /// <param name="m21">Row 2 Column 1</param>
+        /// <param name="m22">Row 2 Column 2</param>
+        /// <param name="m23">Row 2 Column 3</param>
+        /// <param name="m24">Row 2 Column 4</param>
+        /// <param name="m31">Row 3 Column 1</param>
+        /// <param name="m32">Row 3 Column 3</param>
+        /// <param name="m33">Row 3 Column 4</param>
+        /// <param name="m34">Row 3 Column 4</param>
+        /// <param name="m41">Row 4 Column 1</param>
+        /// <param name="m42">Row 4 Column 2</param>
+        /// <param name="m43">Row 4 Column 3</param>
+        /// <param name="m44">Row 4 Column 4</param>
+        public void Set(
+            float m11, float m12, float m13, float m14,
+            float m21, float m22, float m23, float m24,
+            float m31, float m32, float m33, float m34,
+            float m41, float m42, float m43, float m44)
+        {
+            this.m11 = m11;
+            this.m12 = m12;
+            this.m13 = m13;
+            this.m14 = m14;
+            this.m21 = m21;
+            this.m22 = m22;
+            this.m23 = m23;
+            this.m24 = m24;
+            this.m31 = m31;
+            this.m32 = m32;
+            this.m33 = m33;
+            this.m34 = m34;
+            this.m41 = m41;
+            this.m42 = m42;
+            this.m43 = m43;
+            this.m44 = m44;
+        }
+
         /// <summary>
         /// Calculate the determinant of the matrix.
         /// </summary>
@@ -191,32 +254,46 @@ namespace nml
         /// <returns>The resulting multiplication of the matrix</returns>
         public static Matrix4 Multiply(Matrix4 matrix, float scalar)
         {
-            float l11 = matrix[0, 0] * scalar;
-            float l12 = matrix[0, 1] * scalar;
-            float l13 = matrix[0, 2] * scalar;
-            float l14 = matrix[0, 3] * scalar;
+            float a11 = matrix.M11;
+            float a12 = matrix.M12;
+            float a13 = matrix.M13;
+            float a14 = matrix.M14;
+            float a21 = matrix.M21;
+            float a22 = matrix.M22;
+            float a23 = matrix.M23;
+            float a24 = matrix.M24;
+            float a31 = matrix.M31;
+            float a32 = matrix.M32;
+            float a33 = matrix.M33;
+            float a34 = matrix.M34;
+            float a41 = matrix.M41;
+            float a42 = matrix.M42;
+            float a43 = matrix.M43;
+            float a44 = matrix.M44;
 
-            float l21 = matrix[1, 0] * scalar;
-            float l22 = matrix[1, 1] * scalar;
-            float l23 = matrix[1, 2] * scalar;
-            float l24 = matrix[1, 3] * scalar;
+            Matrix4 result = new Matrix4();
 
-            float l31 = matrix[2, 0] * scalar;
-            float l32 = matrix[2, 1] * scalar;
-            float l33 = matrix[2, 2] * scalar;
-            float l34 = matrix[2, 3] * scalar;
+            result.M11 = a11 * scalar;
+            result.M12 = a12 * scalar;
+            result.M13 = a13 * scalar;
+            result.M14 = a14 * scalar;
 
-            float l41 = matrix[3, 0] * scalar;
-            float l42 = matrix[3, 1] * scalar;
-            float l43 = matrix[3, 2] * scalar;
-            float l44 = matrix[3, 3] * scalar;
+            result.M21 = a21 * scalar;
+            result.M22 = a22 * scalar;
+            result.M23 = a23 * scalar;
+            result.M24 = a24 * scalar;
 
-            return new Matrix4(new float[] {
-                                        l11, l12, l13, l14,
-                                        l21, l22, l23, l24,
-                                        l31, l32, l33, l34,
-                                        l41, l42, l43, l44,
-            });
+            result.M31 = a31 * scalar;
+            result.M32 = a32 * scalar;
+            result.M33 = a33 * scalar;
+            result.M34 = a34 * scalar;
+
+            result.M41 = a41 * scalar;
+            result.M42 = a42 * scalar;
+            result.M43 = a43 * scalar;
+            result.M44 = a44 * scalar;
+
+            return result;
         }
 
         /// <summary>
@@ -228,32 +305,63 @@ namespace nml
         /// 
         public static Matrix4 Multiply(Matrix4 a, Matrix4 b)
         {
-            float l11 = (a[0, 0] * b[0, 0]) + (a[0, 1] * b[1, 0]) + (a[0, 2] * b[2, 0]) + (a[0, 3] * b[3, 0]);
-            float l12 = (a[0, 0] * b[0, 1]) + (a[0, 1] * b[1, 1]) + (a[0, 2] * b[2, 1]) + (a[0, 3] * b[3, 1]);
-            float l13 = (a[0, 0] * b[0, 2]) + (a[0, 1] * b[1, 2]) + (a[0, 2] * b[2, 2]) + (a[0, 3] * b[3, 2]);
-            float l14 = (a[0, 0] * b[0, 3]) + (a[0, 1] * b[1, 3]) + (a[0, 2] * b[2, 3]) + (a[0, 3] * b[3, 3]);
+            float a11 = a.M11;
+            float a12 = a.M12;
+            float a13 = a.M13;
+            float a14 = a.M14;
+            float a21 = a.M21;
+            float a22 = a.M22;
+            float a23 = a.M23;
+            float a24 = a.M24;
+            float a31 = a.M31;
+            float a32 = a.M32;
+            float a33 = a.M33;
+            float a34 = a.M34;
+            float a41 = a.M41;
+            float a42 = a.M42;
+            float a43 = a.M43;
+            float a44 = a.M44;
 
-            float l21 = (a[1, 0] * b[0, 0]) + (a[1, 1] * b[1, 0]) + (a[1, 2] * b[2, 0]) + (a[1, 3] * b[3, 0]);
-            float l22 = (a[1, 0] * b[0, 1]) + (a[1, 1] * b[1, 1]) + (a[1, 2] * b[2, 1]) + (a[1, 3] * b[3, 1]);
-            float l23 = (a[1, 0] * b[0, 2]) + (a[1, 1] * b[1, 2]) + (a[1, 2] * b[2, 2]) + (a[1, 3] * b[3, 2]);
-            float l24 = (a[1, 0] * b[0, 3]) + (a[1, 1] * b[1, 3]) + (a[1, 2] * b[2, 3]) + (a[1, 3] * b[3, 3]);
+            float b11 = b.M11;
+            float b12 = b.M12;
+            float b13 = b.M13;
+            float b14 = b.M14;
+            float b21 = b.M21;
+            float b22 = b.M22;
+            float b23 = b.M23;
+            float b24 = b.M24;
+            float b31 = b.M31;
+            float b32 = b.M32;
+            float b33 = b.M33;
+            float b34 = b.M34;
+            float b41 = b.M41;
+            float b42 = b.M42;
+            float b43 = b.M43;
+            float b44 = b.M44;
 
-            float l31 = (a[2, 0] * b[0, 0]) + (a[2, 1] * b[1, 0]) + (a[2, 2] * b[2, 0]) + (a[2, 3] * b[3, 0]);
-            float l32 = (a[2, 0] * b[0, 1]) + (a[2, 1] * b[1, 1]) + (a[2, 2] * b[2, 1]) + (a[2, 3] * b[3, 1]);
-            float l33 = (a[2, 0] * b[0, 2]) + (a[2, 1] * b[1, 2]) + (a[2, 2] * b[2, 2]) + (a[2, 3] * b[3, 2]);
-            float l34 = (a[2, 0] * b[0, 3]) + (a[2, 1] * b[1, 3]) + (a[2, 2] * b[2, 3]) + (a[2, 3] * b[3, 3]);
+            Matrix4 result = new Matrix4();
 
-            float l41 = (a[3, 0] * b[0, 0]) + (a[3, 1] * b[1, 0]) + (a[3, 2] * b[2, 0]) + (a[3, 3] * b[3, 0]);
-            float l42 = (a[3, 0] * b[0, 1]) + (a[3, 1] * b[1, 1]) + (a[3, 2] * b[2, 1]) + (a[3, 3] * b[3, 1]);
-            float l43 = (a[3, 0] * b[0, 2]) + (a[3, 1] * b[1, 2]) + (a[3, 2] * b[2, 2]) + (a[3, 3] * b[3, 2]);
-            float l44 = (a[3, 0] * b[0, 3]) + (a[3, 1] * b[1, 3]) + (a[3, 2] * b[2, 3]) + (a[3, 3] * b[3, 3]);
+            result.M11 = (a11 * b11) + (a12 * b21) + (a13 * b31) + (a14 * b41);
+            result.M12 = (a11 * b12) + (a12 * b22) + (a13 * b32) + (a14 * b42);
+            result.M13 = (a11 * b13) + (a12 * b23) + (a13 * b33) + (a14 * b43);
+            result.M14 = (a11 * b14) + (a12 * b24) + (a13 * b34) + (a14 * b44);
 
-            return new Matrix4(new float[] {
-                                        l11, l12, l13, l14,
-                                        l21, l22, l23, l24,
-                                        l31, l32, l33, l34,
-                                        l41, l42, l43, l44,
-            });
+            result.M21 = (a21 * b11) + (a22 * b21) + (a23 * b31) + (a24 * b41);
+            result.M22 = (a21 * b12) + (a22 * b22) + (a23 * b32) + (a24 * b42);
+            result.M23 = (a21 * b13) + (a22 * b23) + (a23 * b33) + (a24 * b43);
+            result.M24 = (a21 * b14) + (a22 * b24) + (a23 * b34) + (a24 * b44);
+
+            result.M31 = (a31 * b11) + (a32 * b21) + (a33 * b31) + (a34 * b41);
+            result.M32 = (a31 * b12) + (a32 * b22) + (a33 * b32) + (a34 * b42);
+            result.M33 = (a31 * b13) + (a32 * b23) + (a33 * b33) + (a34 * b43);
+            result.M34 = (a31 * b14) + (a32 * b24) + (a33 * b34) + (a34 * b44);
+
+            result.M41 = (a41 * b11) + (a42 * b21) + (a43 * b31) + (a44 * b41);
+            result.M42 = (a41 * b12) + (a42 * b22) + (a43 * b32) + (a44 * b42);
+            result.M43 = (a41 * b13) + (a42 * b23) + (a43 * b33) + (a44 * b43);
+            result.M44 = (a41 * b14) + (a42 * b24) + (a43 * b34) + (a44 * b44);
+
+            return result;          
         }
 
         /// <summary>
@@ -264,32 +372,63 @@ namespace nml
         /// <returns>The resulting addition of the two matrices.</returns>
         public static Matrix4 Add(Matrix4 a, Matrix4 b)
         {
-            float l11 = a[0, 0] + b[0, 0];
-            float l12 = a[0, 1] + b[0, 1];
-            float l13 = a[0, 2] + b[0, 2];
-            float l14 = a[0, 3] + b[0, 3];
+            float a11 = a.M11;
+            float a12 = a.M12;
+            float a13 = a.M13;
+            float a14 = a.M14;
+            float a21 = a.M21;
+            float a22 = a.M22;
+            float a23 = a.M23;
+            float a24 = a.M24;
+            float a31 = a.M31;
+            float a32 = a.M32;
+            float a33 = a.M33;
+            float a34 = a.M34;
+            float a41 = a.M41;
+            float a42 = a.M42;
+            float a43 = a.M43;
+            float a44 = a.M44;
 
-            float l21 = a[1, 0] + b[1, 0];
-            float l22 = a[1, 1] + b[1, 1];
-            float l23 = a[1, 2] + b[1, 2];
-            float l24 = a[1, 3] + b[1, 3];
+            float b11 = b.M11;
+            float b12 = b.M12;
+            float b13 = b.M13;
+            float b14 = b.M14;
+            float b21 = b.M21;
+            float b22 = b.M22;
+            float b23 = b.M23;
+            float b24 = b.M24;
+            float b31 = b.M31;
+            float b32 = b.M32;
+            float b33 = b.M33;
+            float b34 = b.M34;
+            float b41 = b.M41;
+            float b42 = b.M42;
+            float b43 = b.M43;
+            float b44 = b.M44;
 
-            float l31 = a[2, 0] + b[2, 0];
-            float l32 = a[2, 1] + b[2, 1];
-            float l33 = a[2, 2] + b[2, 2];
-            float l34 = a[2, 3] + b[2, 3];
+            Matrix4 result = new Matrix4(); 
 
-            float l41 = a[3, 0] + b[3, 0];
-            float l42 = a[3, 1] + b[3, 1];
-            float l43 = a[3, 2] + b[3, 2];
-            float l44 = a[3, 3] + b[3, 3];
+            result.m11 = a11 + b11;
+            result.m12 = a12 + b12;
+            result.m13 = a13 + b13;
+            result.m14 = a14 + b14;
 
-            return new Matrix4(new float[] {
-                                        l11, l12, l13, l14,
-                                        l21, l22, l23, l24,
-                                        l31, l32, l33, l34,
-                                        l41, l42, l43, l44,
-            });
+            result.m21 = a21 + b21;
+            result.m22 = a22 + b22;
+            result.m23 = a23 + b23;
+            result.m24 = a24 + b24;
+
+            result.m31 = a31 + b31;
+            result.m32 = a32 + b32;
+            result.m33 = a33 + b33;
+            result.m34 = a34 + b34;
+
+            result.m41 = a41 + b41;
+            result.m42 = a42 + b42;
+            result.m43 = a43 + b43;
+            result.m44 = a44 + b44;
+
+            return result;
         }
 
         /// <summary>
@@ -300,32 +439,63 @@ namespace nml
         /// <returns>The resulting subtraction of the two matrices.</returns>
         public static Matrix4 Subtract(Matrix4 a, Matrix4 b)
         {
-            float l11 = a[0, 0] - b[0, 0];
-            float l12 = a[0, 1] - b[0, 1];
-            float l13 = a[0, 2] - b[0, 2];
-            float l14 = a[0, 3] - b[0, 3];
+            float a11 = a.M11;
+            float a12 = a.M12;
+            float a13 = a.M13;
+            float a14 = a.M14;
+            float a21 = a.M21;
+            float a22 = a.M22;
+            float a23 = a.M23;
+            float a24 = a.M24;
+            float a31 = a.M31;
+            float a32 = a.M32;
+            float a33 = a.M33;
+            float a34 = a.M34;
+            float a41 = a.M41;
+            float a42 = a.M42;
+            float a43 = a.M43;
+            float a44 = a.M44;
 
-            float l21 = a[1, 0] - b[1, 0];
-            float l22 = a[1, 1] - b[1, 1];
-            float l23 = a[1, 2] - b[1, 2];
-            float l24 = a[1, 3] - b[1, 3];
+            float b11 = b.M11;
+            float b12 = b.M12;
+            float b13 = b.M13;
+            float b14 = b.M14;
+            float b21 = b.M21;
+            float b22 = b.M22;
+            float b23 = b.M23;
+            float b24 = b.M24;
+            float b31 = b.M31;
+            float b32 = b.M32;
+            float b33 = b.M33;
+            float b34 = b.M34;
+            float b41 = b.M41;
+            float b42 = b.M42;
+            float b43 = b.M43;
+            float b44 = b.M44;
 
-            float l31 = a[2, 0] - b[2, 0];
-            float l32 = a[2, 1] - b[2, 1];
-            float l33 = a[2, 2] - b[2, 2];
-            float l34 = a[2, 3] - b[2, 3];
+            Matrix4 result = new Matrix4();
 
-            float l41 = a[3, 0] - b[3, 0];
-            float l42 = a[3, 1] - b[3, 1];
-            float l43 = a[3, 2] - b[3, 2];
-            float l44 = a[3, 3] - b[3, 3];
+            result.m11 = a11 - b11;
+            result.m12 = a12 - b12;
+            result.m13 = a13 - b13;
+            result.m14 = a14 - b14;
 
-            return new Matrix4(new float[] {
-                                        l11, l12, l13, l14,
-                                        l21, l22, l23, l24,
-                                        l31, l32, l33, l34,
-                                        l41, l42, l43, l44,
-            });
+            result.m21 = a21 - b21;
+            result.m22 = a22 - b22;
+            result.m23 = a23 - b23;
+            result.m24 = a24 - b24;
+
+            result.m31 = a31 - b31;
+            result.m32 = a32 - b32;
+            result.m33 = a33 - b33;
+            result.m34 = a34 - b34;
+
+            result.m41 = a41 - b41;
+            result.m42 = a42 - b42;
+            result.m43 = a43 - b43;
+            result.m44 = a44 - b44;
+
+            return result;
         }
 
         /// <summary>
@@ -364,22 +534,22 @@ namespace nml
             // All the local variables are because it's generally faster in C#.
             // Todo: Potentially add optional inverse performance tricks that only work on certain kinds of matrices e.g. affine transforms. Based on GPU gems code.
 
-            float l1 = matrix[0, 0];
-            float l2 = matrix[0, 1];
-            float l3 = matrix[0, 2];
-            float l4 = matrix[0, 3];
-            float l5 = matrix[1, 0];
-            float l6 = matrix[1, 1];
-            float l7 = matrix[1, 2];
-            float l8 = matrix[1, 3];
-            float l9 = matrix[2, 0];
-            float l10 = matrix[2, 1];
-            float l11 = matrix[2, 2];
-            float l12 = matrix[2, 3];
-            float l13 = matrix[3, 0];
-            float l14 = matrix[3, 1];
-            float l15 = matrix[3, 2];
-            float l16 = matrix[3, 3];
+            float l1 = matrix.M11;
+            float l2 = matrix.M12;
+            float l3 = matrix.M13;
+            float l4 = matrix.M14;
+            float l5 = matrix.M21;
+            float l6 = matrix.M22;
+            float l7 = matrix.M23;
+            float l8 = matrix.M24;
+            float l9 = matrix.M31;
+            float l10 = matrix.M32;
+            float l11 = matrix.M33;
+            float l12 = matrix.M34;
+            float l13 = matrix.M41;
+            float l14 = matrix.M42;
+            float l15 = matrix.M43;
+            float l16 = matrix.M44;
 
             float l17 = (l11 * l16) - (l12 * l15);
             float l18 = (l10 * l16) - (l12 * l14);
@@ -407,22 +577,22 @@ namespace nml
 
             var invertedMatrix = new Matrix4();
 
-            invertedMatrix[0, 0] = l23 * l27;
-            invertedMatrix[1, 0] = l24 * l27;
-            invertedMatrix[2, 0] = l25 * l27;
-            invertedMatrix[3, 0] = l26 * l27;
-            invertedMatrix[0, 1] = -(((l2 * l17) - (l3 * l18)) + (l4 * l19)) * l27;
-            invertedMatrix[1, 1] = (((l1 * l17) - (l3 * l20)) + (l4 * l21)) * l27;
-            invertedMatrix[2, 1] = -(((l1 * l18) - (l2 * l20)) + (l4 * l22)) * l27;
-            invertedMatrix[3, 1] = (((l1 * l19) - (l2 * l21)) + (l3 * l22)) * l27;
-            invertedMatrix[0, 2] = (((l2 * l28) - (l3 * l29)) + (l4 * l30)) * l27;
-            invertedMatrix[1, 2] = -(((l1 * l28) - (l3 * l31)) + (l4 * l32)) * l27;
-            invertedMatrix[2, 2] = (((l1 * l29) - (l2 * l31)) + (l4 * l33)) * l27;
-            invertedMatrix[3, 2] = -(((l1 * l30) - (l2 * l32)) + (l3 * l33)) * l27;
-            invertedMatrix[0, 3] = -(((l2 * l34) - (l3 * l35)) + (l4 * l36)) * l27;
-            invertedMatrix[1, 3] = (((l1 * l34) - (l3 * l37)) + (l4 * l38)) * l27;
-            invertedMatrix[2, 3] = -(((l1 * l35) - (l2 * l37)) + (l4 * l39)) * l27;
-            invertedMatrix[3, 3] = (((l1 * l36) - (l2 * l38)) + (l3 * l39)) * l27;
+            invertedMatrix.m11 = l23 * l27;
+            invertedMatrix.m21 = l24 * l27;
+            invertedMatrix.m31 = l25 * l27;
+            invertedMatrix.m41 = l26 * l27;
+            invertedMatrix.m12 = -(((l2 * l17) - (l3 * l18)) + (l4 * l19)) * l27;
+            invertedMatrix.m22 = (((l1 * l17) - (l3 * l20)) + (l4 * l21)) * l27;
+            invertedMatrix.m32 = -(((l1 * l18) - (l2 * l20)) + (l4 * l22)) * l27;
+            invertedMatrix.m42 = (((l1 * l19) - (l2 * l21)) + (l3 * l22)) * l27;
+            invertedMatrix.m13 = (((l2 * l28) - (l3 * l29)) + (l4 * l30)) * l27;
+            invertedMatrix.m23 = -(((l1 * l28) - (l3 * l31)) + (l4 * l32)) * l27;
+            invertedMatrix.m33 = (((l1 * l29) - (l2 * l31)) + (l4 * l33)) * l27;
+            invertedMatrix.m43 = -(((l1 * l30) - (l2 * l32)) + (l3 * l33)) * l27;
+            invertedMatrix.m14 = -(((l2 * l34) - (l3 * l35)) + (l4 * l36)) * l27;
+            invertedMatrix.m24 = (((l1 * l34) - (l3 * l37)) + (l4 * l38)) * l27;
+            invertedMatrix.m34 = -(((l1 * l35) - (l2 * l37)) + (l4 * l39)) * l27;
+            invertedMatrix.m44 = (((l1 * l36) - (l2 * l38)) + (l3 * l39)) * l27;
 
             return invertedMatrix;
         }
