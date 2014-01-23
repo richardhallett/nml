@@ -10,7 +10,7 @@ namespace nml
     /// <summary>
     /// This is a 4x4 matrix, it is a generic case for working with transformations in 3d space.
     /// The data is stored in row-major order, as per C# arrays, e.g. m12 refers to first row second column.
-    /// The mathmatical operations on vector transforms are for column major vectors i.e. M*v.
+    /// The mathematical operations on vector transforms use column major vectors i.e. M*v.
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
