@@ -753,6 +753,25 @@ namespace nml
         }
 
         /// <summary>
+        /// Create a right handed orthographic projection matrix. 
+        /// A clipping plane is used to form a box that is scaled to a unit cube (-1, -1, -1) to (1, 1, 1) which has its centre at the origin (0, 0, 0).
+        /// </summary>
+        /// <param name="left">The left coordinate of the horizontal plane.</param>
+        /// <param name="right">The right coordinate of the horizontal plane.</param>
+        /// <param name="bottom">The bottom coordinate of the vertical plane.</param>
+        /// <param name="top">The top coordinate of the vertical plane.</param>
+        /// <param name="near">The near coordinate of the depth plane.</param>
+        /// <param name="far">The far coordinate of the depth plane.</param>
+        /// <returns>A projection matrix.</returns>
+        public static Matrix4 OrthographicProjectionRH(float left, float right, float bottom, float top, float near, float far)
+        {            
+            return new Matrix4(new float[] { 2 / (right - left),    0.0f,               0.0f,               -(right + left) / (right - left),
+                                             0.0f,                  2 / (top - bottom), 0.0f,               -(top + bottom) / (top - bottom),
+                                             0.0f,                  0.0f,               -2 / (far - near),  -(far + near) / (far - near),
+                                             0.0f,                  0.0f,               0.0f,               1.0f});
+        }
+
+        /// <summary>
         /// Transform a <see cref="Vector4"/> by this matrix.
         /// </summary>
         /// <param name="vec"></param>

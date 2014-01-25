@@ -267,5 +267,19 @@ namespace nml.tests
             Assert.True(rY.Equals(expectedResultY, 1e-3f));
             Assert.True(rZ.Equals(expectedResultZ, 1e-3f));
         }
+        
+        [Fact]
+        public void Matrix4OrtographicProjectionRHTest()
+        {
+            var projMatrix = Matrix4.OrthographicProjectionRH(0, 10, 0, 10, -1, 1);
+
+            // This would be at the full extent of our clipping plane (top right)
+            var vec = new Vector4(10, 10, 1, 1);
+            var expectedResult = new Vector4(1, 1, -1, 1);
+
+            var r = projMatrix.Transform(vec);
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
     }
 }
