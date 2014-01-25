@@ -245,5 +245,27 @@ namespace nml.tests
 
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
+
+        [Fact]
+        public void Matrix4RotateAxisTest()
+        {
+            var rotXAxis = Matrix4.RotateAxis(Vector3.UnitX, (float)Math.PI);
+            var rotYAxis = Matrix4.RotateAxis(Vector3.UnitY, (float)Math.PI);
+            var rotZAxis = Matrix4.RotateAxis(Vector3.UnitZ, (float)Math.PI);
+
+            var vec = new Vector4(3, 4, 5, 1);
+
+            var expectedResultX = new Vector4(3, -4, -5, 1);
+            var expectedResultY = new Vector4(-3, 4, -5, 1);
+            var expectedResultZ = new Vector4(-3, -4, 5, 1);
+
+            var rX = rotXAxis.Transform(vec);
+            var rY = rotYAxis.Transform(vec);
+            var rZ = rotZAxis.Transform(vec);
+
+            Assert.True(rX.Equals(expectedResultX, 1e-3f));
+            Assert.True(rY.Equals(expectedResultY, 1e-3f));
+            Assert.True(rZ.Equals(expectedResultZ, 1e-3f));
+        }
     }
 }

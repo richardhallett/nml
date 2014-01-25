@@ -218,6 +218,7 @@ namespace nml
         {
             get
             {
+                // Local variables for faster lookup.
                 float l11 = this.m11;
                 float l12 = this.m12;
                 float l13 = this.m13;
@@ -234,6 +235,7 @@ namespace nml
                 float l42 = this.m42;
                 float l43 = this.m43;
                 float l44 = this.m44;
+
                 float c1 = (l33 * l44) - (l34 * l43);
                 float c2 = (l32 * l44) - (l34 * l42);
                 float c3 = (l32 * l43) - (l33 * l42);
@@ -254,6 +256,7 @@ namespace nml
         /// <returns>The resulting multiplication of the matrix</returns>
         public static Matrix4 Multiply(Matrix4 matrix, float scalar)
         {
+            // Local variables for faster lookup.
             float a11 = matrix.M11;
             float a12 = matrix.M12;
             float a13 = matrix.M13;
@@ -305,6 +308,7 @@ namespace nml
         /// 
         public static Matrix4 Multiply(Matrix4 a, Matrix4 b)
         {
+            // Local variables for faster lookup.
             float a11 = a.M11;
             float a12 = a.M12;
             float a13 = a.M13;
@@ -372,6 +376,7 @@ namespace nml
         /// <returns>The resulting addition of the two matrices.</returns>
         public static Matrix4 Add(Matrix4 a, Matrix4 b)
         {
+            // Local variables for faster lookup.
             float a11 = a.M11;
             float a12 = a.M12;
             float a13 = a.M13;
@@ -439,6 +444,7 @@ namespace nml
         /// <returns>The resulting subtraction of the two matrices.</returns>
         public static Matrix4 Subtract(Matrix4 a, Matrix4 b)
         {
+            // Local variables for faster lookup.
             float a11 = a.M11;
             float a12 = a.M12;
             float a13 = a.M13;
@@ -499,7 +505,7 @@ namespace nml
         }
 
         /// <summary>
-        /// Swap all elements, rows become columns, columns become rows.
+        /// Swap all elements, rows become columns, columns become rows of the given matrix.
         /// </summary>
         /// <param name="matrix">The matrix to tranpose.</param>
         /// <param name="result">The transposed matrix</param>
@@ -535,10 +541,10 @@ namespace nml
         /// <param name="matrix">The matrix to invert.</param>
         /// <returns>The inverted matrix.</returns>
         public static Matrix4 Invert(Matrix4 matrix)
-        {     
-            // All the local variables are because it's generally faster in C#.
+        {                 
             // Todo: Potentially add optional inverse performance tricks that only work on certain kinds of matrices e.g. affine transforms. Based on GPU gems code.
 
+            // Local variables for faster lookup.
             float l1 = matrix.M11;
             float l2 = matrix.M12;
             float l3 = matrix.M13;
@@ -703,13 +709,47 @@ namespace nml
         /// <returns>A rotation matrix.</returns>
         public static Matrix4 RotateZ(float angle)
         {
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos = (float)Math.Cos(angle);            
+            float sin = (float)Math.Sin(angle);            
 
             return new Matrix4(new float[] { cos, -sin, 0.0f, 0.0f,
                                              sin, cos, 0.0f, 0.0f,
                                              0.0f, 0.0f, 1.0f, 0.0f,
                                              0.0f, 0.0f, 0.0f, 1.0f});
+        }
+
+        /// <summary>
+        /// Create a rotation matrix around an axis by a given angle.
+        /// </summary>
+        /// <remarks>If you do not use a normalised vector for the axis, you will get undefined behaviour, in the interest of speed this function does not do any safety checks.</remarks>
+        /// <param name="axis">A normalised unit vector representing the axis to rotate about.</param>
+        /// <param name="angle">The angle in radians.</param>
+        /// <returns>A rotation matrix.</returns>
+        public static Matrix4 RotateAxis(Vector3 axis, float angle)
+        {
+            float x = axis.x;
+            float y = axis.y;
+            float z = axis.z;
+
+            float cos = (float)Math.Cos(angle);
+            float cos1 = 1.0f - cos;
+            float sin = (float)Math.Sin(angle);
+
+            float xx1 = x * x * cos1;
+            float xy1 = x * y * cos1;
+            float xz1 = x * z * cos1;
+            float yy1 = y * y * cos1;
+            float yz1 = y * z * cos1;
+            float zz1 = z * z * cos1;
+            
+            float sinx = x * sin;
+            float siny = y * sin;
+            float sinz = z * sin;
+
+            return new Matrix4(new float[] { cos + xx1,     xy1 - sinz,     xz1 + siny, 0.0f,
+                                             xy1 + sinz,    cos + yy1,      yz1 - sinx, 0.0f,
+                                             xz1 - siny,    yz1 + sinx,     cos + zz1,  0.0f,
+                                             0.0f,          0.0f,           0.0f,       1.0f});
         }
 
         /// <summary>
@@ -719,6 +759,7 @@ namespace nml
         /// <returns>The resulting <see cref="Vector4"/> transformed by this matrix i.e. M * (x, y, z, w)</returns>
         public Vector4 Transform(Vector4 vec)
         {
+            // Local variables for faster lookup.
             float l11 = this.m11;
             float l12 = this.m12;
             float l13 = this.m13;
@@ -744,11 +785,17 @@ namespace nml
             );
         }
 
+        /// <summary>
+        /// Inverts this matrix.
+        /// </summary>
         public void Invert()
         {
             this = Matrix4.Invert(this);
         }
 
+        /// <summary>
+        /// Swap all elements, rows become columns, columns become rows of this matrix.
+        /// </summary>
         public void Transpose()
         {
             this = Matrix4.Transpose(this);
