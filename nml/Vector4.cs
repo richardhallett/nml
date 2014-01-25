@@ -333,7 +333,7 @@ namespace nml
         /// <param name="obj">The <see cref="System.Object"/> to compare.</param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <returns>True/False</returns>
         public override bool Equals(System.Object obj)
         {
             if (obj == null)
@@ -346,15 +346,29 @@ namespace nml
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="Vector4"/> is exactly equal to this instance.
         /// </summary>
         /// <param name="other">The <see cref="Vector4"/> to compare with.</param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="Vector4"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <returns>True/False</returns>
         public bool Equals(Vector4 other)
         {
             return (this.x == other.x) && (this.y == other.y) && (this.z == other.z);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="Vector4"/> is equal to this instance up to the given precision.
+        /// </summary>
+        /// <param name="other">The <see cref="Vector4"/> to compare with.</param>
+        /// <param name="epsilon">The precision.</param>
+        /// <returns>True/False</returns>
+        public bool Equals(Vector4 other, float epsilon)
+        {
+            return (Math.Abs(this.x - other.x) < epsilon) &&
+                   (Math.Abs(this.y - other.y) < epsilon) &&
+                   (Math.Abs(this.z - other.z) < epsilon) &&
+                   (Math.Abs(this.w - other.w) < epsilon);
         }
 
         /// <summary>
