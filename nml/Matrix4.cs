@@ -529,6 +529,11 @@ namespace nml
             return tMatrix;
         }
 
+        /// <summary>
+        /// Inverts the given matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix to invert.</param>
+        /// <returns>The inverted matrix.</returns>
         public static Matrix4 Invert(Matrix4 matrix)
         {     
             // All the local variables are because it's generally faster in C#.
@@ -598,7 +603,7 @@ namespace nml
         }
 
         /// <summary>
-        /// Creates a new translation matrix with the specified axis offset.
+        /// Create a new translation matrix with the specified axis offset.
         /// </summary>
         /// <param name="x">X translation.</param>
         /// <param name="y">Y translation.</param>
@@ -613,7 +618,7 @@ namespace nml
         }
 
         /// <summary>
-        /// Creates a new translation matrix using a <see cref="Vector3"/>
+        /// Create a new translation matrix using a <see cref="Vector3"/>
         /// </summary>
         /// <param name="vec"><see cref="Vector3"/> to use for translation.</param>
         /// <returns>The resulting translation matrix.</returns>
@@ -623,7 +628,7 @@ namespace nml
         }
 
         /// <summary>
-        /// Creates a scaling matrix with the specified axis values.
+        /// Create a scaling matrix with the specified axis values.
         /// </summary>
         /// <param name="x">X scale.</param>
         /// <param name="y">Y scale.</param>
@@ -638,7 +643,7 @@ namespace nml
         }
 
         /// <summary>
-        /// Creates a scaling matrix with the specified axis values.
+        /// Create a scaling matrix with the specified axis values.
         /// </summary>
         /// <param name="vec"><see cref="Vector3"/> to use for scaling.</param>
         /// <returns></returns>
@@ -648,13 +653,63 @@ namespace nml
         }
 
         /// <summary>
-        /// Creates a scaling matrix with the specified value for uniformly scaling each axis.
+        /// Create a scaling matrix with the specified value for uniformly scaling each axis.
         /// </summary>
         /// <param name="scale">The value to uniformly scale by.</param>
         /// <returns></returns>
         public static Matrix4 Scale(float scale)
         {
             return Matrix4.Scale(scale, scale, scale);
+        }
+
+        /// <summary>
+        /// Create a rotation matrix around the X axis by the given angle.
+        /// </summary>
+        /// <param name="angle">The angle in radians.</param>
+        /// <returns>A rotation matrix.</returns>
+        public static Matrix4 RotateX(float angle)
+        {
+            float cos = (float)Math.Cos(angle);
+            float sin = (float)Math.Sin(angle);
+
+            return new Matrix4(new float[] { 1.0f, 0.0f, 0.0f, 0.0f,
+                                             0.0f, cos, -sin, 0.0f,
+                                             0.0f, sin, cos, 0.0f,
+                                             0.0f, 0.0f, 0.0f, 1.0f});
+        }
+
+        /// <summary>
+        /// Create a rotation matrix around the Y axis by the given angle.
+        /// 
+        /// </summary>
+        /// <param name="angle">The angle in radians.</param>
+        /// <returns>A rotation matrix.</returns>
+        public static Matrix4 RotateY(float angle)
+        {
+            float cos = (float)Math.Cos(angle);
+            float sin = (float)Math.Sin(angle);
+
+            return new Matrix4(new float[] { cos, 0.0f, sin, 0.0f,
+                                             0.0f, 1.0f, 0.0f, 0.0f,
+                                             -sin, 0.0f, cos, 0.0f,
+                                             0.0f, 0.0f, 0.0f, 1.0f});
+        }
+
+        /// <summary>
+        /// Create a rotation matrix around the Z axis by the given angle.
+        /// 
+        /// </summary>
+        /// <param name="angle">The angle in radians.</param>
+        /// <returns>A rotation matrix.</returns>
+        public static Matrix4 RotateZ(float angle)
+        {
+            float cos = (float)Math.Cos(angle);
+            float sin = (float)Math.Sin(angle);
+
+            return new Matrix4(new float[] { cos, -sin, 0.0f, 0.0f,
+                                             sin, cos, 0.0f, 0.0f,
+                                             0.0f, 0.0f, 1.0f, 0.0f,
+                                             0.0f, 0.0f, 0.0f, 1.0f});
         }
 
         /// <summary>
