@@ -281,5 +281,19 @@ namespace nml.tests
 
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
+
+        [Fact]
+        public void Matrix4PerspectiveProjectionRHTest()
+        {
+            var projMatrix = Matrix4.PerspectiveProjectionRH(0, 10, 0, 10, 0.1f, 100.0f);
+
+            // Arbitrarily chosen
+            var vec = new Vector4(3, 4, 5, 1);
+            var expectedResult = new Vector4(5.06f, 5.08f, -5.21021f, -5.0f);
+
+            var r = projMatrix.Transform(vec);
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
     }
 }

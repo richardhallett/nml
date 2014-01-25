@@ -756,12 +756,12 @@ namespace nml
         /// Create a right handed orthographic projection matrix. 
         /// A clipping plane is used to form a box that is scaled to a unit cube (-1, -1, -1) to (1, 1, 1) which has its centre at the origin (0, 0, 0).
         /// </summary>
-        /// <param name="left">The left coordinate of the horizontal plane.</param>
-        /// <param name="right">The right coordinate of the horizontal plane.</param>
-        /// <param name="bottom">The bottom coordinate of the vertical plane.</param>
-        /// <param name="top">The top coordinate of the vertical plane.</param>
-        /// <param name="near">The near coordinate of the depth plane.</param>
-        /// <param name="far">The far coordinate of the depth plane.</param>
+        /// <param name="left">The left coordinate of the view frustrum.</param>
+        /// <param name="right">The right coordinate of the view frustrum.</param>
+        /// <param name="bottom">The bottom coordinate of the view frustrum</param>
+        /// <param name="top">The top coordinate of the view frustrum</param>
+        /// <param name="near">The near coordinate of the depth plane. Can be negative if the plane is behind the viewer.</param>
+        /// <param name="far">The far coordinate of the depth plane. Can be negative if the plane is behind the viewer.</param>
         /// <returns>A projection matrix.</returns>
         public static Matrix4 OrthographicProjectionRH(float left, float right, float bottom, float top, float near, float far)
         {            
@@ -769,6 +769,62 @@ namespace nml
                                              0.0f,                  2 / (top - bottom), 0.0f,               -(top + bottom) / (top - bottom),
                                              0.0f,                  0.0f,               -2 / (far - near),  -(far + near) / (far - near),
                                              0.0f,                  0.0f,               0.0f,               1.0f});
+        }
+
+        /// <summary>
+        /// Create a right handed perspective projection matrix. 
+        /// A clipping plane is used to form a box that is scaled to a unit cube (-1, -1, -1) to (1, 1, 1) which has its centre at the origin (0, 0, 0).
+        /// </summary>
+        /// <param name="left">The left coordinate of the view frustrum.</param>
+        /// <param name="right">The right coordinate of the view frustrum.</param>
+        /// <param name="bottom">The bottom coordinate of the view frustrum</param>
+        /// <param name="top">The top coordinate of the view frustrum</param>
+        /// <param name="near">Specifies the distance from the viewer to the near clipping plane (always positive).</param>
+        /// <param name="far">Specifies the distance from the viewer to the far clipping plane (always positive).</param>
+        /// <returns>A projection matrix.</returns>
+        public static Matrix4 PerspectiveProjectionRH(float left, float right, float bottom, float top, float near, float far)
+        {
+            if (near <= 0)
+                throw new ArgumentOutOfRangeException("near");
+            if (far <= 0)
+                throw new ArgumentOutOfRangeException("far");
+            if (near >= far)
+                throw new ArgumentOutOfRangeException("near");
+
+            return new Matrix4(new float[] { (2.0f * near) / (right - left),    0.0f,                           (right + left) / (right - left),    0.0f,
+                                             0.0f,                              (2.0f * near) / (top - bottom),  (top + bottom) / (top - bottom),    0.0f,
+                                             0.0f,                              0.0f,                           -(far + near) / (far - near),       -(2 * far * near) / (far - near),
+                                             0.0f,                              0.0f,                           -1.0f,                              0.0f});
+        }
+
+        /// <summary>
+        /// Create a right handed perspective projection matrix
+        /// A clipping plane is used to form a box that is scaled to a unit cube (-1, -1, -1) to (1, 1, 1) which has its centre at the origin (0, 0, 0).
+        /// </summary>
+        /// <param name="fovy">The field of view angle in radians.</param>
+        /// <param name="aspect">The aspect ratio of the view (width / height)</param>
+        /// <param name="near">Specifies the distance from the viewer to the near clipping plane (always positive).</param>
+        /// <param name="far">Specifies the distance from the viewer to the far clipping plane (always positive).</param>
+        /// <returns></returns>
+        public static Matrix4 PerspectiveProjectionRH(float fovy, float aspect, float near, float far)
+        {
+            if (fovy <= 0 || fovy > Math.PI)
+                throw new ArgumentOutOfRangeException("fovy");
+            if (aspect <= 0)
+                throw new ArgumentOutOfRangeException("aspect");
+            if (near <= 0)
+                throw new ArgumentOutOfRangeException("near");
+            if (far <= 0)
+                throw new ArgumentOutOfRangeException("far");
+            if (near >= far)
+                throw new ArgumentOutOfRangeException("near");
+
+            float left = near * (float)Math.Tan(fovy * 0.5f);
+            float right = -left;
+            float bottom = left * aspect;
+            float top = right * aspect;
+
+            return PerspectiveProjectionRH(left, right, bottom, top, near, far);
         }
 
         /// <summary>
