@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace nml
 {
-    [Serializable]
+    /// <summary>
+    /// A vector (x,y)
+    /// </summary>
+    [Serializable]   
     public struct Vector2 : IEquatable<Vector2>
     {       
         /// <summary>
