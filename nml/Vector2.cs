@@ -284,7 +284,7 @@ namespace nml
         /// </summary>
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
-        /// <returns></returns>
+        /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public static bool operator ==(Vector2 a, Vector2 b)
         {
             return a.Equals(b);
@@ -295,7 +295,7 @@ namespace nml
         /// </summary>
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
-        /// <returns></returns>
+        /// <returns><c>true</c> if the two vectors are not equal <c>false</c> otherwise.</returns>
         public static bool operator !=(Vector2 a, Vector2 b)
         {
             return !(a.Equals(b));
@@ -316,7 +316,7 @@ namespace nml
         /// <param name="obj">The <see cref="System.Object"/> to compare.</param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// <returns>True/False</returns>
+        /// <returns><c>true</c> if the objects are equal <c>false</c> otherwise.</returns>
         public override bool Equals(System.Object obj)
         {
             if (obj == null)
@@ -334,7 +334,7 @@ namespace nml
         /// <param name="other">The <see cref="Vector2"/> to compare with.</param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="Vector2"/> is equal to this instance; otherwise, <c>false</c>.
-        /// <returns>True/False</returns>
+        /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public bool Equals(Vector2 other)
         {
             return (this.x == other.x) && (this.y == other.y);
@@ -345,7 +345,7 @@ namespace nml
         /// </summary>
         /// <param name="other">The <see cref="Vector2"/> to compare with.</param>
         /// <param name="epsilon">The precision.</param>
-        /// <returns>True/False</returns>
+        /// <returns><c>true</c> if the two vectors are equal to the given epsilon <c>false</c> otherwise.</returns>
         public bool Equals(Vector2 other, float epsilon)
         {
             return (Math.Abs(this.x - other.x) < epsilon) &&

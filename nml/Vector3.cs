@@ -309,7 +309,7 @@ namespace nml
         /// </summary>
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
-        /// <returns>The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z)</returns>
+        /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public static Vector3 operator +(Vector3 a, Vector3 b)
         {
             return Vector3.Add(a, b);
@@ -320,7 +320,7 @@ namespace nml
         /// </summary>
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
-        /// <returns></returns>
+        /// <returns><c>true</c> if the two vectors are not equal <c>false</c> otherwise.</returns>
         public static bool operator ==(Vector3 a, Vector3 b)
         {
             return a.Equals(b);
@@ -370,7 +370,7 @@ namespace nml
         /// <param name="other">The <see cref="Vector3"/> to compare with.</param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="Vector3"/> is equal to this instance; otherwise, <c>false</c>.
-        /// <returns>True/False</returns>
+        /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public bool Equals(Vector3 other)
         {
             return (this.x == other.x) && (this.y == other.y) && (this.z == other.z);
@@ -381,7 +381,7 @@ namespace nml
         /// </summary>
         /// <param name="other">The <see cref="Vector3"/> to compare with.</param>
         /// <param name="epsilon">The precision.</param>
-        /// <returns>True/False</returns>
+        /// <returns><c>true</c> if the two vectors are equal to the given epsilon <c>false</c> otherwise.</returns>
         public bool Equals(Vector3 other, float epsilon)
         {
             return (Math.Abs(this.x - other.x) < epsilon) &&
