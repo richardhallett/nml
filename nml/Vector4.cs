@@ -322,6 +322,28 @@ namespace nml
         }
 
         /// <summary>
+        /// Determines whether the specified <see cref="Vector4"/> is exactly equal to this instance.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <returns></returns>
+        public static bool operator ==(Vector4 a, Vector4 b)
+        {
+            return a.Equals(b);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="Vector4"/> is not equal to this instance.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <returns></returns>
+        public static bool operator !=(Vector4 a, Vector4 b)
+        {
+            return !(a.Equals(b));
+        }
+
+        /// <summary>
         /// Return a string representation of the vector.
         /// </summary>
         /// <returns></returns>
