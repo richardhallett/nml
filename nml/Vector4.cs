@@ -379,7 +379,7 @@ namespace nml
         /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public bool Equals(Vector4 other)
         {
-            return (this.x == other.x) && (this.y == other.y) && (this.z == other.z);
+            return (this.x == other.x) && (this.y == other.y) && (this.z == other.z) && (this.w == other.w);
         }
 
         /// <summary>
