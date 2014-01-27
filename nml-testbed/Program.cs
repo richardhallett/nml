@@ -14,17 +14,11 @@ namespace nml_testbed
             var m = new Matrix4(new float[] { 1.0f, 1.0f, 2.0f, 0.0f,
                                               1.0f, 1.0f, 2.0f, 0.0f,
                                               1.0f, 1.0f, 2.0f, 0.0f,
-                                              1.0f, 1.0f, 2.0f, 0.0f});            
-            m[0, 1] = 1.0f;
-            m[3, 2] = 3.0f;
+                                              1.0f, 1.0f, 2.0f, 0.0f});
 
-            Console.WriteLine(m);
-
-            var a = new Vector2(3.0f, 4.0f);
-
-            a.Normalise();
-
-            Console.WriteLine(a);
+            var r = m * m;
+            
+            Console.WriteLine(r);
         }
     }
 }
