@@ -44,8 +44,8 @@ namespace nml
         /// <summary>
         /// Creates a new instance of <see cref="Vector4"/> with values specified by list collection.
         /// </summary>
-        /// <param name="values">List collection of floats</param>
-        public Vector4(IReadOnlyList<float> values)
+        /// <param name="values">The floats to initialise the values with</param>
+        public Vector4(float[] values)
             : this()
         {
             this.x = values[0];

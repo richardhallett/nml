@@ -36,10 +36,10 @@ namespace nml
         /// <summary>
         /// Creates a new instance of <see cref="Matrix4"/> with values specified by list collection.
         /// </summary>
-        /// <param name="values">Collection of floats</param>
-        public Matrix4(IReadOnlyList<float> values)
+        /// <param name="values">The floats to initialise the values with</param>
+        public Matrix4(float[] values)
         {
-            if (values.Count != 16) {
+            if (values.Length != 16) {
                 throw new ArgumentOutOfRangeException("values", "The size of the values collection must contain 16 elements.");
             }
             

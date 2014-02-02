@@ -41,8 +41,8 @@ namespace nml
         /// <summary>
         /// Creates a new instance of <see cref="Vector3"/> with values specified by list collection.
         /// </summary>
-        /// <param name="values">List collection of floats</param>
-        public Vector3(IReadOnlyList<float> values)
+        /// <param name="values">The floats to initialise the values with</param>
+        public Vector3(float[] values)
             : this()
         {
             this.x = values[0];
