@@ -243,6 +243,21 @@ namespace nml
         }
 
         /// <summary>
+        /// Get a rotation quaternion around the specified axis by the desired angle in radians.
+        /// </summary>
+        /// <param name="axis">Normalised axis vector.</param>
+        /// <param name="angle">Angle in radians.</param>
+        /// <returns></returns>
+        public static Quaternion RotateAxis(Vector3 axis, float angle)
+        {
+            angle *= 0.5f;
+            float cos = (float)Math.Cos(angle);
+            float sin = (float)Math.Sin(angle);
+
+            return new Quaternion(axis.x * sin, axis.y * sin, axis.z * sin, cos);
+        }
+       
+        /// <summary>
         /// Transform a normalised <see cref="Vector3"/> by this quaternion.
         /// </summary>
         /// <param name="vec">A normalised vector to rotate.</param>

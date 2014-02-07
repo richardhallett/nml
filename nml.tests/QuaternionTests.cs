@@ -109,5 +109,70 @@ namespace nml.tests
 
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
+
+
+        [Fact]
+        public void QuaternionRotateXTest()
+        {
+            //var a = Matrix4.RotateX((float)Math.PI);
+
+            //var b = new Vector4(3, 4, 5, 1);
+
+            //var expectedResult = new Vector4(3, -4, -5, 1);
+
+            //var r = a.Transform(b);
+
+            //Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
+
+        [Fact]
+        public void QuaternionRotateYTest()
+        {
+            //var a = Matrix4.RotateY((float)Math.PI);
+
+            //var b = new Vector4(3, 4, 5, 1);
+
+            //var expectedResult = new Vector4(-3, 4, -5, 1);
+
+            //var r = a.Transform(b);
+
+            //Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
+
+        [Fact]
+        public void QuaternionRotateZTest()
+        {
+            //var a = Matrix4.RotateZ((float)Math.PI);
+
+            //var b = new Vector4(3, 4, 5, 1);
+
+            //var expectedResult = new Vector4(-3, -4, 5, 1);
+
+            //var r = a.Transform(b);
+
+            //Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
+
+        [Fact]
+        public void QuaternionRotateAxisTest()
+        {
+            var rotXAxis = Quaternion.RotateAxis(Vector3.UnitX, (float)Math.PI);
+            var rotYAxis = Quaternion.RotateAxis(Vector3.UnitY, (float)Math.PI);
+            var rotZAxis = Quaternion.RotateAxis(Vector3.UnitZ, (float)Math.PI);
+
+            var vec = new Vector3(3, 4, 5);
+
+            var expectedResultX = new Vector3(3, -4, -5);
+            var expectedResultY = new Vector3(-3, 4, -5);
+            var expectedResultZ = new Vector3(-3, -4, 5);
+
+            var rX = rotXAxis.Transform(vec);
+            var rY = rotYAxis.Transform(vec);
+            var rZ = rotZAxis.Transform(vec);
+
+            Assert.True(rX.Equals(expectedResultX, 1e-3f));
+            Assert.True(rY.Equals(expectedResultY, 1e-3f));
+            Assert.True(rZ.Equals(expectedResultZ, 1e-3f));
+        }
     }
 }
