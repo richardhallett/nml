@@ -70,6 +70,11 @@ namespace nml
         public float w { get; set; }
 
         /// <summary>
+        /// The axis component of the quaternion as a <see cref="Vector3"/> 
+        /// </summary>
+        public Vector3 xyz { get { return new Vector3(x, y, z); } }
+
+        /// <summary>
         /// Calculate the length of this quaternion.
         /// </summary>
         public float Length
@@ -218,6 +223,33 @@ namespace nml
         public static Quaternion Multiply(Quaternion quaternion, float scalar)
         {
             return new Quaternion(quaternion.x * scalar, quaternion.y * scalar, quaternion.z * scalar, quaternion.w * scalar);
+        }
+
+        /// <summary>
+        /// Transform a <see cref="Vector3"/> by this quaternion.
+        /// </summary>
+        /// <param name="vec">A vector to rotate.</param>
+        /// <returns>The resulting <see cref="Vector3"/> transformed by this quaternion</returns>
+        public Vector3 Transform(Vector3 vec)
+        {
+            // Local variables for faster lookup.
+            Vector3 xyz = this.xyz;
+            float w = this.w;
+
+            var t = Vector3.Cross(xyz, vec) * 2;
+            var r = vec + (t * w) + Vector3.Cross(xyz, t);
+
+            return r;
+        }
+
+        /// <summary>
+        /// Transform a normalised <see cref="Vector3"/> by this quaternion.
+        /// </summary>
+        /// <param name="vec">A normalised vector to rotate.</param>
+        /// <returns>The resulting <see cref="Vector3"/> transformed by this quaternion</returns>
+        public static Vector3 operator *(Quaternion quat, Vector3 vec)
+        {
+            return quat.Transform(vec);
         }
 
         /// <summary>

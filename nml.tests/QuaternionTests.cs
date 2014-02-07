@@ -96,5 +96,18 @@ namespace nml.tests
 
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
+        
+        [Fact]
+        public void QuaternionTransformVector3Test()
+        {
+            var a = new Quaternion(1.0f, 0.0f, 0.0f, 0.0f);
+            var b = new Vector3(3, 4, 5);
+
+            var expectedResult = new Vector3(3, -4, -5);
+            
+            var r = a * b;
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
     }
 }
