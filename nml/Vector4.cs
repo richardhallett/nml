@@ -128,6 +128,7 @@ namespace nml
                 float x = this.x;
                 float y = this.y;
                 float z = this.z;
+                float w = this.w;
                 return (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w * w));
             }
         }
@@ -143,6 +144,7 @@ namespace nml
                 float x = this.x;
                 float y = this.y;
                 float z = this.z;
+                float w = this.w;
                 return (float)(x * x) + (y * y) + (z * z) + (w * w);
             }
         }
