@@ -251,10 +251,75 @@ namespace nml
         public static Quaternion RotateAxis(Vector3 axis, float angle)
         {
             angle *= 0.5f;
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos = (float)System.Math.Cos(angle);
+            float sin = (float)System.Math.Sin(angle);
 
             return new Quaternion(axis.x * sin, axis.y * sin, axis.z * sin, cos);
+        }
+
+        /// <summary>
+        /// Get a rotation quaternion around the specifieid euler angles.
+        /// </summary>
+        /// <param name="yaw">Yaw in radians.</param>
+        /// <param name="pitch">Pitch in radians.</param>
+        /// <param name="roll">Roll in radians.</param>
+        /// <returns></returns>
+        public static Quaternion RotateEuler(float yaw, float pitch, float roll)
+        {
+            float hYaw = yaw * 0.5f;
+            float hPitch = pitch * 0.5f;            
+            float hRoll = roll * 0.5f;
+
+            float sinRoll = (float)System.Math.Sin(hPitch);
+            float cosRoll = (float)System.Math.Cos(hPitch);
+            float sinPitch = (float)System.Math.Sin(hPitch);
+            float cosPitch = (float)System.Math.Cos(hPitch);
+            float sinYaw = (float)System.Math.Sin(hYaw);
+            float cosYaw = (float)System.Math.Cos(hYaw);
+
+            return new Quaternion(
+                    (cosYaw * sinPitch * cosRoll) + (sinYaw * cosPitch * sinRoll),
+                    (sinYaw * cosPitch * cosRoll) - (cosYaw * sinPitch * sinRoll),
+                    (cosYaw * cosPitch * sinRoll) - (sinYaw * sinPitch * cosRoll),
+                    (cosYaw * cosPitch * cosRoll) + (sinYaw * sinPitch * sinRoll)
+            );                       
+        }
+
+        /// <summary>
+        /// Get a vector representation of the axis and angle of a quaternion.
+        /// </summary>
+        /// <param name="quat">The quaternion we want to get the axis and angle from.</param>
+        /// <returns>A vector4 representing the axis and angle.</returns>
+        public static Vector4 GetAxisAngle(Quaternion quat)
+        {
+            quat.Normalise();
+            float x = quat.x;
+            float y = quat.y;
+            float z = quat.z;
+            float w = quat.w;
+
+            float angle = 2.0f * (float)System.Math.Acos(w);
+            float sin = (float)System.Math.Sin(angle * 0.5f) ;
+
+            if (System.Math.Abs(sin) > 1e-4f)
+            {
+                float sin1 = 1.0f / sin;
+                return new Vector4(x * sin1, y * sin1, z * sin1, angle);
+            }
+            else
+            {
+                // The angle is too close to 0 to be able to be represented, therefore to avoid blowing up we just return a Unit Vector.
+                return Vector4.UnitX;
+            }                       
+        }        
+
+        /// <summary>
+        /// Get a vector representation of the axis and angle of this quaternion.
+        /// </summary>
+        /// <returns>A vector4 representing the axis and angle.</returns>
+        public Vector4 GetAxisAngle()
+        {
+            return Quaternion.GetAxisAngle(this);
         }
        
         /// <summary>

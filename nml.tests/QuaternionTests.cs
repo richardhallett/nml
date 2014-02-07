@@ -174,5 +174,29 @@ namespace nml.tests
             Assert.True(rY.Equals(expectedResultY, 1e-3f));
             Assert.True(rZ.Equals(expectedResultZ, 1e-3f));
         }
+
+        [Fact]
+        public void QuaternionGetAxisAngleTest()
+        {
+            var rotQuat = Quaternion.RotateAxis(Vector3.UnitX, (float)Math.PI);
+            var expectedResult = new Vector4(1.0f, 0, 0, (float)Math.PI);
+
+            var r = rotQuat.GetAxisAngle();
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
+
+        [Fact]
+        public void QuaternionRotateEulerTest()
+        {
+            var rotQuat = Quaternion.RotateEuler((float)Math.PI, 0.0f, 0.0f);
+            var vec = new Vector3(3, 4, 5);
+
+            var expectedResult = new Vector3(-3, 4, -5);
+
+            var r = rotQuat * vec;
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
     }
 }
