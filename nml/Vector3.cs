@@ -338,6 +338,15 @@ namespace nml
         }
 
         /// <summary>
+        /// Returns the components of a vector in an array.
+        /// </summary>
+        /// <returns>An array with the components of the vector.</returns>
+        public float[] ToArray()
+        {
+            return new float[] { x, y, z};
+        }
+
+        /// <summary>
         /// Return a string representation of the vector.
         /// </summary>
         /// <returns></returns>

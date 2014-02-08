@@ -420,6 +420,15 @@ namespace nml
         }
 
         /// <summary>
+        /// Returns the components of a quaternion in an array.
+        /// </summary>
+        /// <returns>An array with the components of the quaternion.</returns>
+        public float[] ToArray()
+        {
+            return new float[] { x, y, z, w };
+        }
+
+        /// <summary>
         /// Return a string representation of the quaternion.
         /// </summary>
         /// <returns></returns>
