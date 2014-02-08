@@ -125,6 +125,26 @@ namespace nml
         }
 
         /// <summary>
+        /// Negate a quaternion so it faces the opposite direction, keeping the same orientation.
+        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Invert"/>.
+        /// </summary>
+        /// <param name="quat">The quaternion to negate.</param>
+        /// <returns>A quaternion facing the opposite direction.</returns>
+        public static Quaternion Negate(Quaternion quat)
+        {
+            return new Quaternion(-quat.x, -quat.y, -quat.z, -quat.w);
+        }
+
+        /// <summary>
+        /// Negate this quaternion so it faces the opposite direction, keeping the same orientation.
+        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Inverse"/>.
+        /// </summary>
+        public void Negate()
+        {
+            this = Quaternion.Negate(this);
+        }
+
+        /// <summary>
         /// Normalise passed in quaternion.
         /// </summary>
         /// <param name="quat">The quaternion to normalise</param>
@@ -195,6 +215,14 @@ namespace nml
             float w = quat.w * inv;
 
             return new Quaternion(x, y, z, w);
+        }
+
+        /// <summary>
+        /// Inverts this quaternion.
+        /// </summary>
+        public void Inverse()
+        {
+            this = Quaternion.Invert(this);
         }
 
         /// <summary>
@@ -329,7 +357,7 @@ namespace nml
         public Vector4 GetAxisAngle()
         {
             return Quaternion.GetAxisAngle(this);
-        }
+        }        
 
         /// <summary>
         /// Get a rotation <see cref="Matrix4" /> representing a quaternion.
