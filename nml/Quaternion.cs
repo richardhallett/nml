@@ -72,7 +72,16 @@ namespace nml
         /// <summary>
         /// The axis component of the quaternion as a <see cref="Vector3"/> 
         /// </summary>
-        public Vector3 xyz { get { return new Vector3(x, y, z); } }
+        public Vector3 xyz
+        {
+            get { return new Vector3(x, y, z); }
+            set
+            {
+                this.x = value.x;
+                this.y = value.y;
+                this.z = value.z;
+            }
+        }
 
         /// <summary>
         /// Calculate the length of this quaternion.
