@@ -198,5 +198,19 @@ namespace nml.tests
 
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
+
+        [Fact]
+        public void QuaternionToMatrix4Test()
+        {
+            var rotQuat = Quaternion.RotateEuler((float)Math.PI, 0.0f, 0.0f);
+            var rotMatrix = rotQuat.GetMatrix4();
+
+            var vec = new Vector4(3, 4, 5, 1);
+            var expectedResult = new Vector4(-3, 4, -5, 1);
+
+            var r = rotMatrix * vec;
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));
+        }
     }
 }
