@@ -110,49 +110,6 @@ namespace nml.tests
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
 
-
-        [Fact]
-        public void QuaternionRotateXTest()
-        {
-            //var a = Matrix4.RotateX((float)Math.PI);
-
-            //var b = new Vector4(3, 4, 5, 1);
-
-            //var expectedResult = new Vector4(3, -4, -5, 1);
-
-            //var r = a.Transform(b);
-
-            //Assert.True(r.Equals(expectedResult, 1e-3f));
-        }
-
-        [Fact]
-        public void QuaternionRotateYTest()
-        {
-            //var a = Matrix4.RotateY((float)Math.PI);
-
-            //var b = new Vector4(3, 4, 5, 1);
-
-            //var expectedResult = new Vector4(-3, 4, -5, 1);
-
-            //var r = a.Transform(b);
-
-            //Assert.True(r.Equals(expectedResult, 1e-3f));
-        }
-
-        [Fact]
-        public void QuaternionRotateZTest()
-        {
-            //var a = Matrix4.RotateZ((float)Math.PI);
-
-            //var b = new Vector4(3, 4, 5, 1);
-
-            //var expectedResult = new Vector4(-3, -4, 5, 1);
-
-            //var r = a.Transform(b);
-
-            //Assert.True(r.Equals(expectedResult, 1e-3f));
-        }
-
         [Fact]
         public void QuaternionRotateAxisTest()
         {
