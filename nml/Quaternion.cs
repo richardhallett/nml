@@ -365,7 +365,7 @@ namespace nml
         /// </summary>
         /// <param name="quat">A normalised quaternion.</param>
         /// <returns></returns>
-        public static Matrix4x4 GetMatrix4(Quaternion quat)
+        public static Matrix4x4 GetMatrix4x4(Quaternion quat)
         {            
             float x = quat.x;
             float y = quat.y;
