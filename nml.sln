@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nml", "nml\nml.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nml-testbed", "nml-testbed\nml-testbed.csproj", "{4374A82F-9AC7-4E34-A490-4DC34A6C9390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nml.benchmarks", "nml.benchmarks\nml.benchmarks.csproj", "{EB98CAEF-4B8B-4C8F-95B9-4D7D9D0BA822}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,15 +27,8 @@ Global
 		{4374A82F-9AC7-4E34-A490-4DC34A6C9390}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4374A82F-9AC7-4E34-A490-4DC34A6C9390}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4374A82F-9AC7-4E34-A490-4DC34A6C9390}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB98CAEF-4B8B-4C8F-95B9-4D7D9D0BA822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB98CAEF-4B8B-4C8F-95B9-4D7D9D0BA822}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB98CAEF-4B8B-4C8F-95B9-4D7D9D0BA822}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB98CAEF-4B8B-4C8F-95B9-4D7D9D0BA822}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
