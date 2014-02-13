@@ -394,9 +394,9 @@ namespace nml
         /// Note: The quaternion must be a unit length quaternion, the results are undefined otherwise.
         /// </summary>
         /// <returns></returns>
-        public Matrix4x4 GetMatrix4()
+        public Matrix4x4 GetMatrix4x4()
         {
-            return Quaternion.GetMatrix4(this);
+            return Quaternion.GetMatrix4x4(this);
         }
        
         /// <summary>
