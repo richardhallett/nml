@@ -360,12 +360,12 @@ namespace nml
         }        
 
         /// <summary>
-        /// Get a rotation <see cref="Matrix4" /> representing a quaternion.
+        /// Get a rotation <see cref="Matrix4x4" /> representing a quaternion.
         /// Note: The quaternion must be a unit length quaternion, the results are undefined otherwise.
         /// </summary>
         /// <param name="quat">A normalised quaternion.</param>
         /// <returns></returns>
-        public static Matrix4 GetMatrix4(Quaternion quat)
+        public static Matrix4x4 GetMatrix4(Quaternion quat)
         {            
             float x = quat.x;
             float y = quat.y;
@@ -382,7 +382,7 @@ namespace nml
 	        float wy = w * y;
 	        float wz = w * z;
 
-            return new Matrix4(new float[] { 1.0f - 2.0f * (y2 + z2),     2.0f * (xy - wz),           2.0f * (xz + wy),           0.0f,
+            return new Matrix4x4(new float[] { 1.0f - 2.0f * (y2 + z2),     2.0f * (xy - wz),           2.0f * (xz + wy),           0.0f,
                                              2.0f * (xy + wz),            1.0f - 2.0f * (x2 + z2),    2.0f * (yz - wx),           0.0f,
                                              2.0f * (xz - wy),            2.0f * (yz + wx),           1.0f - 2.0f * (x2 + y2),    0.0f,
                                              0.0f,                        0.0f,                       0.0f,                       1.0f }
@@ -390,11 +390,11 @@ namespace nml
         }
 
         /// <summary>
-        /// Get a rotation <see cref="Matrix4" /> representing this quaternion.
+        /// Get a rotation <see cref="Matrix4x4" /> representing this quaternion.
         /// Note: The quaternion must be a unit length quaternion, the results are undefined otherwise.
         /// </summary>
         /// <returns></returns>
-        public Matrix4 GetMatrix4()
+        public Matrix4x4 GetMatrix4()
         {
             return Quaternion.GetMatrix4(this);
         }

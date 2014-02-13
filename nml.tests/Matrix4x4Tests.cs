@@ -3,12 +3,12 @@ using Xunit;
 
 namespace nml.tests
 {
-    public class Matrix4Tests
+    public class Matrix4x4Tests
     {
         [Fact]
-        public void Matrix4ArrayIndexTest()
+        public void Matrix4x4ArrayIndexTest()
         {
-            var a = new Matrix4();
+            var a = new Matrix4x4();
 
             a[0, 1] = 1.0f;
             a[3, 2] = 5.0f;
@@ -21,16 +21,16 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4MultiplyScalarTest()
+        public void Matrix4x4MultiplyScalarTest()
         {
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 2.0f, 3.0f, 4.0f,
                                             5.0f, 6.0f, 7.0f, 8.0f,
                                             9.0f, 10.0f, 11.0f, 12.0f,
                                             13.0f, 14.0f, 15.0f, 16.0f});            
             float scalar = 2.0f;
 
-            var expectedResult = new Matrix4(new float[] {  
+            var expectedResult = new Matrix4x4(new float[] {  
                                             2.0f, 4.0f, 6.0f, 8.0f,
                                             10.0f, 12.0f, 14.0f, 16.0f,
                                             18.0f, 20.0f, 22.0f, 24.0f,
@@ -38,19 +38,19 @@ namespace nml.tests
 
             var r = a * scalar;
 
-            Assert.Equal<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4x4>(expectedResult, r);
         }
 
         [Fact]
-        public void Matrix4AdditionTest()
+        public void Matrix4x4AdditionTest()
         {
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 2.0f, 3.0f, 4.0f,
                                             5.0f, 6.0f, 7.0f, 8.0f,
                                             9.0f, 10.0f, 11.0f, 12.0f,
                                             13.0f, 14.0f, 15.0f, 16.0f});
 
-            var expectedResult = new Matrix4(new float[] {  
+            var expectedResult = new Matrix4x4(new float[] {  
                                             2.0f, 4.0f, 6.0f, 8.0f,
                                             10.0f, 12.0f, 14.0f, 16.0f,
                                             18.0f, 20.0f, 22.0f, 24.0f,
@@ -58,36 +58,36 @@ namespace nml.tests
 
             var r = a + a;
 
-            Assert.Equal<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4x4>(expectedResult, r);
         }
 
         [Fact]
-        public void Matrix4SubtractionTest()
+        public void Matrix4x4SubtractionTest()
         {
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 2.0f, 3.0f, 4.0f,
                                             5.0f, 6.0f, 7.0f, 8.0f,
                                             9.0f, 10.0f, 11.0f, 12.0f,
                                             13.0f, 14.0f, 15.0f, 16.0f});
 
-            var expectedResult = new Matrix4(0.0f);
+            var expectedResult = new Matrix4x4(0.0f);
 
             var r = a - a;
 
-            Assert.Equal<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4x4>(expectedResult, r);
         }
 
 
         [Fact]
-        public void Matrix4TransposeTest()
+        public void Matrix4x4TransposeTest()
         {
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 2.0f, 3.0f, 4.0f,
                                             5.0f, 6.0f, 7.0f, 8.0f,
                                             9.0f, 10.0f, 11.0f, 12.0f,
                                             13.0f, 14.0f, 15.0f, 16.0f});
 
-            var expectedResult = new Matrix4(new float[] { 
+            var expectedResult = new Matrix4x4(new float[] { 
                                             1.0f, 5.0f, 9.0f, 13.0f,
                                             2.0f, 6.0f, 10.0f, 14.0f,
                                             3.0f, 7.0f, 11.0f, 15.0f,
@@ -95,20 +95,20 @@ namespace nml.tests
 
             a.Transpose();
 
-            Assert.Equal<Matrix4>(expectedResult, a);
+            Assert.Equal<Matrix4x4>(expectedResult, a);
         }
 
         [Fact]
-        public void Matrix4MultiplyMatrixTest()
+        public void Matrix4x4MultiplyMatrixTest()
         {
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 2.0f, 3.0f, 4.0f,
                                             5.0f, 6.0f, 7.0f, 8.0f,
                                             9.0f, 10.0f, 11.0f, 12.0f,
                                             13.0f, 14.0f, 15.0f, 16.0f});
             
 
-            var expectedResult = new Matrix4(new float[] {  
+            var expectedResult = new Matrix4x4(new float[] {  
                                             90.0f, 100.0f, 110.0f, 120.0f,
                                             202.0f, 228.0f, 254.0f, 280.0f,
                                             314.0f, 356.0f, 398.0f, 440.0f,
@@ -116,14 +116,14 @@ namespace nml.tests
 
             var r = a * a;
 
-            Assert.Equal<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4x4>(expectedResult, r);
         }
 
         [Fact]
-        public void Matrix4DeterminantTest()
+        public void Matrix4x4DeterminantTest()
         {
             // Although i've been using this elsewhere as I like ordered numbers, as it turns out works pretty well for getting a zero based determinant (singular matrix, i.e. no inverse)
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 2.0f, 3.0f, 4.0f,
                                             5.0f, 6.0f, 7.0f, 8.0f,
                                             9.0f, 10.0f, 11.0f, 12.0f,
@@ -138,30 +138,30 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4InvertTest()
+        public void Matrix4x4InvertTest()
         {            
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 1.0f, 0.0f, 0.0f,
                                             1.0f, 1.0f, 1.0f, 0.0f,
                                             0.0f, 1.0f, 1.0f, 0.0f,
                                             0.0f, 0.0f, 0.0f, 1.0f});
 
 
-            var expectedResult = new Matrix4(new float[] { 
+            var expectedResult = new Matrix4x4(new float[] { 
                                             0.0f, 1.0f, -1.0f, 0.0f,
                                             1.0f, -1.0f, 1.0f, 0.0f,
                                             -1.0f, 1.0f, 0.0f, 0.0f,
                                             0.0f, 0.0f, 0.0f, 1.0f});
 
-            var r = Matrix4.Invert(a);
+            var r = Matrix4x4.Invert(a);
 
-            Assert.Equal<Matrix4>(expectedResult, r);
+            Assert.Equal<Matrix4x4>(expectedResult, r);
         }
 
         [Fact]
-        public void Matrix4TransformTest()
+        public void Matrix4x4TransformTest()
         {
-            var a = new Matrix4(new float[] { 
+            var a = new Matrix4x4(new float[] { 
                                             1.0f, 0.0f, 0.0f, 2.0f,
                                             0.0f, 1.0f, 0.0f, 4.0f,
                                             0.0f, 0.0f, 1.0f, 6.0f,
@@ -177,9 +177,9 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4TranslateTest()
+        public void Matrix4x4TranslateTest()
         {
-            var a = Matrix4.Translate(2, 4, 6);
+            var a = Matrix4x4.Translate(2, 4, 6);
 
             var b = new Vector4(3, 4, 5, 1);
 
@@ -191,9 +191,9 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4ScaleTest()
+        public void Matrix4x4ScaleTest()
         {
-            var a = Matrix4.Scale(2, 4, 6);
+            var a = Matrix4x4.Scale(2, 4, 6);
 
             var b = new Vector4(3, 4, 5, 1);
 
@@ -205,9 +205,9 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4RotateXTest()
+        public void Matrix4x4RotateXTest()
         {
-            var a = Matrix4.RotateX((float)Math.PI);
+            var a = Matrix4x4.RotateX((float)Math.PI);
 
             var b = new Vector4(3, 4, 5, 1);
 
@@ -219,9 +219,9 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4RotateYTest()
+        public void Matrix4x4RotateYTest()
         {
-            var a = Matrix4.RotateY((float)Math.PI);
+            var a = Matrix4x4.RotateY((float)Math.PI);
 
             var b = new Vector4(3, 4, 5, 1);
 
@@ -233,9 +233,9 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4RotateZTest()
+        public void Matrix4x4RotateZTest()
         {
-            var a = Matrix4.RotateZ((float)Math.PI);
+            var a = Matrix4x4.RotateZ((float)Math.PI);
 
             var b = new Vector4(3, 4, 5, 1);
 
@@ -247,11 +247,11 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4RotateAxisTest()
+        public void Matrix4x4RotateAxisTest()
         {
-            var rotXAxis = Matrix4.RotateAxis(Vector3.UnitX, (float)Math.PI);
-            var rotYAxis = Matrix4.RotateAxis(Vector3.UnitY, (float)Math.PI);
-            var rotZAxis = Matrix4.RotateAxis(Vector3.UnitZ, (float)Math.PI);
+            var rotXAxis = Matrix4x4.RotateAxis(Vector3.UnitX, (float)Math.PI);
+            var rotYAxis = Matrix4x4.RotateAxis(Vector3.UnitY, (float)Math.PI);
+            var rotZAxis = Matrix4x4.RotateAxis(Vector3.UnitZ, (float)Math.PI);
 
             var vec = new Vector4(3, 4, 5, 1);
 
@@ -269,9 +269,9 @@ namespace nml.tests
         }
         
         [Fact]
-        public void Matrix4OrtographicProjectionRHTest()
+        public void Matrix4x4OrtographicProjectionRHTest()
         {
-            var projMatrix = Matrix4.OrthographicProjectionRH(0, 10, 0, 10, -1, 1);
+            var projMatrix = Matrix4x4.OrthographicProjectionRH(0, 10, 0, 10, -1, 1);
 
             // This would be at the full extent of our clipping plane (top right)
             var vec = new Vector4(10, 10, 1, 1);
@@ -283,9 +283,9 @@ namespace nml.tests
         }
 
         [Fact]
-        public void Matrix4PerspectiveProjectionRHTest()
+        public void Matrix4x4PerspectiveProjectionRHTest()
         {
-            var projMatrix = Matrix4.PerspectiveProjectionRH(0, 10, 0, 10, 0.1f, 100.0f);
+            var projMatrix = Matrix4x4.PerspectiveProjectionRH(0, 10, 0, 10, 0.1f, 100.0f);
 
             // Arbitrarily chosen
             var vec = new Vector4(3, 4, 5, 1);

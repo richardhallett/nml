@@ -14,18 +14,18 @@ namespace nml
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct Matrix4 : IEquatable<Matrix4>
+    public struct Matrix4x4 : IEquatable<Matrix4x4>
     {
         /// <summary>
         /// A 4x4 identity matrix.
         /// </summary>
-        public static readonly Matrix4 Identity = new Matrix4() { m11 = 1.0f, m22 = 1.0f, m33 = 1.0f, m44 = 1.0f };
+        public static readonly Matrix4x4 Identity = new Matrix4x4() { m11 = 1.0f, m22 = 1.0f, m33 = 1.0f, m44 = 1.0f };
 
         /// <summary>
-        /// Creates a new instance of <see cref="Matrix4"/> with scalar.
+        /// Creates a new instance of <see cref="Matrix4x4"/> with scalar.
         /// </summary>
         /// <param name="value">A scalar value that will be assigned to all components.</param>
-        public Matrix4(float value)
+        public Matrix4x4(float value)
         {
             m11 = m12 = m13 = m14 =
             m21 = m22 = m23 = m24 =
@@ -34,10 +34,10 @@ namespace nml
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="Matrix4"/> with values specified by list collection.
+        /// Creates a new instance of <see cref="Matrix4x4"/> with values specified by list collection.
         /// </summary>
         /// <param name="values">The floats to initialise the values with</param>
-        public Matrix4(float[] values)
+        public Matrix4x4(float[] values)
         {
             if (values.Length != 16) {
                 throw new ArgumentOutOfRangeException("values", "The size of the values collection must contain 16 elements.");
@@ -254,7 +254,7 @@ namespace nml
         /// <param name="matrix">The matrix to scale.</param>
         /// <param name="scalar">The value you want to scale the matrix by.</param>
         /// <returns>The resulting multiplication of the matrix</returns>
-        public static Matrix4 Multiply(Matrix4 matrix, float scalar)
+        public static Matrix4x4 Multiply(Matrix4x4 matrix, float scalar)
         {
             // Local variables for faster lookup.
             float a11 = matrix.M11;
@@ -274,7 +274,7 @@ namespace nml
             float a43 = matrix.M43;
             float a44 = matrix.M44;
 
-            Matrix4 result = new Matrix4();
+            Matrix4x4 result = new Matrix4x4();
 
             result.M11 = a11 * scalar;
             result.M12 = a12 * scalar;
@@ -306,7 +306,7 @@ namespace nml
         /// <param name="b">Second matrix</param>
         /// <returns>The product of the two matrices.</returns>
         /// 
-        public static Matrix4 Multiply(Matrix4 a, Matrix4 b)
+        public static Matrix4x4 Multiply(Matrix4x4 a, Matrix4x4 b)
         {
             // Local variables for faster lookup.
             float a11 = a.M11;
@@ -343,7 +343,7 @@ namespace nml
             float b43 = b.M43;
             float b44 = b.M44;
 
-            Matrix4 result = new Matrix4();
+            Matrix4x4 result = new Matrix4x4();
 
             result.M11 = (a11 * b11) + (a12 * b21) + (a13 * b31) + (a14 * b41);
             result.M12 = (a11 * b12) + (a12 * b22) + (a13 * b32) + (a14 * b42);
@@ -374,7 +374,7 @@ namespace nml
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
         /// <returns>The resulting addition of the two matrices.</returns>
-        public static Matrix4 Add(Matrix4 a, Matrix4 b)
+        public static Matrix4x4 Add(Matrix4x4 a, Matrix4x4 b)
         {
             // Local variables for faster lookup.
             float a11 = a.M11;
@@ -411,7 +411,7 @@ namespace nml
             float b43 = b.M43;
             float b44 = b.M44;
 
-            Matrix4 result = new Matrix4(); 
+            Matrix4x4 result = new Matrix4x4(); 
 
             result.m11 = a11 + b11;
             result.m12 = a12 + b12;
@@ -442,7 +442,7 @@ namespace nml
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
         /// <returns>The resulting subtraction of the two matrices.</returns>
-        public static Matrix4 Subtract(Matrix4 a, Matrix4 b)
+        public static Matrix4x4 Subtract(Matrix4x4 a, Matrix4x4 b)
         {
             // Local variables for faster lookup.
             float a11 = a.M11;
@@ -479,7 +479,7 @@ namespace nml
             float b43 = b.M43;
             float b44 = b.M44;
 
-            Matrix4 result = new Matrix4();
+            Matrix4x4 result = new Matrix4x4();
 
             result.m11 = a11 - b11;
             result.m12 = a12 - b12;
@@ -509,9 +509,9 @@ namespace nml
         /// </summary>
         /// <param name="matrix">The matrix to tranpose.</param>
         /// <param name="result">The transposed matrix</param>
-        public static Matrix4 Transpose(Matrix4 matrix)
+        public static Matrix4x4 Transpose(Matrix4x4 matrix)
         {
-            Matrix4 tMatrix = new Matrix4();
+            Matrix4x4 tMatrix = new Matrix4x4();
             tMatrix[0, 0] = matrix[0, 0];
             tMatrix[0, 1] = matrix[1, 0];
             tMatrix[0, 2] = matrix[2, 0];
@@ -540,7 +540,7 @@ namespace nml
         /// </summary>
         /// <param name="matrix">The matrix to invert.</param>
         /// <returns>The inverted matrix.</returns>
-        public static Matrix4 Invert(Matrix4 matrix)
+        public static Matrix4x4 Invert(Matrix4x4 matrix)
         {                 
             // Todo: Potentially add optional inverse performance tricks that only work on certain kinds of matrices e.g. affine transforms. Based on GPU gems code.
 
@@ -586,7 +586,7 @@ namespace nml
             float l38 = (l5 * l11) - (l7 * l9);
             float l39 = (l5 * l10) - (l6 * l9);
 
-            var invertedMatrix = new Matrix4();
+            var invertedMatrix = new Matrix4x4();
 
             invertedMatrix.m11 = l23 * l27;
             invertedMatrix.m21 = l24 * l27;
@@ -615,9 +615,9 @@ namespace nml
         /// <param name="y">Y translation.</param>
         /// <param name="z">Z translation.</param>
         /// <returns>The resulting translation matrix.</returns>
-        public static Matrix4 Translate(float x, float y, float z)
+        public static Matrix4x4 Translate(float x, float y, float z)
         {
-            return new Matrix4(new float[] { 1.0f, 0.0f, 0.0f, x,
+            return new Matrix4x4(new float[] { 1.0f, 0.0f, 0.0f, x,
                                              0.0f, 1.0f, 0.0f, y,
                                              0.0f, 0.0f, 1.0f, z,
                                              0.0f, 0.0f, 0.0f, 1.0f});
@@ -628,9 +628,9 @@ namespace nml
         /// </summary>
         /// <param name="vec"><see cref="Vector3"/> to use for translation.</param>
         /// <returns>The resulting translation matrix.</returns>
-        public static Matrix4 Translate(Vector3 vec)
+        public static Matrix4x4 Translate(Vector3 vec)
         {
-            return Matrix4.Translate(vec.x, vec.y, vec.z);
+            return Matrix4x4.Translate(vec.x, vec.y, vec.z);
         }
 
         /// <summary>
@@ -640,9 +640,9 @@ namespace nml
         /// <param name="y">Y scale.</param>
         /// <param name="z">Z scale.</param>
         /// <returns></returns>
-        public static Matrix4 Scale(float x, float y, float z)
+        public static Matrix4x4 Scale(float x, float y, float z)
         {
-            return new Matrix4(new float[] { x, 0.0f, 0.0f, 0.0f,
+            return new Matrix4x4(new float[] { x, 0.0f, 0.0f, 0.0f,
                                              0.0f, y, 0.0f, 0.0f,
                                              0.0f, 0.0f, z, 0.0f,
                                              0.0f, 0.0f, 0.0f, 1.0f});
@@ -653,9 +653,9 @@ namespace nml
         /// </summary>
         /// <param name="vec"><see cref="Vector3"/> to use for scaling.</param>
         /// <returns></returns>
-        public static Matrix4 Scale(Vector3 vec)
+        public static Matrix4x4 Scale(Vector3 vec)
         {
-            return Matrix4.Scale(vec.x, vec.y, vec.z);
+            return Matrix4x4.Scale(vec.x, vec.y, vec.z);
         }
 
         /// <summary>
@@ -663,9 +663,9 @@ namespace nml
         /// </summary>
         /// <param name="scale">The value to uniformly scale by.</param>
         /// <returns></returns>
-        public static Matrix4 Scale(float scale)
+        public static Matrix4x4 Scale(float scale)
         {
-            return Matrix4.Scale(scale, scale, scale);
+            return Matrix4x4.Scale(scale, scale, scale);
         }
 
         /// <summary>
@@ -673,12 +673,12 @@ namespace nml
         /// </summary>
         /// <param name="angle">The angle in radians.</param>
         /// <returns>A rotation matrix.</returns>
-        public static Matrix4 RotateX(float angle)
+        public static Matrix4x4 RotateX(float angle)
         {
             float cos = (float)Math.Cos(angle);
             float sin = (float)Math.Sin(angle);
 
-            return new Matrix4(new float[] { 1.0f, 0.0f, 0.0f, 0.0f,
+            return new Matrix4x4(new float[] { 1.0f, 0.0f, 0.0f, 0.0f,
                                              0.0f, cos, -sin, 0.0f,
                                              0.0f, sin, cos, 0.0f,
                                              0.0f, 0.0f, 0.0f, 1.0f});
@@ -690,12 +690,12 @@ namespace nml
         /// </summary>
         /// <param name="angle">The angle in radians.</param>
         /// <returns>A rotation matrix.</returns>
-        public static Matrix4 RotateY(float angle)
+        public static Matrix4x4 RotateY(float angle)
         {
             float cos = (float)Math.Cos(angle);
             float sin = (float)Math.Sin(angle);
 
-            return new Matrix4(new float[] { cos, 0.0f, sin, 0.0f,
+            return new Matrix4x4(new float[] { cos, 0.0f, sin, 0.0f,
                                              0.0f, 1.0f, 0.0f, 0.0f,
                                              -sin, 0.0f, cos, 0.0f,
                                              0.0f, 0.0f, 0.0f, 1.0f});
@@ -707,12 +707,12 @@ namespace nml
         /// </summary>
         /// <param name="angle">The angle in radians.</param>
         /// <returns>A rotation matrix.</returns>
-        public static Matrix4 RotateZ(float angle)
+        public static Matrix4x4 RotateZ(float angle)
         {
             float cos = (float)Math.Cos(angle);            
             float sin = (float)Math.Sin(angle);            
 
-            return new Matrix4(new float[] { cos, -sin, 0.0f, 0.0f,
+            return new Matrix4x4(new float[] { cos, -sin, 0.0f, 0.0f,
                                              sin, cos, 0.0f, 0.0f,
                                              0.0f, 0.0f, 1.0f, 0.0f,
                                              0.0f, 0.0f, 0.0f, 1.0f});
@@ -725,7 +725,7 @@ namespace nml
         /// <param name="axis">A normalised unit vector representing the axis to rotate about.</param>
         /// <param name="angle">The angle in radians.</param>
         /// <returns>A rotation matrix.</returns>
-        public static Matrix4 RotateAxis(Vector3 axis, float angle)
+        public static Matrix4x4 RotateAxis(Vector3 axis, float angle)
         {
             float x = axis.x;
             float y = axis.y;
@@ -746,7 +746,7 @@ namespace nml
             float siny = y * sin;
             float sinz = z * sin;
 
-            return new Matrix4(new float[] { cos + xx1,     xy1 - sinz,     xz1 + siny, 0.0f,
+            return new Matrix4x4(new float[] { cos + xx1,     xy1 - sinz,     xz1 + siny, 0.0f,
                                              xy1 + sinz,    cos + yy1,      yz1 - sinx, 0.0f,
                                              xz1 - siny,    yz1 + sinx,     cos + zz1,  0.0f,
                                              0.0f,          0.0f,           0.0f,       1.0f});
@@ -763,9 +763,9 @@ namespace nml
         /// <param name="near">The near coordinate of the depth plane. Can be negative if the plane is behind the viewer.</param>
         /// <param name="far">The far coordinate of the depth plane. Can be negative if the plane is behind the viewer.</param>
         /// <returns>A projection matrix.</returns>
-        public static Matrix4 OrthographicProjectionRH(float left, float right, float bottom, float top, float near, float far)
+        public static Matrix4x4 OrthographicProjectionRH(float left, float right, float bottom, float top, float near, float far)
         {            
-            return new Matrix4(new float[] { 2 / (right - left),    0.0f,               0.0f,               -(right + left) / (right - left),
+            return new Matrix4x4(new float[] { 2 / (right - left),    0.0f,               0.0f,               -(right + left) / (right - left),
                                              0.0f,                  2 / (top - bottom), 0.0f,               -(top + bottom) / (top - bottom),
                                              0.0f,                  0.0f,               -2 / (far - near),  -(far + near) / (far - near),
                                              0.0f,                  0.0f,               0.0f,               1.0f});
@@ -782,7 +782,7 @@ namespace nml
         /// <param name="near">Specifies the distance from the viewer to the near clipping plane (always positive).</param>
         /// <param name="far">Specifies the distance from the viewer to the far clipping plane (always positive).</param>
         /// <returns>A projection matrix.</returns>
-        public static Matrix4 PerspectiveProjectionRH(float left, float right, float bottom, float top, float near, float far)
+        public static Matrix4x4 PerspectiveProjectionRH(float left, float right, float bottom, float top, float near, float far)
         {
             if (near <= 0)
                 throw new ArgumentOutOfRangeException("near");
@@ -791,7 +791,7 @@ namespace nml
             if (near >= far)
                 throw new ArgumentOutOfRangeException("near");
 
-            return new Matrix4(new float[] { (2.0f * near) / (right - left),    0.0f,                           (right + left) / (right - left),    0.0f,
+            return new Matrix4x4(new float[] { (2.0f * near) / (right - left),    0.0f,                           (right + left) / (right - left),    0.0f,
                                              0.0f,                              (2.0f * near) / (top - bottom),  (top + bottom) / (top - bottom),    0.0f,
                                              0.0f,                              0.0f,                           -(far + near) / (far - near),       -(2 * far * near) / (far - near),
                                              0.0f,                              0.0f,                           -1.0f,                              0.0f});
@@ -806,7 +806,7 @@ namespace nml
         /// <param name="near">Specifies the distance from the viewer to the near clipping plane (always positive).</param>
         /// <param name="far">Specifies the distance from the viewer to the far clipping plane (always positive).</param>
         /// <returns></returns>
-        public static Matrix4 PerspectiveProjectionRH(float fovy, float aspect, float near, float far)
+        public static Matrix4x4 PerspectiveProjectionRH(float fovy, float aspect, float near, float far)
         {
             if (fovy <= 0 || fovy > Math.PI)
                 throw new ArgumentOutOfRangeException("fovy");
@@ -865,7 +865,7 @@ namespace nml
         /// </summary>
         public void Invert()
         {
-            this = Matrix4.Invert(this);
+            this = Matrix4x4.Invert(this);
         }
 
         /// <summary>
@@ -873,7 +873,7 @@ namespace nml
         /// </summary>
         public void Transpose()
         {
-            this = Matrix4.Transpose(this);
+            this = Matrix4x4.Transpose(this);
         }
 
         /// <summary>
@@ -882,9 +882,9 @@ namespace nml
         /// <param name="matrix">The matrix to scale.</param>
         /// <param name="scalar">The value you want to scale the matrix by.</param>
         /// <returns>The resulting multiplication of the matrix</returns>
-        public static Matrix4 operator *(Matrix4 matrix, float scalar)
+        public static Matrix4x4 operator *(Matrix4x4 matrix, float scalar)
         {
-            return Matrix4.Multiply(matrix, scalar);
+            return Matrix4x4.Multiply(matrix, scalar);
         }     
 
         /// <summary>
@@ -894,9 +894,9 @@ namespace nml
         /// <param name="b">Second matrix</param>
         /// <returns>The product of the two matrices.</returns>
         /// 
-        public static Matrix4 operator *(Matrix4 a, Matrix4 b)
+        public static Matrix4x4 operator *(Matrix4x4 a, Matrix4x4 b)
         {
-            return Matrix4.Multiply(a, b);
+            return Matrix4x4.Multiply(a, b);
         }
 
         /// <summary>
@@ -905,7 +905,7 @@ namespace nml
         /// <param name="matrix"></param>
         /// <param name="vec"></param>
         /// <returns></returns>
-        public static Vector4 operator *(Matrix4 matrix, Vector4 vec)
+        public static Vector4 operator *(Matrix4x4 matrix, Vector4 vec)
         {
             return matrix.Transform(vec);
         }     
@@ -916,9 +916,9 @@ namespace nml
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
         /// <returns>The resulting subtraction of the two matrices.</returns>
-        public static Matrix4 operator -(Matrix4 a, Matrix4 b)
+        public static Matrix4x4 operator -(Matrix4x4 a, Matrix4x4 b)
         {
-            return Matrix4.Subtract(a, b);
+            return Matrix4x4.Subtract(a, b);
         }
 
         /// <summary>
@@ -927,9 +927,9 @@ namespace nml
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
         /// <returns>The resulting addition of the two matrices.</returns>
-        public static Matrix4 operator +(Matrix4 a, Matrix4 b)
+        public static Matrix4x4 operator +(Matrix4x4 a, Matrix4x4 b)
         {
-            return Matrix4.Add(a, b);
+            return Matrix4x4.Add(a, b);
         }
 
         /// <summary>
@@ -947,7 +947,7 @@ namespace nml
             if (obj.GetType() != GetType())
                 return false;
 
-            return Equals((Matrix4)obj);
+            return Equals((Matrix4x4)obj);
         }
 
         /// <summary>
@@ -975,7 +975,7 @@ namespace nml
         /// <returns>
         /// <c>true</c> if the specified <see cref="Vector2"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Matrix4 other)
+        public bool Equals(Matrix4x4 other)
         {
             return 
                 (this.m11 == other.m11) && (this.m12 == other.m12) && (this.m13 == other.m13) && (this.m14 == other.m14) &&

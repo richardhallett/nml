@@ -11,7 +11,7 @@ namespace nml_testbed
     {
         static void Main(string[] args)
         {
-            var m = new Matrix4(new float[] { 1.0f, 1.0f, 2.0f, 0.0f,
+            var m = new Matrix4x4(new float[] { 1.0f, 1.0f, 2.0f, 0.0f,
                                               1.0f, 1.0f, 2.0f, 0.0f,
                                               1.0f, 1.0f, 2.0f, 0.0f,
                                               1.0f, 1.0f, 2.0f, 0.0f});
