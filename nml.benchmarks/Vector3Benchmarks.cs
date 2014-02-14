@@ -64,5 +64,11 @@ namespace nml.benchmarks
         {
             var r = a.IsNormalised;
         }
+
+        [Benchmark(Name = "Vector3 Lerp")]
+        public void Lerp()
+        {
+            var r = Vector3.Lerp(a, b, 0.5f);
+        }
     }
 }

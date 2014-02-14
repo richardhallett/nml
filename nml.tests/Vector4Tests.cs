@@ -178,6 +178,28 @@ namespace nml.tests
             var r = a.IsNormalised;
 
             Assert.Equal<bool>(expectedResult, r);
-        }      
+        }
+
+        [Fact]
+        public void Vector4LerpTest()
+        {
+            var a = new Vector4(3.0f, 4.0f, 2.0f, 1.5f);
+            var b = new Vector4(6.0f, 8.0f, 4.0f, 2.5f);
+
+            var r1 = Vector4.Lerp(a, b, 0);
+            var expectedResult1 = new Vector4(3.0f, 4.0f, 2.0f, 1.5f);
+
+            var r2 = Vector4.Lerp(a, b, 1);
+            var expectedResult2 = new Vector4(6.0f, 8.0f, 4.0f, 2.5f);
+
+            var r3 = Vector4.Lerp(a, b, 0.5f);
+            var expectedResult3 = new Vector4(4.5f, 6.0f, 3.0f, 2.0f);
+
+            var r = a.IsNormalised;
+
+            Assert.Equal<Vector4>(expectedResult1, r1);
+            Assert.Equal<Vector4>(expectedResult2, r2);
+            Assert.Equal<Vector4>(expectedResult3, r3);
+        }
     }
 }

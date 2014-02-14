@@ -280,6 +280,22 @@ namespace nml
         }
 
         /// <summary>
+        /// Linearly interpolate between two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Vector A and 1 is Vector B</param>
+        /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
+        public static Vector4 Lerp(Vector4 a, Vector4 b, float t)
+        {
+            a.x = a.x + (b.x - a.x) * t;
+            a.y = a.y + (b.y - a.y) * t;
+            a.z = a.z + (b.z - a.z) * t;
+            a.w = a.w + (b.w - a.w) * t;
+            return a;
+        }
+
+        /// <summary>
         /// Multiply vector components by scalar.
         /// </summary>
         /// <param name="vector">The vector to scale.</param>

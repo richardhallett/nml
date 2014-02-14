@@ -158,5 +158,27 @@ namespace nml.tests
 
             Assert.Equal<bool>(expectedResult, r);
         }
+
+        [Fact]
+        public void Vector2LerpTest()
+        {            
+            var a = new Vector2(3.0f, 4.0f);
+            var b = new Vector2(6.0f, 8.0f);
+            
+            var r1 = Vector2.Lerp(a, b, 0);
+            var expectedResult1 = new Vector2(3.0f, 4.0f);
+
+            var r2 = Vector2.Lerp(a, b, 1);
+            var expectedResult2 = new Vector2(6.0f, 8.0f);
+
+            var r3 = Vector2.Lerp(a, b, 0.5f);
+            var expectedResult3 = new Vector2(4.5f, 6.0f);
+
+            var r = a.IsNormalised;
+
+            Assert.Equal<Vector2>(expectedResult1, r1);
+            Assert.Equal<Vector2>(expectedResult2, r2);
+            Assert.Equal<Vector2>(expectedResult3, r3);
+        }
     }
 }
