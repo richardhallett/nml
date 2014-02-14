@@ -109,8 +109,8 @@ namespace nml.benchmarks
                     else
                     {
                         func = (Action)Delegate.CreateDelegate(typeof(Action), classInstance, method, true);
-                    }                   
-                    
+                    }
+
                     BenchmarkAttribute benchmarkAttr = (BenchmarkAttribute)method.GetCustomAttributes(typeof(BenchmarkAttribute), true)[0];
 
                     // If we've specified a name to use, use that otherwise use the methods own name
@@ -130,16 +130,16 @@ namespace nml.benchmarks
                     // Go ahead and profile.
                     Profile(name, iterations, func);
                 }
-            }   
+            }
         }
 
         static void Main(string[] args)
         {
             ExecuteBenchmarks();
 
-            foreach(var result in _results)
+            foreach (var result in _results)
             {
-                Console.WriteLine("{0} Per Op {1} ns", result.Key, result.Value);
+                Console.WriteLine("{0}: {1} ns", result.Key, result.Value);
             }
         }
     }
