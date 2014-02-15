@@ -70,5 +70,17 @@ namespace nml.benchmarks
         {
             var r = Vector3.Lerp(a, b, 0.5f);
         }
+
+        [Benchmark(Name = "Vector3 Distance")]
+        public void Distance()
+        {
+            var r = Vector3.Distance(a, b);
+        }
+
+        [Benchmark(Name = "Vector3 DistanceSquared")]
+        public void DistanceSquared()
+        {
+            var r = Vector3.DistanceSquared(a, b);
+        }
     }
 }

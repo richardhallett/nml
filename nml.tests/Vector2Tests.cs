@@ -180,5 +180,32 @@ namespace nml.tests
             Assert.Equal<Vector2>(expectedResult2, r2);
             Assert.Equal<Vector2>(expectedResult3, r3);
         }
+
+        [Fact]
+        public void Vector2DistanceTest()
+        {
+            var a = new Vector2(3.0f, 4.0f);
+            var b = new Vector2(6.0f, 8.0f);
+
+            var expectedResult = 5.0f;
+
+            var r = a.Distance(b);
+
+            Assert.Equal<float>(expectedResult, r);
+        }
+
+
+        [Fact]
+        public void Vector2DistanceSquaredTest()
+        {
+            var a = new Vector2(3.0f, 4.0f);
+            var b = new Vector2(6.0f, 8.0f);
+
+            var expectedResult = 25.0f;
+
+            var r = a.DistanceSquared(b);
+
+            Assert.Equal<float>(expectedResult, r);
+        }
     }
 }

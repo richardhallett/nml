@@ -296,6 +296,71 @@ namespace nml
         }
 
         /// <summary>
+        /// Linearly interpolate between this and another vector.
+        /// </summary>
+        /// <param name="vector">Vector to interpolate with.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is this and 1 is Vector B</param>
+        /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
+        public Vector4 Lerp(Vector4 vector, float t)
+        {
+            return Vector4.Lerp(this, vector, t);
+        }
+
+        /// <summary>
+        /// Get the distance between two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <returns>The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</returns>
+        public static float Distance(Vector4 a, Vector4 b)
+        {
+            float x = a.x - b.x;
+            float y = a.y - b.y;
+            float z = a.z - b.z;
+            float w = a.w - b.w;
+
+            return (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w * w));
+        }
+
+        /// <summary>
+        /// Distance between this vector and specified vector.
+        /// </summary>
+        /// <param name="vector">Vector to calculate distance against.</param>
+        /// <returns>The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</returns>
+        public float Distance(Vector4 vector)
+        {
+            return Vector4.Distance(this, vector);
+        }
+
+        /// <summary>
+        /// Get the squared distance between two vectors.
+        /// This is slightly faster as we avoid the square root, use this if you're just comparing distances.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <returns>The squared distance between a and b</returns>
+        public static float DistanceSquared(Vector4 a, Vector4 b)
+        {
+            float x = a.x - b.x;
+            float y = a.y - b.y;
+            float z = a.z - b.z;
+            float w = a.w - b.w;
+
+            return (float)(x * x) + (y * y) + (z * z) + (w * w);
+        }
+
+        /// <summary>
+        /// Get the squared distance between this vector and specified vector.
+        /// This is slightly faster as we avoid the square root, use this if you're just comparing distances.
+        /// </summary>
+        /// <param name="vector">Vector to calculate distance against.</param>
+        /// <returns>The squared distance between a and b</returns>
+        public float DistanceSquared(Vector4 vector)
+        {
+            return Vector4.DistanceSquared(this, vector);
+        }
+
+        /// <summary>
         /// Multiply vector components by scalar.
         /// </summary>
         /// <param name="vector">The vector to scale.</param>
