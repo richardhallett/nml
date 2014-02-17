@@ -266,7 +266,6 @@ namespace nml
             else
             {
                 // If the length is greater than the tolerance then we just force a return of a unit vector.
-                // Not 100% sure on this.
                 return new Vector4(1.0f, 0.0f, 0.0f, 0.0f);
             }
         }

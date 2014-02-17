@@ -165,7 +165,6 @@ namespace nml
             else
             {
                 // If the length is greater than the tolerance then we just force a return of a unit vector.
-                // Not 100% sure on this.
                 return new Quaternion(1.0f, 0.0f, 0.0f, 0.0f);
             }
         }
@@ -398,6 +397,60 @@ namespace nml
         {
             return Quaternion.GetMatrix4x4(this);
         }
+
+        /// <summary>
+        /// Linearly interpolate between two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
+        /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
+        public static Quaternion Lerp(Quaternion a, Quaternion b, float t)
+        {
+            Quaternion r = new Quaternion();
+            r.x = a.x + (b.x - a.x) * t;
+            r.y = a.y + (b.y - a.y) * t;
+            r.z = a.z + (b.z - a.z) * t;
+            r.w = a.w + (b.w - a.w) * t;
+            return r;
+        }
+
+        /// <summary>
+        /// Linearly interpolate between this and another vector.
+        /// </summary>
+        /// <param name="quat">Quaternion to interpolate with.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is this and 1 is the other Quaternion</param>
+        /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
+        public Quaternion Lerp(Quaternion quat, float t)
+        {
+            return Quaternion.Lerp(this, quat, t);
+        }
+
+        /// <summary>
+        /// Linearly interpolate between two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
+        /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
+        public static Quaternion NLerp(Quaternion a, Quaternion b, float t)
+        {
+            Quaternion r = Quaternion.Lerp(a, b, t);
+            r.Normalise();
+            return r;
+        }
+
+        /// <summary>
+        /// Linearly interpolate between this and another vector and normalises the result.
+        /// This is a conveniance function as it is useful and sometimes deseriable to us normalised interpolation.
+        /// </summary>
+        /// <param name="quat">Quaternion to interpolate with.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is this and 1 is the other Quaternion</param>
+        /// <returns>A normalised quaternion representing a linear combination: a when t=0 or b when t=1 else a point between.</returns>
+        public Quaternion NLerp(Quaternion quat, float t)
+        {
+            return Quaternion.NLerp(this, quat, t);
+        }
        
         /// <summary>
         /// Transform a normalised <see cref="Vector3"/> by this quaternion.
@@ -471,7 +524,7 @@ namespace nml
         /// <returns></returns>
         public override string ToString()
         {
-            return base.ToString() + String.Format(": ({0}, {1}, {2}, {3})", this.x, this.y, this.x, this.w);
+            return base.ToString() + String.Format(": ({0}, {1}, {2}, {3})", this.x, this.y, this.z, this.w);
         }
 
         /// <summary>

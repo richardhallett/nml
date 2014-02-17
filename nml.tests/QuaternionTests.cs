@@ -169,5 +169,30 @@ namespace nml.tests
 
             Assert.True(r.Equals(expectedResult, 1e-3f));
         }
+
+
+        [Fact]
+        public void QuaternionLerpTest()
+        {
+            var a = new Quaternion(3.0f, 4.0f, 2.0f, 1.5f);
+            var b = new Quaternion(6.0f, 8.0f, 4.0f, 2.5f);
+
+            var r = Quaternion.Lerp(a, b, 0.5f);
+            var expectedResult = new Quaternion(4.5f, 6.0f, 3.0f, 2.0f);
+
+            Assert.Equal<Quaternion>(expectedResult, r);            
+        }
+
+        [Fact]
+        public void QuaternionNLerpTest()
+        {
+            var a = new Quaternion(3.0f, 4.0f, 2.0f, 1.5f);
+            var b = new Quaternion(6.0f, 8.0f, 4.0f, 2.5f);
+
+            var r = Quaternion.NLerp(a, b, 0.5f);
+            var expectedResult = new Quaternion(0.540758f, 0.72101f, 0.360505f, 0.240337f);
+
+            Assert.True(r.Equals(expectedResult, 1e-3f));            
+        }
     }
 }
