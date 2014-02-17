@@ -197,8 +197,6 @@ namespace nml.tests
             var r3 = Vector3.Lerp(a, b, 0.5f);
             var expectedResult3 = new Vector3(4.5f, 6.0f, 3.0f);
 
-            var r = a.IsNormalised;
-
             Assert.Equal<Vector3>(expectedResult1, r1);
             Assert.Equal<Vector3>(expectedResult2, r2);
             Assert.Equal<Vector3>(expectedResult3, r3);
