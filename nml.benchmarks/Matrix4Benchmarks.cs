@@ -21,10 +21,24 @@ namespace nml.benchmarks
             var r = matrix * matrix;
         }
 
+        [Benchmark(Name = "Matrix4x4 * Matrix4x4 By Ref")]
+        public static void MultiplyMatrixByRef()
+        {
+            Matrix4x4 result;
+            Matrix4x4.Multiply(ref matrix, ref matrix, out result);
+        }
+
         [Benchmark(Name = "Matrix4x4 * scalar")]
         public void MultiplyScalar()
         {
             var r = matrix * 2.0f;
+        }
+
+        [Benchmark(Name = "Matrix4x4 * scalar By Ref")]
+        public void MultiplyScalarByRef()
+        {
+            Matrix4x4 result;
+            Matrix4x4.Multiply(ref matrix, 2.0f, out result);
         }
 
         [Benchmark(Name = "Matrix4x4 + Matrix4x4")]
@@ -33,10 +47,24 @@ namespace nml.benchmarks
             var r = matrix + matrix;
         }
 
+        [Benchmark(Name = "Matrix4x4 + Matrix4x4 By Ref")]
+        public static void AdditionByRef()
+        {
+            Matrix4x4 result;
+            Matrix4x4.Add(ref matrix, ref matrix, out result);
+        }
+
         [Benchmark(Name = "Matrix4x4 - Matrix4x4")]
         public void Subtraction()
         {
             var r = matrix - matrix;
+        }
+
+        [Benchmark(Name = "Matrix4x4 - Matrix4x4 By Ref")]
+        public static void SubtractionByRef()
+        {
+            Matrix4x4 result;
+            Matrix4x4.Subtract(ref matrix, ref matrix, out result);
         }
 
         [Benchmark(Name = "Matrix4x4 Transpose")]
@@ -61,6 +89,13 @@ namespace nml.benchmarks
         public void Matrix4TransformVectorBenchmark()
         {
             var r = matrix * vector;
+        }
+
+        [Benchmark(Name = "Matrix4x4 * Vector4f By Ref")]
+        public void Matrix4TransformVectorBenchmarkByRef()
+        {
+            Vector4 result;
+            Matrix4x4.Transform(ref matrix, ref vector, out result);
         }
     }
 }

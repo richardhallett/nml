@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -170,6 +171,34 @@ namespace nml
         public static Vector3 UnitZ { get { return new Vector3(0.0f, 0.0f, 1.0f); } }
 
         /// <summary>
+        /// Calculates the cross product of two <see cref="Vector3" />
+        /// </summary>
+        /// <param name="a">The first vector.</param>
+        /// <param name="b">The second vector.</param>
+        /// <returns>The cross product of the two vectors</returns>
+        public static Vector3 Cross(Vector3 a, Vector3 b)
+        {
+            Vector3 result;
+            Vector3.Cross(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates the cross product of two <see cref="Vector3" />
+        /// </summary>
+        /// <param name="a">The first vector.</param>
+        /// <param name="b">The second vector.</param>
+        /// <param name="result">The cross product of the two vectors</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Cross(ref Vector3 a, ref Vector3 b, out Vector3 result)
+        {
+            result = new Vector3(
+                (a.y * b.z) - (a.z * b.y),
+                (a.z * b.x) - (a.x * b.z),
+                (a.x * b.y) - (a.y * b.x));            
+        }
+
+        /// <summary>
         /// Adds two vectors.
         /// </summary>
         /// <param name="a">First vector.</param>
@@ -177,9 +206,23 @@ namespace nml
         /// <returns>The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z)</returns>
         public static Vector3 Add(Vector3 a, Vector3 b)
         {
-            return new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+            Vector3 result;
+            Vector3.Add(ref a, ref b, out result);
+            return result;
         }
-        
+
+        /// <summary>
+        /// Adds two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Add(ref Vector3 a, ref Vector3 b, out Vector3 result)
+        {
+            result = new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+        }
+
         /// <summary>
         /// Subtracts two vectors.
         /// </summary>
@@ -188,7 +231,21 @@ namespace nml
         /// <returns>The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z)</returns>
         public static Vector3 Subtract(Vector3 a, Vector3 b)
         {
-            return new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+            Vector3 result;
+            Vector3.Subtract(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Subtracts two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(ref Vector3 a, ref Vector3 b, out Vector3 result)
+        {
+            result = new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
         }
 
         /// <summary>
@@ -199,8 +256,22 @@ namespace nml
         /// <returns>The multiplication of the vector (v.x*s, v.y*s, v.z*s)</returns>
         public static Vector3 Multiply(Vector3 vector, float scalar)
         {
-            return new Vector3(vector.x * scalar, vector.y * scalar, vector.z * scalar);
-        }       
+            Vector3 result;
+            Vector3.Multiply(ref vector, scalar, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Multiply vector components by scalar.
+        /// </summary>
+        /// <param name="vector">The vector to scale.</param>
+        /// <param name="scalar">The value you want to scale the vector by.</param>
+        /// <param name="result">The multiplication of the vector (v.x*s, v.y*s, v.z*s)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(ref Vector3 vector, float scalar, out Vector3 result)
+        {
+            result = new Vector3(vector.x * scalar, vector.y * scalar, vector.z * scalar);
+        }
 
         /// <summary>
         /// Divide vector components by scalar.
@@ -210,7 +281,21 @@ namespace nml
         /// <returns>The division of the vector (v.x/s, v.y/s, v.z/s)</returns>
         public static Vector3 Divide(Vector3 vector, float scalar)
         {
-            return new Vector3(vector.x / scalar, vector.y / scalar, vector.z / scalar);
+            Vector3 result;
+            Vector3.Divide(ref vector, scalar, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Divide vector components by scalar.
+        /// </summary>
+        /// <param name="vector">The vector to scale.</param>
+        /// <param name="scalar">The value you want to scale the vector by.</param>
+        /// <param name="result">The division of the vector (v.x/s, v.y/s, v.z/s)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Divide(ref Vector3 vector, float scalar, out Vector3 result)
+        {
+            result = new Vector3(vector.x / scalar, vector.y / scalar, vector.z / scalar);
         }
 
         /// <summary>
@@ -221,21 +306,21 @@ namespace nml
         /// <returns>The dot product of the two vectors (a.x*b.x + a.y*b.y + a.z*b.z)</returns>
         public static float Dot(Vector3 a, Vector3 b)
         {
-            return (a.x * b.x) + (a.y * b.y) + +(a.z * b.z);
+            float result;
+            Vector3.Dot(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>
-        /// Calculates the cross product of two <see cref="Vector3" />
+        /// Calculates the dot product of two vectors.
         /// </summary>
-        /// <param name="a">The first vector.</param>
-        /// <param name="b">The second vector.</param>
-        /// <returns>The cross product of the two vectors</returns>
-        public static Vector3 Cross(Vector3 a, Vector3 b)
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The dot product of the two vectors (a.x*b.x + a.y*b.y + a.z*b.z)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Dot(ref Vector3 a, ref Vector3 b, out float result)
         {
-            return new Vector3(
-                (a.y * b.z) - (a.z * b.y),
-                (a.z * b.x) - (a.x * b.z),
-                (a.x * b.y) - (a.y * b.x));
+            result = (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
         }
 
         /// <summary>
@@ -245,6 +330,19 @@ namespace nml
         /// <returns>The normalised vector.</returns>
         public static Vector3 Normalise(Vector3 a)
         {
+            Vector3 result;
+            Normalise(ref a, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Normalise passed in vector
+        /// </summary>
+        /// <param name="a">The vector to normalise</param>
+        /// <param name="result">The normalised vector.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Normalise(ref Vector3 a, out Vector3 result)
+        {
             float length = a.LengthSquared;
             if (length > 1e-6f)
             {
@@ -253,12 +351,12 @@ namespace nml
                 float y = a.y * inv;
                 float z = a.z * inv;
 
-                return new Vector3(x, y, z);
+                result = new Vector3(x, y, z);
             }
             else
             {
                 // If the length is greater than the tolerance then we just force a return of a unit vector.
-                return new Vector3(1.0f, 0.0f, 0.0f);
+                result = new Vector3(1.0f, 0.0f, 0.0f);
             }
         }
 
@@ -267,7 +365,9 @@ namespace nml
         /// </summary>
         public void Normalise()
         {
-            this = Vector3.Normalise(this);
+            Vector3 result;
+            Vector3.Normalise(ref this, out result);
+            this = result;
         }
 
         /// <summary>
@@ -279,10 +379,26 @@ namespace nml
         /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
         public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
         {
-            a.x = a.x + (b.x - a.x) * t;
-            a.y = a.y + (b.y - a.y) * t;
-            a.z = a.z + (b.z - a.z) * t;
-            return a;
+            Vector3 result;
+            Vector3.Lerp(ref a, ref b, t, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Linearly interpolate between two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Vector A and 1 is Vector B</param>
+        /// <param name="result">A linear combination: a when t=0 or b when t=1 else a point between.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Lerp(ref Vector3 a, ref Vector3 b, float t, out Vector3 result)
+        {
+            float x = a.x + (b.x - a.x) * t;
+            float y = a.y + (b.y - a.y) * t;
+            float z = a.z + (b.z - a.z) * t;
+
+            result = new Vector3(x, y, z);
         }
 
         /// <summary>
@@ -304,13 +420,26 @@ namespace nml
         /// <returns>The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</returns>
         public static float Distance(Vector3 a, Vector3 b)
         {
+            float result;
+            Vector3.Distance(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Get the distance between two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Distance(ref Vector3 a, ref Vector3 b, out float result)
+        {
             float x = a.x - b.x;
             float y = a.y - b.y;
             float z = a.z - b.z;
 
-            return (float)Math.Sqrt((x * x) + (y * y) + (z * z));
+            result = (float)Math.Sqrt((x * x) + (y * y) + (z * z));
         }
-
         /// <summary>
         /// Distance between this vector and specified vector.
         /// </summary>
@@ -318,7 +447,9 @@ namespace nml
         /// <returns>The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</returns>
         public float Distance(Vector3 vector)
         {
-            return Vector3.Distance(this, vector);
+            float result;
+            Vector3.Distance(ref this, ref vector, out result);
+            return result;
         }
 
         /// <summary>
@@ -330,11 +461,26 @@ namespace nml
         /// <returns>The squared distance between a and b</returns>
         public static float DistanceSquared(Vector3 a, Vector3 b)
         {
+            float result;
+            Vector3.DistanceSquared(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Get the squared distance between two vectors.
+        /// This is slightly faster as we avoid the square root, use this if you're just comparing distances.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The squared distance between a and b</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void DistanceSquared(ref Vector3 a, ref Vector3 b, out float result)
+        {
             float x = a.x - b.x;
             float y = a.y - b.y;
             float z = a.z - b.z;
 
-            return (float)(x * x) + (y * y) + (z * z);
+            result = (float)(x * x) + (y * y) + (z * z);
         }
 
         /// <summary>
@@ -345,7 +491,9 @@ namespace nml
         /// <returns>The squared distance between a and b</returns>
         public float DistanceSquared(Vector3 vector)
         {
-            return Vector3.DistanceSquared(this, vector);
+            float result;
+            Vector3.DistanceSquared(ref this, ref vector, out result);
+            return result;
         }
 
         /// <summary>
@@ -356,7 +504,9 @@ namespace nml
         /// <returns>The multiplication of the vector (v.x*s, v.y*s, v.z*s)</returns>
         public static Vector3 operator *(Vector3 vector, float scalar)
         {
-            return Vector3.Multiply(vector, scalar);
+            Vector3 result;
+            Vector3.Multiply(ref vector, scalar, out result);
+            return result;
         }
 
         /// <summary>
@@ -367,7 +517,9 @@ namespace nml
         /// <returns>The division of the vector (v.x/s, v.y/s, v.z*s)</returns>
         public static Vector3 operator /(Vector3 vector, float scalar)
         {
-            return Vector3.Divide(vector, scalar);
+            Vector3 result;
+            Vector3.Divide(ref vector, scalar, out result);
+            return result;
         }
 
         /// <summary>
@@ -378,7 +530,9 @@ namespace nml
         /// <returns>The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z)</returns>
         public static Vector3 operator -(Vector3 a, Vector3 b)
         {
-            return Vector3.Subtract(a, b);
+            Vector3 result;
+            Vector3.Subtract(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>
@@ -386,11 +540,13 @@ namespace nml
         /// </summary>
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
-        /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
+        /// <returns>The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z)</returns>
         public static Vector3 operator +(Vector3 a, Vector3 b)
         {
-            return Vector3.Add(a, b);
-        }
+            Vector3 result;
+            Vector3.Add(ref a, ref b, out result);
+            return result;
+        }        
 
         /// <summary>
         /// Determines whether the specified <see cref="Vector3"/> is exactly equal to this instance.

@@ -11,21 +11,24 @@ namespace nml_testbed
     {
         static void Main(string[] args)
         {
-            var m = new Matrix4x4(new float[] { 1.0f, 1.0f, 2.0f, 0.0f,
-                                              1.0f, 1.0f, 2.0f, 0.0f,
-                                              1.0f, 1.0f, 2.0f, 0.0f,
-                                              1.0f, 1.0f, 2.0f, 0.0f});
+            var a = new Vector4(1.4f, 2.4f, 1.0f, 1.0f);
+            var r = Vector4.Normalise(a);
 
-            var r = m * m;
+            //var m = new Matrix4x4(new float[] { 1.0f, 1.0f, 2.0f, 0.0f,
+            //                                  1.0f, 1.0f, 2.0f, 0.0f,
+            //                                  1.0f, 1.0f, 2.0f, 0.0f,
+            //                                  1.0f, 1.0f, 2.0f, 0.0f});
 
-            var vecA = new Vector2(0, 5);
-            var vecB = new Vector2(5, 0);
+            //var r = m * m;
 
-            var vecC = vecA - vecB;
+            //var vecA = new Vector2(0, 5);
+            //var vecB = new Vector2(5, 0);
 
-            Console.WriteLine(Vector2.Distance(vecA, vecB));
-            Console.WriteLine(vecC);
-            Console.WriteLine(vecC.Length);
+            //var vecC = vecA - vecB;
+
+            //Console.WriteLine(Vector2.Distance(vecA, vecB));
+            //Console.WriteLine(vecC);
+            //Console.WriteLine(vecC.Length);
         }
     }
 }

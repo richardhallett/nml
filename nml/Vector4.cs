@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace nml
 {
@@ -198,8 +195,22 @@ namespace nml
         /// <returns>The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</returns>
         public static Vector4 Add(Vector4 a, Vector4 b)
         {
-            return new Vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+            Vector4 result;
+            Vector4.Add(ref a, ref b, out result);
+            return result;
         }
+
+        /// <summary>
+        /// Adds two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Add(ref Vector4 a, ref Vector4 b, out Vector4 result)
+        {
+            result = new Vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        }        
         
         /// <summary>
         /// Subtracts two vectors.
@@ -209,7 +220,21 @@ namespace nml
         /// <returns>The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</returns>
         public static Vector4 Subtract(Vector4 a, Vector4 b)
         {
-            return new Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+            Vector4 result;
+            Vector4.Subtract(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Subtracts two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(ref Vector4 a, ref Vector4 b, out Vector4 result)
+        {
+            result = new Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
         }
 
         /// <summary>
@@ -220,7 +245,21 @@ namespace nml
         /// <returns>The multiplication of the vector (v.x*s, v.y*s, v.z*s, v.w*s)</returns>
         public static Vector4 Multiply(Vector4 vector, float scalar)
         {
-            return new Vector4(vector.x * scalar, vector.y * scalar, vector.z * scalar, vector.w * scalar);
+            Vector4 result;
+            Vector4.Multiply(ref vector, scalar, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Multiply vector components by scalar.
+        /// </summary>
+        /// <param name="vector">The vector to scale.</param>
+        /// <param name="scalar">The value you want to scale the vector by.</param>
+        /// <param name="result">The multiplication of the vector (v.x*s, v.y*s, v.z*s, v.w*s)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(ref Vector4 vector, float scalar, out Vector4 result)
+        {
+            result = new Vector4(vector.x * scalar, vector.y * scalar, vector.z * scalar, vector.w * scalar);
         }       
 
         /// <summary>
@@ -231,7 +270,21 @@ namespace nml
         /// <returns>The division of the vector (v.x/s, v.y/s, v.z/s, v.w/s)</returns>
         public static Vector4 Divide(Vector4 vector, float scalar)
         {
-            return new Vector4(vector.x / scalar, vector.y / scalar, vector.z / scalar, vector.w / scalar);
+            Vector4 result;
+            Vector4.Divide(ref vector, scalar, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Divide vector components by scalar.
+        /// </summary>
+        /// <param name="vector">The vector to scale.</param>
+        /// <param name="scalar">The value you want to scale the vector by.</param>
+        /// <param name="result">The division of the vector (v.x/s, v.y/s, v.z/s, v.w/s)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Divide(ref Vector4 vector, float scalar, out Vector4 result)
+        {
+            result = new Vector4(vector.x / scalar, vector.y / scalar, vector.z / scalar, vector.w / scalar);
         }
 
         /// <summary>
@@ -242,7 +295,21 @@ namespace nml
         /// <returns>The dot product of the two vectors (a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w)</returns>
         public static float Dot(Vector4 a, Vector4 b)
         {
-            return (a.x * b.x) + (a.y * b.y) + +(a.z * b.z) + (a.w * b.w);
+            float result;
+            Vector4.Dot(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates the dot product of two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The dot product of the two vectors (a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Dot(ref Vector4 a, ref Vector4 b, out float result)
+        {
+            result = (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
         }
 
         /// <summary>
@@ -251,6 +318,19 @@ namespace nml
         /// <param name="a">The vector to normalise</param>
         /// <returns>The normalised vector.</returns>
         public static Vector4 Normalise(Vector4 a)
+        {
+            Vector4 result;
+            Normalise(ref a, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Normalise passed in vector
+        /// </summary>
+        /// <param name="a">The vector to normalise</param>
+        /// <param name="result">The normalised vector.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Normalise(ref Vector4 a, out Vector4 result)
         {
             float length = a.LengthSquared;
             if (length > 1e-6f)
@@ -261,12 +341,12 @@ namespace nml
                 float z = a.z * inv;
                 float w = a.w * inv;
 
-                return new Vector4(x, y, z, w);
+                result = new Vector4(x, y, z, w);
             }
             else
             {
                 // If the length is greater than the tolerance then we just force a return of a unit vector.
-                return new Vector4(1.0f, 0.0f, 0.0f, 0.0f);
+                result = new Vector4(1.0f, 0.0f, 0.0f, 0.0f);
             }
         }
 
@@ -275,7 +355,9 @@ namespace nml
         /// </summary>
         public void Normalise()
         {
-            this = Vector4.Normalise(this);
+            Vector4 result;
+            Vector4.Normalise(ref this, out result);
+            this = result;
         }
 
         /// <summary>
@@ -287,11 +369,26 @@ namespace nml
         /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
         public static Vector4 Lerp(Vector4 a, Vector4 b, float t)
         {
-            a.x = a.x + (b.x - a.x) * t;
-            a.y = a.y + (b.y - a.y) * t;
-            a.z = a.z + (b.z - a.z) * t;
-            a.w = a.w + (b.w - a.w) * t;
-            return a;
+            Vector4 result;
+            Vector4.Lerp(ref a, ref b, t, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Linearly interpolate between two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Vector A and 1 is Vector B</param>
+        /// <param name="result">A linear combination: a when t=0 or b when t=1 else a point between.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Lerp(ref Vector4 a, ref Vector4 b, float t, out Vector4 result)
+        {
+            float x = a.x + (b.x - a.x) * t;
+            float y = a.y + (b.y - a.y) * t;
+            float z = a.z + (b.z - a.z) * t;
+            float w = a.w + (b.w - a.w) * t;
+            result = new Vector4(x, y, z, w);
         }
 
         /// <summary>
@@ -313,14 +410,27 @@ namespace nml
         /// <returns>The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</returns>
         public static float Distance(Vector4 a, Vector4 b)
         {
+            float result;
+            Vector4.Distance(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Get the distance between two vectors.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Distance(ref Vector4 a, ref Vector4 b, out float result)
+        {
             float x = a.x - b.x;
             float y = a.y - b.y;
             float z = a.z - b.z;
             float w = a.w - b.w;
 
-            return (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w * w));
+            result = (float)Math.Sqrt((x * x) + (y * y) + (z * z) + (w * w));
         }
-
         /// <summary>
         /// Distance between this vector and specified vector.
         /// </summary>
@@ -328,7 +438,9 @@ namespace nml
         /// <returns>The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</returns>
         public float Distance(Vector4 vector)
         {
-            return Vector4.Distance(this, vector);
+            float result;
+            Vector4.Distance(ref this, ref vector, out result);
+            return result;
         }
 
         /// <summary>
@@ -340,12 +452,27 @@ namespace nml
         /// <returns>The squared distance between a and b</returns>
         public static float DistanceSquared(Vector4 a, Vector4 b)
         {
+            float result;
+            Vector4.DistanceSquared(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Get the squared distance between two vectors.
+        /// This is slightly faster as we avoid the square root, use this if you're just comparing distances.
+        /// </summary>
+        /// <param name="a">First vector.</param>
+        /// <param name="b">Second vector.</param>
+        /// <param name="result">The squared distance between a and b</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void DistanceSquared(ref Vector4 a, ref Vector4 b, out float result)
+        {
             float x = a.x - b.x;
             float y = a.y - b.y;
             float z = a.z - b.z;
             float w = a.w - b.w;
 
-            return (float)(x * x) + (y * y) + (z * z) + (w * w);
+            result = (float)(x * x) + (y * y) + (z * z) + (w * w);
         }
 
         /// <summary>
@@ -356,7 +483,9 @@ namespace nml
         /// <returns>The squared distance between a and b</returns>
         public float DistanceSquared(Vector4 vector)
         {
-            return Vector4.DistanceSquared(this, vector);
+            float result;
+            Vector4.DistanceSquared(ref this, ref vector, out result);
+            return result;
         }
 
         /// <summary>
@@ -367,7 +496,9 @@ namespace nml
         /// <returns>The multiplication of the vector (v.x*s, v.y*s, v.z*s, v.w*s)</returns>
         public static Vector4 operator *(Vector4 vector, float scalar)
         {
-            return Vector4.Multiply(vector, scalar);
+            Vector4 result;
+            Vector4.Multiply(ref vector, scalar, out result);
+            return result;
         }
 
         /// <summary>
@@ -378,7 +509,9 @@ namespace nml
         /// <returns>The division of the vector (v.x/s, v.y/s, v.z*s, v.w*s)</returns>
         public static Vector4 operator /(Vector4 vector, float scalar)
         {
-            return Vector4.Divide(vector, scalar);
+            Vector4 result;
+            Vector4.Divide(ref vector, scalar, out result);
+            return result;
         }
 
         /// <summary>
@@ -389,7 +522,9 @@ namespace nml
         /// <returns>The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</returns>
         public static Vector4 operator -(Vector4 a, Vector4 b)
         {
-            return Vector4.Subtract(a, b);
+            Vector4 result;
+            Vector4.Subtract(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>
@@ -400,7 +535,9 @@ namespace nml
         /// <returns>The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</returns>
         public static Vector4 operator +(Vector4 a, Vector4 b)
         {
-            return Vector4.Add(a, b);
+            Vector4 result;
+            Vector4.Add(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>

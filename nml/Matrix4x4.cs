@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace nml
 {
     /// <summary>
     /// This is a 4x4 matrix, it is a generic case for working with transformations in 3d space.
-    /// The data is stored in row-major order, as per C# arrays, e.g. m12 refers to first row second column.
-    /// The mathematical operations on vector transforms use column major vectors i.e. M*v.
+    /// The data is stored in row-major order, e.g. m12 refers to first row second column.
+    /// The mathematical operations on vector transforms use the order of M*v.
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
@@ -255,6 +252,20 @@ namespace nml
         /// <param name="scalar">The value you want to scale the matrix by.</param>
         /// <returns>The resulting multiplication of the matrix</returns>
         public static Matrix4x4 Multiply(Matrix4x4 matrix, float scalar)
+        {            
+            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4.Multiply(ref matrix, scalar, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Multiply matrix components by scalar.
+        /// </summary>
+        /// <param name="matrix">The matrix to scale.</param>
+        /// <param name="scalar">The value you want to scale the matrix by.</param>
+        /// <param name="result">The resulting multiplication of the matrix</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(ref Matrix4x4 matrix, float scalar, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
             float a11 = matrix.M11;
@@ -274,29 +285,28 @@ namespace nml
             float a43 = matrix.M43;
             float a44 = matrix.M44;
 
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 r = new Matrix4x4();
+            r.M11 = a11 * scalar;
+            r.M12 = a12 * scalar;
+            r.M13 = a13 * scalar;
+            r.M14 = a14 * scalar;
 
-            result.M11 = a11 * scalar;
-            result.M12 = a12 * scalar;
-            result.M13 = a13 * scalar;
-            result.M14 = a14 * scalar;
+            r.M21 = a21 * scalar;
+            r.M22 = a22 * scalar;
+            r.M23 = a23 * scalar;
+            r.M24 = a24 * scalar;
 
-            result.M21 = a21 * scalar;
-            result.M22 = a22 * scalar;
-            result.M23 = a23 * scalar;
-            result.M24 = a24 * scalar;
+            r.M31 = a31 * scalar;
+            r.M32 = a32 * scalar;
+            r.M33 = a33 * scalar;
+            r.M34 = a34 * scalar;
 
-            result.M31 = a31 * scalar;
-            result.M32 = a32 * scalar;
-            result.M33 = a33 * scalar;
-            result.M34 = a34 * scalar;
+            r.M41 = a41 * scalar;
+            r.M42 = a42 * scalar;
+            r.M43 = a43 * scalar;
+            r.M44 = a44 * scalar;
 
-            result.M41 = a41 * scalar;
-            result.M42 = a42 * scalar;
-            result.M43 = a43 * scalar;
-            result.M44 = a44 * scalar;
-
-            return result;
+            result = r;
         }
 
         /// <summary>
@@ -307,6 +317,21 @@ namespace nml
         /// <returns>The product of the two matrices.</returns>
         /// 
         public static Matrix4x4 Multiply(Matrix4x4 a, Matrix4x4 b)
+        {            
+            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4.Multiply(ref a, ref b, out result);
+            return result;          
+        }
+
+        /// <summary>
+        /// Multiply two matrices and return product.
+        /// </summary>
+        /// <param name="a">First matrix</param>
+        /// <param name="b">Second matrix</param>
+        /// <param name="result">The product of the two matrices.</param>
+        /// 
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
             float a11 = a.M11;
@@ -343,29 +368,29 @@ namespace nml
             float b43 = b.M43;
             float b44 = b.M44;
 
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 r = new Matrix4x4();
 
-            result.M11 = (a11 * b11) + (a12 * b21) + (a13 * b31) + (a14 * b41);
-            result.M12 = (a11 * b12) + (a12 * b22) + (a13 * b32) + (a14 * b42);
-            result.M13 = (a11 * b13) + (a12 * b23) + (a13 * b33) + (a14 * b43);
-            result.M14 = (a11 * b14) + (a12 * b24) + (a13 * b34) + (a14 * b44);
+            r.M11 = (a11 * b11) + (a12 * b21) + (a13 * b31) + (a14 * b41);
+            r.M12 = (a11 * b12) + (a12 * b22) + (a13 * b32) + (a14 * b42);
+            r.M13 = (a11 * b13) + (a12 * b23) + (a13 * b33) + (a14 * b43);
+            r.M14 = (a11 * b14) + (a12 * b24) + (a13 * b34) + (a14 * b44);
 
-            result.M21 = (a21 * b11) + (a22 * b21) + (a23 * b31) + (a24 * b41);
-            result.M22 = (a21 * b12) + (a22 * b22) + (a23 * b32) + (a24 * b42);
-            result.M23 = (a21 * b13) + (a22 * b23) + (a23 * b33) + (a24 * b43);
-            result.M24 = (a21 * b14) + (a22 * b24) + (a23 * b34) + (a24 * b44);
+            r.M21 = (a21 * b11) + (a22 * b21) + (a23 * b31) + (a24 * b41);
+            r.M22 = (a21 * b12) + (a22 * b22) + (a23 * b32) + (a24 * b42);
+            r.M23 = (a21 * b13) + (a22 * b23) + (a23 * b33) + (a24 * b43);
+            r.M24 = (a21 * b14) + (a22 * b24) + (a23 * b34) + (a24 * b44);
 
-            result.M31 = (a31 * b11) + (a32 * b21) + (a33 * b31) + (a34 * b41);
-            result.M32 = (a31 * b12) + (a32 * b22) + (a33 * b32) + (a34 * b42);
-            result.M33 = (a31 * b13) + (a32 * b23) + (a33 * b33) + (a34 * b43);
-            result.M34 = (a31 * b14) + (a32 * b24) + (a33 * b34) + (a34 * b44);
+            r.M31 = (a31 * b11) + (a32 * b21) + (a33 * b31) + (a34 * b41);
+            r.M32 = (a31 * b12) + (a32 * b22) + (a33 * b32) + (a34 * b42);
+            r.M33 = (a31 * b13) + (a32 * b23) + (a33 * b33) + (a34 * b43);
+            r.M34 = (a31 * b14) + (a32 * b24) + (a33 * b34) + (a34 * b44);
 
-            result.M41 = (a41 * b11) + (a42 * b21) + (a43 * b31) + (a44 * b41);
-            result.M42 = (a41 * b12) + (a42 * b22) + (a43 * b32) + (a44 * b42);
-            result.M43 = (a41 * b13) + (a42 * b23) + (a43 * b33) + (a44 * b43);
-            result.M44 = (a41 * b14) + (a42 * b24) + (a43 * b34) + (a44 * b44);
+            r.M41 = (a41 * b11) + (a42 * b21) + (a43 * b31) + (a44 * b41);
+            r.M42 = (a41 * b12) + (a42 * b22) + (a43 * b32) + (a44 * b42);
+            r.M43 = (a41 * b13) + (a42 * b23) + (a43 * b33) + (a44 * b43);
+            r.M44 = (a41 * b14) + (a42 * b24) + (a43 * b34) + (a44 * b44);
 
-            return result;          
+            result = r;
         }
 
         /// <summary>
@@ -375,6 +400,20 @@ namespace nml
         /// <param name="b">The second matrix.</param>
         /// <returns>The resulting addition of the two matrices.</returns>
         public static Matrix4x4 Add(Matrix4x4 a, Matrix4x4 b)
+        {         
+            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4.Add(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Add two matrices together.
+        /// </summary>
+        /// <param name="a">The first matrix.</param>
+        /// <param name="b">The second matrix.</param>
+        /// <param name="result">The resulting addition of the two matrices.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Add(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
             float a11 = a.M11;
@@ -411,29 +450,29 @@ namespace nml
             float b43 = b.M43;
             float b44 = b.M44;
 
-            Matrix4x4 result = new Matrix4x4(); 
+            Matrix4x4 r = new Matrix4x4();
 
-            result.m11 = a11 + b11;
-            result.m12 = a12 + b12;
-            result.m13 = a13 + b13;
-            result.m14 = a14 + b14;
+            r.m11 = a11 + b11;
+            r.m12 = a12 + b12;
+            r.m13 = a13 + b13;
+            r.m14 = a14 + b14;
 
-            result.m21 = a21 + b21;
-            result.m22 = a22 + b22;
-            result.m23 = a23 + b23;
-            result.m24 = a24 + b24;
+            r.m21 = a21 + b21;
+            r.m22 = a22 + b22;
+            r.m23 = a23 + b23;
+            r.m24 = a24 + b24;
 
-            result.m31 = a31 + b31;
-            result.m32 = a32 + b32;
-            result.m33 = a33 + b33;
-            result.m34 = a34 + b34;
+            r.m31 = a31 + b31;
+            r.m32 = a32 + b32;
+            r.m33 = a33 + b33;
+            r.m34 = a34 + b34;
 
-            result.m41 = a41 + b41;
-            result.m42 = a42 + b42;
-            result.m43 = a43 + b43;
-            result.m44 = a44 + b44;
+            r.m41 = a41 + b41;
+            r.m42 = a42 + b42;
+            r.m43 = a43 + b43;
+            r.m44 = a44 + b44;
 
-            return result;
+            result = r;
         }
 
         /// <summary>
@@ -443,6 +482,20 @@ namespace nml
         /// <param name="b">The second matrix.</param>
         /// <returns>The resulting subtraction of the two matrices.</returns>
         public static Matrix4x4 Subtract(Matrix4x4 a, Matrix4x4 b)
+        {           
+            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4.Subtract(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Subtract one matrix from another.
+        /// </summary>
+        /// <param name="a">The first matrix.</param>
+        /// <param name="b">The second matrix.</param>
+        /// <param>The resulting subtraction of the two matrices.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
             float a11 = a.M11;
@@ -479,29 +532,29 @@ namespace nml
             float b43 = b.M43;
             float b44 = b.M44;
 
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 r = new Matrix4x4();
 
-            result.m11 = a11 - b11;
-            result.m12 = a12 - b12;
-            result.m13 = a13 - b13;
-            result.m14 = a14 - b14;
+            r.m11 = a11 - b11;
+            r.m12 = a12 - b12;
+            r.m13 = a13 - b13;
+            r.m14 = a14 - b14;
 
-            result.m21 = a21 - b21;
-            result.m22 = a22 - b22;
-            result.m23 = a23 - b23;
-            result.m24 = a24 - b24;
+            r.m21 = a21 - b21;
+            r.m22 = a22 - b22;
+            r.m23 = a23 - b23;
+            r.m24 = a24 - b24;
 
-            result.m31 = a31 - b31;
-            result.m32 = a32 - b32;
-            result.m33 = a33 - b33;
-            result.m34 = a34 - b34;
+            r.m31 = a31 - b31;
+            r.m32 = a32 - b32;
+            r.m33 = a33 - b33;
+            r.m34 = a34 - b34;
 
-            result.m41 = a41 - b41;
-            result.m42 = a42 - b42;
-            result.m43 = a43 - b43;
-            result.m44 = a44 - b44;
+            r.m41 = a41 - b41;
+            r.m42 = a42 - b42;
+            r.m43 = a43 - b43;
+            r.m44 = a44 - b44;
 
-            return result;
+            result = r;
         }
 
         /// <summary>
@@ -510,6 +563,19 @@ namespace nml
         /// <param name="matrix">The matrix to tranpose.</param>
         /// <param name="result">The transposed matrix</param>
         public static Matrix4x4 Transpose(Matrix4x4 matrix)
+        {
+            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4.Transpose(ref matrix, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Swap all elements, rows become columns, columns become rows of the given matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix to tranpose.</param>
+        /// <param name="result">The transposed matrix</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(ref Matrix4x4 matrix, out Matrix4x4 result)
         {
             Matrix4x4 tMatrix = new Matrix4x4();
             tMatrix[0, 0] = matrix[0, 0];
@@ -531,8 +597,8 @@ namespace nml
             tMatrix[3, 1] = matrix[1, 3];
             tMatrix[3, 2] = matrix[2, 3];
             tMatrix[3, 3] = matrix[3, 3];
-
-            return tMatrix;
+            
+            result = tMatrix;
         }
 
         /// <summary>
@@ -541,9 +607,7 @@ namespace nml
         /// <param name="matrix">The matrix to invert.</param>
         /// <returns>The inverted matrix.</returns>
         public static Matrix4x4 Invert(Matrix4x4 matrix)
-        {                 
-            // Todo: Potentially add optional inverse performance tricks that only work on certain kinds of matrices e.g. affine transforms. Based on GPU gems code.
-
+        {
             // Local variables for faster lookup.
             float l1 = matrix.M11;
             float l2 = matrix.M12;
@@ -830,29 +894,43 @@ namespace nml
         /// <summary>
         /// Transform a <see cref="Vector4"/> by this matrix.
         /// </summary>
-        /// <param name="vec"></param>
+        /// <param name="vec">Vector to transform.</param>
         /// <returns>The resulting <see cref="Vector4"/> transformed by this matrix i.e. M * (x, y, z, w)</returns>
         public Vector4 Transform(Vector4 vec)
         {
-            // Local variables for faster lookup.
-            float l11 = this.m11;
-            float l12 = this.m12;
-            float l13 = this.m13;
-            float l14 = this.m14;
-            float l21 = this.m21;
-            float l22 = this.m22;
-            float l23 = this.m23;
-            float l24 = this.m24;
-            float l31 = this.m31;
-            float l32 = this.m32;
-            float l33 = this.m33;
-            float l34 = this.m34;
-            float l41 = this.m41;
-            float l42 = this.m42;
-            float l43 = this.m43;
-            float l44 = this.m44;
+            Vector4 result;
+            Matrix4x4.Transform(ref this, ref vec, out result);
+            return result;
+        }
 
-            return new Vector4(
+        /// <summary>
+        /// Transform a <see cref="Vector4"/> by a matrix.
+        /// </summary>
+        /// <param name="matrix">Matrix to transform with.</param>
+        /// <param name="vec">Vector to transform.</param>
+        /// <param name="result">The resulting <see cref="Vector4"/> transformed by this matrix i.e. M * (x, y, z, w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Transform(ref Matrix4x4 matrix, ref Vector4 vec, out Vector4 result)
+        {
+            // Local variables for faster lookup.
+            float l11 = matrix.m11;
+            float l12 = matrix.m12;
+            float l13 = matrix.m13;
+            float l14 = matrix.m14;
+            float l21 = matrix.m21;
+            float l22 = matrix.m22;
+            float l23 = matrix.m23;
+            float l24 = matrix.m24;
+            float l31 = matrix.m31;
+            float l32 = matrix.m32;
+            float l33 = matrix.m33;
+            float l34 = matrix.m34;
+            float l41 = matrix.m41;
+            float l42 = matrix.m42;
+            float l43 = matrix.m43;
+            float l44 = matrix.m44;
+
+            result = new Vector4(
                 Vector4.Dot(new Vector4(l11, l12, l13, l14), vec),
                 Vector4.Dot(new Vector4(l21, l22, l23, l24), vec),
                 Vector4.Dot(new Vector4(l31, l32, l33, l34), vec),
@@ -865,7 +943,7 @@ namespace nml
         /// </summary>
         public void Invert()
         {
-            this = Matrix4x4.Invert(this);
+            this = Invert(this);
         }
 
         /// <summary>
@@ -873,7 +951,9 @@ namespace nml
         /// </summary>
         public void Transpose()
         {
-            this = Matrix4x4.Transpose(this);
+            Matrix4x4 result;
+            Matrix4x4.Transpose(ref this, out result);
+            this = result;
         }
 
         /// <summary>
@@ -884,7 +964,9 @@ namespace nml
         /// <returns>The resulting multiplication of the matrix</returns>
         public static Matrix4x4 operator *(Matrix4x4 matrix, float scalar)
         {
-            return Matrix4x4.Multiply(matrix, scalar);
+            Matrix4x4 result;
+            Matrix4x4.Multiply(ref matrix, scalar, out result);
+            return result;
         }     
 
         /// <summary>
@@ -896,7 +978,9 @@ namespace nml
         /// 
         public static Matrix4x4 operator *(Matrix4x4 a, Matrix4x4 b)
         {
-            return Matrix4x4.Multiply(a, b);
+            Matrix4x4 result;
+            Matrix4x4.Multiply(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>
@@ -907,7 +991,9 @@ namespace nml
         /// <returns></returns>
         public static Vector4 operator *(Matrix4x4 matrix, Vector4 vec)
         {
-            return matrix.Transform(vec);
+            Vector4 result;
+            Matrix4x4.Transform(ref matrix, ref vec, out result);
+            return result;
         }     
 
         /// <summary>
@@ -918,7 +1004,9 @@ namespace nml
         /// <returns>The resulting subtraction of the two matrices.</returns>
         public static Matrix4x4 operator -(Matrix4x4 a, Matrix4x4 b)
         {
-            return Matrix4x4.Subtract(a, b);
+            Matrix4x4 result;
+            Matrix4x4.Subtract(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>
@@ -929,7 +1017,9 @@ namespace nml
         /// <returns>The resulting addition of the two matrices.</returns>
         public static Matrix4x4 operator +(Matrix4x4 a, Matrix4x4 b)
         {
-            return Matrix4x4.Add(a, b);
+            Matrix4x4 result;
+            Matrix4x4.Add(ref a, ref b, out result);
+            return result;
         }
 
         /// <summary>

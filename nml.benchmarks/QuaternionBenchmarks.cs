@@ -76,5 +76,17 @@ namespace nml.benchmarks
         {
             var r = a.GetMatrix4x4();
         }
+
+        [Benchmark(Name = "Quaternion Lerp")]
+        public void Lerp()
+        {
+            var r = Quaternion.Lerp(a, b, 0.5f);
+        }
+
+        [Benchmark(Name = "Quaternion Nlerp")]
+        public void NLerp()
+        {
+            var r = Quaternion.NLerp(a, b, 0.5f);
+        }
     }
 }
