@@ -201,7 +201,7 @@ namespace nml.tests
         }
 
         [Fact]
-        public void QuaternionSerpTest()
+        public void QuaternionSlerpTest()
         {
             // Testing slerp, we'll actually just use some rotation quaternions
             // And test the known expected results of a vector.
