@@ -88,5 +88,11 @@ namespace nml.benchmarks
         {
             var r = Quaternion.NLerp(a, b, 0.5f);
         }
+
+        [Benchmark(Name = "Quaternion Slerp")]
+        public void Slerp()
+        {
+            var r = Quaternion.Slerp(a, b, 0.5f);
+        }
     }
 }

@@ -146,14 +146,19 @@ namespace nml.tests
         [Fact]
         public void QuaternionRotateEulerTest()
         {
-            var rotQuat = Quaternion.RotateEuler((float)Math.PI, 0.0f, 0.0f);
+            var rotQuatYaw = Quaternion.RotateEuler((float)Math.PI, 0.0f, 0.0f);
+            var rotQuatPitch = Quaternion.RotateEuler(0.0f, (float)Math.PI, 0.0f);
+            var rotQuatRoll = Quaternion.RotateEuler(0.0f, 0.0f, (float)Math.PI);
+
             var vec = new Vector3(3, 4, 5);
+            
+            var rYaw = rotQuatYaw * vec;
+            var rPitch = rotQuatPitch * vec;
+            var rRoll = rotQuatRoll * vec;            
 
-            var expectedResult = new Vector3(-3, 4, -5);
-
-            var r = rotQuat * vec;
-
-            Assert.True(r.Equals(expectedResult, 1e-3f));
+            Assert.True(rYaw.Equals(new Vector3(-3, 4, -5), 1e-3f));
+            Assert.True(rPitch.Equals(new Vector3(3, -4, -5), 1e-3f));
+            Assert.True(rRoll.Equals(new Vector3(-3, -4, 5), 1e-3f));            
         }
 
         [Fact]
@@ -193,6 +198,28 @@ namespace nml.tests
             var expectedResult = new Quaternion(0.540758f, 0.72101f, 0.360505f, 0.240337f);
 
             Assert.True(r.Equals(expectedResult, 1e-3f));            
+        }
+
+        [Fact]
+        public void QuaternionSerpTest()
+        {
+            // Testing slerp, we'll actually just use some rotation quaternions
+            // And test the known expected results of a vector.
+            var a = Quaternion.RotateEuler(0.0f, 0.0f, (float)Math.PI);
+            var b = Quaternion.RotateEuler(0.0f, 0.0f, (float)Math.PI * 2);
+            
+            var c = Quaternion.Slerp(a, b, 0.0f);
+            var d = Quaternion.Slerp(a, b, 1.0f);
+            var e = Quaternion.Slerp(a, b, 0.5f);
+
+            var vec = new Vector3(3, 4, 0);
+            var r1 = c * vec;
+            var r2 = d * vec;
+            var r3 = e * vec;
+        
+            Assert.True(r1.Equals(new Vector3(-3, -4, 0), 1e-3f));
+            Assert.True(r2.Equals(new Vector3(3, 4, 0), 1e-3f));
+            Assert.True(r3.Equals(new Vector3(4, -3, 0), 1e-3f));
         }
     }
 }

@@ -122,6 +122,31 @@ namespace nml
         }
 
         /// <summary>
+        /// Calculates the dot product of two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <returns>The dot product of the two quaternions (a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w)</returns>
+        public static float Dot(Quaternion a, Quaternion b)
+        {
+            float result;
+            Quaternion.Dot(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates the dot product of two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="result">The dot product of the two quaternions (a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Dot(ref Quaternion a, ref Quaternion b, out float result)
+        {
+            result = (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
+        }
+
+        /// <summary>
         /// Negate a quaternion so it faces the opposite direction, keeping the same orientation.
         /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Invert"/>.
         /// </summary>
@@ -418,8 +443,8 @@ namespace nml
             float hPitch = pitch * 0.5f;            
             float hRoll = roll * 0.5f;
 
-            float sinRoll = (float)System.Math.Sin(hPitch);
-            float cosRoll = (float)System.Math.Cos(hPitch);
+            float sinRoll = (float)System.Math.Sin(hRoll);
+            float cosRoll = (float)System.Math.Cos(hRoll);
             float sinPitch = (float)System.Math.Sin(hPitch);
             float cosPitch = (float)System.Math.Cos(hPitch);
             float sinYaw = (float)System.Math.Sin(hYaw);
@@ -630,6 +655,81 @@ namespace nml
         {
             Quaternion result;
             Quaternion.NLerp(ref this, ref quat, t, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Spherical interpolation between two quaternions.
+        /// Note: Spherical interpolation is non commutative Slerp(a,b) is not the same as Slerp(b,a).
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
+        /// <returns>An interpolated quaternion between the two points.</returns>
+        public static Quaternion Slerp(Quaternion a, Quaternion b, float t)
+        {
+            Quaternion result;
+            Quaternion.Slerp(ref a, ref b, t, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Spherical interpolation between two quaternions.
+        /// Note: Spherical interpolation is non commutative Slerp(a,b) is not the same as Slerp(b,a).
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
+        /// <param name="t">An interpolated quaternion between the two points.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Slerp(ref Quaternion a, ref Quaternion b, float t, out Quaternion result)
+        {
+            // Get the dot product.
+            float product;
+            Quaternion.Dot(ref a, ref b, out product);
+
+            if (product > 0.9995f)
+            {
+                // If the values are so close then it's not worth slerping
+                // Do normalised lerp instead.
+                result = Quaternion.NLerp(a, b, t);
+                return;
+            }
+
+            // Just in case we slip outside our range let's ensure we clamp to prevent undefined behaviour.
+            product = Common.Clamp(product, -1.0f, 1.0f);
+
+            float theta = (float)Math.Acos(product) * t;
+
+            float sin = (float)Math.Sin(theta);
+            float cos = (float)Math.Cos(theta);
+
+            Quaternion c = new Quaternion();
+            c.x = b.x - (a.x * product);
+            c.y = b.y - (a.y * product);
+            c.z = b.z - (a.z * product);
+            c.w = b.w - (a.w * product);
+            c.Normalise();
+
+            float rx = (a.x * cos) + (c.x * sin);
+            float ry = (a.y * cos) + (c.y * sin);
+            float rz = (a.z * cos) + (c.z * sin);
+            float rw = (a.w * cos) + (c.w * sin);
+
+            result = new Quaternion(rx, ry, rz, rw);
+        }
+
+        /// <summary>
+        /// Spherical interpolation between this and another quaternion.
+        /// Note: Spherical interpolation is non commutative Slerp(a,b) is not the same as Slerp(b,a).
+        /// </summary>
+        /// <param name="quat">Quaternion to interpolate with.</param>
+        /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is this and 1 is the other Quaternion</param>
+        /// <returns>An interpolated quaternion between the two points.</returns>
+        public Quaternion Slerp(Quaternion quat, float t)
+        {
+            Quaternion result;
+            Quaternion.Slerp(ref this, ref quat, t, out result);
             return result;
         }
        

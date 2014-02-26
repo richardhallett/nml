@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="Matrix4x4.cs" />
     <Compile Include="Quaternion.cs" />
     <Compile Include="Vector4.cs" />
