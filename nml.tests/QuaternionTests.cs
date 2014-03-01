@@ -4,8 +4,31 @@ using Xunit;
 namespace nml.tests
 {
     public class QuaternionTests
-    {        
-      
+    {
+        [Fact]
+        public void QuaternionAddTest()
+        {
+            var a = new Quaternion(6.0f, -2.0f, 1.0f, 2.0f);
+            var b = new Quaternion(-4.0f, 4.0f, 1.0f, 3.0f);
+            var expectedResult = new Quaternion(2.0f, 2.0f, 2.0f, 5.0f);
+
+            var r = a + b;
+
+            Assert.Equal<Quaternion>(expectedResult, r);
+        }
+
+        [Fact]
+        public void QuaternionSubtractTest()
+        {
+            var a = new Quaternion(6.0f, -2.0f, 1.0f, 2.0f);
+            var b = new Quaternion(-4.0f, 4.0f, 1.0f, 3.0f);
+            var expectedResult = new Quaternion(10.0f, -6.0f, 0.0f, -1.0f);
+
+            var r = a - b;
+
+            Assert.Equal<Quaternion>(expectedResult, r);
+        }
+
         [Fact]
         public void QuaternionLengthTest()
         {
@@ -14,6 +37,18 @@ namespace nml.tests
             var r = a.Length;
 
             Assert.True(Math.Abs(r - expectedResult) < 1e-3f);
+        }
+
+        [Fact]
+        public void QuaternionDotTest()
+        {
+            var a = new Quaternion(6.0f, -2.0f, 1.0f, 3.0f);
+            var b = new Quaternion(-4.0f, 4.0f, 2.0f, 4.0f);
+            var expectedResult = -18.0f;
+
+            var r = Quaternion.Dot(a, b);
+
+            Assert.Equal<float>(expectedResult, r);
         }
 
         [Fact]

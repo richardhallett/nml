@@ -122,6 +122,56 @@ namespace nml
         }
 
         /// <summary>
+        /// Adds two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <returns>The addition of the two quaternions (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</returns>
+        public static Quaternion Add(Quaternion a, Quaternion b)
+        {
+            Quaternion result;
+            Quaternion.Add(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Adds two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="result">The addition of the two quaternions (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Add(ref Quaternion a, ref Quaternion b, out Quaternion result)
+        {
+            result = new Quaternion(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        }
+
+        /// <summary>
+        /// Subtracts two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <returns>The subtraction of the two quaternions (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</returns>
+        public static Quaternion Subtract(Quaternion a, Quaternion b)
+        {
+            Quaternion result;
+            Quaternion.Subtract(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Subtracts two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <param name="result">The subtraction of the two quaternions (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(ref Quaternion a, ref Quaternion b, out Quaternion result)
+        {
+            result = new Quaternion(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        }
+
+        /// <summary>
         /// Calculates the dot product of two quaternions.
         /// </summary>
         /// <param name="a">First quaternion.</param>
@@ -769,6 +819,32 @@ namespace nml
         {
             Quaternion result;
             Quaternion.Multiply(ref quaternion, scalar, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Subtracts two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <returns>The subtraction of the two quaternions (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</returns>
+        public static Quaternion operator -(Quaternion a, Quaternion b)
+        {
+            Quaternion result;
+            Quaternion.Subtract(ref a, ref b, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Adds two quaternions.
+        /// </summary>
+        /// <param name="a">First quaternion.</param>
+        /// <param name="b">Second quaternion.</param>
+        /// <returns>The addition of the two quaternions (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</returns>
+        public static Quaternion operator +(Quaternion a, Quaternion b)
+        {
+            Quaternion result;
+            Quaternion.Add(ref a, ref b, out result);
             return result;
         }
 
