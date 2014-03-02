@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace nml
 {
     /// <summary>
-    /// This is a 4x4 matrix, it is a generic case for working with transformations in 3d space.
+    /// This is a 4x4 matrix, used for working with affine transformations ( rotation, scaling, translation) as well as perspective projections in 3d space.
     /// The data is stored in row-major order, e.g. m12 refers to first row second column.
     /// The mathematical operations on vector transforms are suitable for the order of M*v.
     /// </summary>
@@ -986,9 +986,9 @@ namespace nml
         /// <summary>
         /// Transform a vector by a matrix, M*v
         /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="vec"></param>
-        /// <returns></returns>
+        /// <param name="matrix">The matrix.</param>
+        /// <param name="vec">The vector to transform.</param>
+        /// <returns>The transformed vector.</returns>
         public static Vector4 operator *(Matrix4x4 matrix, Vector4 vec)
         {
             Vector4 result;
