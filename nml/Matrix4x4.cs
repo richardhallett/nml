@@ -561,7 +561,7 @@ namespace nml
         /// Swap all elements, rows become columns, columns become rows of the given matrix.
         /// </summary>
         /// <param name="matrix">The matrix to tranpose.</param>
-        /// <param name="result">The transposed matrix</param>
+        /// <returns>The transposed matrix</returns>
         public static Matrix4x4 Transpose(Matrix4x4 matrix)
         {
             Matrix4x4 result = new Matrix4x4();
