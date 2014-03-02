@@ -69,9 +69,9 @@ namespace nml
         /// <param name="b">Source value.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is <c>a</c> and 1 is <c>b</c></param>
         /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
-        public static float Lerp(float value1, float value2, float amount)
+        public static float Lerp(float a, float b, float t)
         {
-            return value1 + (value2 - value1) * amount;
+            return a + (b - a) * t;
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace nml
         /// <param name="b">Source value.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is <c>a</c> and 1 is <c>b</c></param>
         /// <returns>A linear combination: a when t=0 or b when t=1 else a point between.</returns>
-        public static double Lerp(double value1, double value2, double amount)
+        public static double Lerp(double a, double b, double t)
         {
-            return value1 + (value2 - value1) * amount;
+            return a + (b - a) * t;
         }
     }
 }
