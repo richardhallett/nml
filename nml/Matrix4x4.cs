@@ -872,7 +872,7 @@ namespace nml
         /// <returns></returns>
         public static Matrix4x4 PerspectiveProjectionRH(float fovy, float aspect, float near, float far)
         {
-            if (fovy <= 0 || fovy > Math.PI)
+            if (fovy <= 0 || fovy > Common.Pi)
                 throw new ArgumentOutOfRangeException("fovy");
             if (aspect <= 0)
                 throw new ArgumentOutOfRangeException("aspect");

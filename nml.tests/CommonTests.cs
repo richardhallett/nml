@@ -39,5 +39,25 @@ namespace nml.tests
 
             Assert.Equal<double>(0.75E+7, r);
         }
+
+        [Fact]
+        public void CommonDegreesToRadiansTest()
+        {
+            float v = 180.0f;
+            var r = Common.DegreesToRadians(v);
+            var expectedResult = Common.Pi;
+
+            Assert.True(Math.Abs(r - expectedResult) < 1e-3f);
+        }
+
+        [Fact]
+        public void CommonRadiansToDegreesTest()
+        {
+            float v = Common.Pi;
+            var r = Common.RadiansToDegrees(v);
+            var expectedResult = 180.0f;
+
+            Assert.True(Math.Abs(r - expectedResult) < 1e-3f);
+        }
     }
 }
