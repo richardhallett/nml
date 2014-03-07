@@ -5,6 +5,7 @@ using System.Text;
 
 namespace nml.benchmarks
 {
+    #pragma warning disable 219
     class QuaternionBenchmarks
     {
         static Quaternion a = new Quaternion(3.0f, 4.0f, 1.0f, 2.0f);
