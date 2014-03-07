@@ -5,6 +5,7 @@ using System.Text;
 
 namespace nml.benchmarks
 {
+    #pragma warning disable 219
     class Vector2Benchmarks
     {
         static Vector2 a = new Vector2(6.0f, -2.0f);

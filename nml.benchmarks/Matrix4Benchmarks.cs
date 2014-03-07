@@ -5,6 +5,7 @@ using System.Text;
 
 namespace nml.benchmarks
 {
+    #pragma warning disable 219
     class Matrix4x4Benchmarks
     {
         static Matrix4x4 matrix = new Matrix4x4(new float[] { 

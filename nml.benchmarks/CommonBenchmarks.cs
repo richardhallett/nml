@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace nml.benchmarks
 {
+    #pragma warning disable 219
     public class CommonBenchmarks
     {
         [Benchmark(Name = "Common Lerp float")]

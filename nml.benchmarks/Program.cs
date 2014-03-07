@@ -72,8 +72,6 @@ namespace nml.benchmarks
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            var benchmarkMethods = new List<MethodInfo>();
-
             foreach (var type in assembly.GetTypes())
             {
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
