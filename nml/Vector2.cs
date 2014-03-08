@@ -440,6 +440,38 @@ namespace nml
         }
 
         /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <param name="result">The vector in the opposite direction.</param>
+        public static void Negate(ref Vector2 vector, out Vector2 result)
+        {
+            result = new Vector2(-vector.x, -vector.y);
+        }
+
+        /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <returns>The vector in the opposite direction.</returns>
+        public static Vector2 Negate(Vector2 vector)
+        {
+            Vector2 result;
+            Vector2.Negate(ref vector, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <returns>The vector in the opposite direction.</returns>
+        public static Vector2 operator -(Vector2 vector)
+        {
+            return new Vector2(-vector.x, -vector.y);
+        }
+
+        /// <summary>
         /// Multiply vector components by scalar.
         /// </summary>
         /// <param name="vector">The vector to scale.</param>
@@ -535,8 +567,6 @@ namespace nml
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object"/> to compare.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
         /// <returns><c>true</c> if the objects are equal <c>false</c> otherwise.</returns>
         public override bool Equals(System.Object obj)
         {
@@ -553,8 +583,6 @@ namespace nml
         /// Determines whether the specified <see cref="Vector2"/> is exactly equal to this instance.
         /// </summary>
         /// <param name="other">The <see cref="Vector2"/> to compare with.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="Vector2"/> is equal to this instance; otherwise, <c>false</c>.
         /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public bool Equals(Vector2 other)
         {

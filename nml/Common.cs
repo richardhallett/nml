@@ -119,7 +119,7 @@ namespace nml
         /// <summary>
         /// Convert radians to degrees
         /// </summary>
-        /// <param name="radians">The value to convert in radians.</param>
+        /// <param name="value">The value to convert in radians.</param>
         /// <returns>The value after conversion in degrees.</returns>
         public static float RadiansToDegrees(float value)
         {

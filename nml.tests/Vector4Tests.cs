@@ -226,5 +226,17 @@ namespace nml.tests
 
             Assert.Equal<float>(expectedResult, r);
         }
+
+        [Fact]
+        public void Vector4NegateTest()
+        {
+            var a = new Vector4(3.0f, 4.0f, 8.0f, 10.0f);
+
+            var expectedResult = new Vector4(-3.0f, -4.0f, -8.0f, -10.0f);
+
+            var r = -a;
+
+            Assert.Equal<Vector4>(expectedResult, r);
+        }
     }
 }

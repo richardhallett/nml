@@ -198,7 +198,7 @@ namespace nml
 
         /// <summary>
         /// Negate a quaternion so it faces the opposite direction, keeping the same orientation.
-        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Invert"/>.
+        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Quaternion.Invert(nml.Quaternion)"/>.
         /// </summary>
         /// <param name="quat">The quaternion to negate.</param>
         /// <returns>A quaternion facing the opposite direction.</returns>
@@ -209,10 +209,10 @@ namespace nml
 
         /// <summary>
         /// Negate a quaternion so it faces the opposite direction, keeping the same orientation.
-        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Invert"/>.
+        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Quaternion.Invert(nml.Quaternion)"/>.
         /// </summary>
         /// <param name="quat">The quaternion to negate.</param>
-        /// <returns>A quaternion facing the opposite direction.</returns>
+        /// <param name="result">A quaternion facing the opposite direction.</param>
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static void Negate(Quaternion quat, ref Quaternion result)
         {
@@ -330,7 +330,7 @@ namespace nml
         /// Inverts the given quaternion.
         /// </summary>
         /// <param name="quat">The quaternion to invert.</param>
-        /// <param name="result">The inverted quaternion.</returns>
+        /// <param name="result">The inverted quaternion.</param>
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static void Invert(ref Quaternion quat, out Quaternion result)
         {
@@ -435,7 +435,7 @@ namespace nml
         /// <summary>
         /// Transform a <see cref="Vector3"/> by a quaternion.
         /// </summary>
-        /// <param name="vec">A quaternion to transform with.</param>
+        /// <param name="quat">A quaternion to transform with.</param>
         /// <param name="vec">A vector to rotate.</param>
         /// <param name="result">The resulting <see cref="Vector3"/> transformed by this quaternion</param>
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
@@ -730,7 +730,7 @@ namespace nml
         /// <param name="a">First quaternion.</param>
         /// <param name="b">Second quaternion.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
-        /// <param name="t">An interpolated quaternion between the two points.</param>
+        /// <param name="result">An interpolated quaternion between the two points.</param>
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static void Slerp(ref Quaternion a, ref Quaternion b, float t, out Quaternion result)
         {
@@ -786,6 +786,7 @@ namespace nml
         /// <summary>
         /// Transform a normalised <see cref="Vector3"/> by this quaternion.
         /// </summary>
+        /// <param name="quat">The quaternion to transform by.</param>
         /// <param name="vec">A normalised vector to rotate.</param>
         /// <returns>The resulting <see cref="Vector3"/> transformed by this quaternion</returns>
         public static Vector3 operator *(Quaternion quat, Vector3 vec)
@@ -892,8 +893,6 @@ namespace nml
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object"/> to compare.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
         /// <returns><c>true</c> if the objects are equal <c>false</c> otherwise.</returns>
         public override bool Equals(System.Object obj)
         {
@@ -910,8 +909,6 @@ namespace nml
         /// Determines whether the specified <see cref="Quaternion"/> is exactly equal to this instance.
         /// </summary>
         /// <param name="other">The <see cref="Quaternion"/> to compare with.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="Quaternion"/> is equal to this instance; otherwise, <c>false</c>.
         /// <returns><c>true</c> if the two quaternions are equal <c>false</c> otherwise.</returns>
         public bool Equals(Quaternion other)
         {

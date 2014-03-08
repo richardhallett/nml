@@ -497,6 +497,38 @@ namespace nml
         }
 
         /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <param name="result">The vector in the opposite direction.</param>
+        public static void Negate(ref Vector3 vector, out Vector3 result)
+        {
+            result = new Vector3(-vector.x, -vector.y, -vector.z);
+        }
+
+        /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <returns>The vector in the opposite direction.</returns>
+        public static Vector3 Negate(Vector3 vector)
+        {
+            Vector3 result;
+            Vector3.Negate(ref vector, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <returns>The vector in the opposite direction.</returns>
+        public static Vector3 operator -(Vector3 vector)
+        {
+            return new Vector3(-vector.x, -vector.y, -vector.z);
+        }
+
+        /// <summary>
         /// Multiply vector components by scalar.
         /// </summary>
         /// <param name="vector">The vector to scale.</param>
@@ -610,8 +642,6 @@ namespace nml
         /// Determines whether the specified <see cref="Vector3"/> is exactly equal to this instance.
         /// </summary>
         /// <param name="other">The <see cref="Vector3"/> to compare with.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="Vector3"/> is equal to this instance; otherwise, <c>false</c>.
         /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public bool Equals(Vector3 other)
         {
@@ -636,7 +666,7 @@ namespace nml
         /// </summary>
         /// <returns>
         /// A hash code for this instance.
-        /// <returns>True/False</returns>
+        /// </returns>
         public override int GetHashCode()
         {
             return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();

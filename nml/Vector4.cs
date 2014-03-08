@@ -489,6 +489,38 @@ namespace nml
         }
 
         /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <param name="result">The vector in the opposite direction.</param>
+        public static void Negate(ref Vector4 vector, out Vector4 result)
+        {
+            result = new Vector4(-vector.x, -vector.y, -vector.z, -vector.w);
+        }
+
+        /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <returns>The vector in the opposite direction.</returns>
+        public static Vector4 Negate(Vector4 vector)
+        {
+            Vector4 result;
+            Vector4.Negate(ref vector, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Reverse the direction of a given vector.
+        /// </summary>
+        /// <param name="vector">Vector to negate.</param>
+        /// <returns>The vector in the opposite direction.</returns>
+        public static Vector4 operator -(Vector4 vector)
+        {
+            return new Vector4(-vector.x, -vector.y, -vector.z, -vector.w);
+        }
+
+        /// <summary>
         /// Multiply vector components by scalar.
         /// </summary>
         /// <param name="vector">The vector to scale.</param>
@@ -583,9 +615,7 @@ namespace nml
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <param name="obj">The <see cref="System.Object"/> to compare.</param>        
         /// <returns><c>true</c> if the objects are equal <c>false</c> otherwise.</returns>
         public override bool Equals(System.Object obj)
         {
@@ -601,9 +631,7 @@ namespace nml
         /// <summary>
         /// Determines whether the specified <see cref="Vector4"/> is exactly equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="Vector4"/> to compare with.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <param name="other">The <see cref="Vector4"/> to compare with.</param>        
         /// <returns><c>true</c> if the two vectors are equal <c>false</c> otherwise.</returns>
         public bool Equals(Vector4 other)
         {

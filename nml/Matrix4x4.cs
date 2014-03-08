@@ -147,21 +147,116 @@ namespace nml
             }
         }
 
+        /// <summary>
+        /// Gets or sets the first row, first column.
+        /// </summary>
+        /// <value>
+        /// The M11.
+        /// </value>
         public float M11 { get { return this.m11; } set { this.m11 = value; } }
+        /// <summary>
+        /// Gets or sets the first row, second column.
+        /// </summary>
+        /// <value>
+        /// The M12.
         public float M12 { get { return this.m12; } set { this.m12 = value; } }
+        /// <summary>
+        /// Gets or sets the first row, third column.
+        /// </summary>
+        /// <value>
+        /// The M13.
+        /// </value>
         public float M13 { get { return this.m13; } set { this.m13 = value; } }
+        /// <summary>
+        /// Gets or sets the first row, fourth column.
+        /// </summary>
+        /// <value>
+        /// The M14.
+        /// </value>
         public float M14 { get { return this.m14; } set { this.m14 = value; } }
+        /// <summary>
+        /// Gets or sets the second row, first column.
+        /// </summary>
+        /// <value>
+        /// The M21.
+        /// </value>
         public float M21 { get { return this.m21; } set { this.m21 = value; } }
+        /// <summary>
+        /// Gets or sets the second row, second column.
+        /// </summary>
+        /// <value>
+        /// The M22.
+        /// </value>
         public float M22 { get { return this.m22; } set { this.m22 = value; } }
+        /// <summary>
+        /// Gets or sets the second row, third column.
+        /// </summary>
+        /// <value>
+        /// The M23.
+        /// </value>
         public float M23 { get { return this.m23; } set { this.m23 = value; } }
+        /// <summary>
+        /// Gets or sets the second row, fourth column.
+        /// </summary>
+        /// <value>
+        /// The M24.
+        /// </value>
         public float M24 { get { return this.m24; } set { this.m24 = value; } }
+        /// <summary>
+        /// Gets or sets the third row, first column.
+        /// </summary>
+        /// <value>
+        /// The M31.
+        /// </value>
         public float M31 { get { return this.m31; } set { this.m31 = value; } }
+        /// <summary>
+        /// Gets or sets the third row, second column.
+        /// </summary>
+        /// <value>
+        /// The M32.
+        /// </value>
         public float M32 { get { return this.m32; } set { this.m32 = value; } }
+        /// <summary>
+        /// Gets or sets the third row, third column.
+        /// </summary>
+        /// <value>
+        /// The M33.
+        /// </value>
         public float M33 { get { return this.m33; } set { this.m33 = value; } }
+        /// <summary>
+        /// Gets or sets the third row, fourth column.
+        /// </summary>
+        /// <value>
+        /// The M34.
+        /// </value>
         public float M34 { get { return this.m34; } set { this.m34 = value; } }
+        /// <summary>
+        /// Gets or sets the fourth row, first column.
+        /// </summary>
+        /// <value>
+        /// The M41.
+        /// </value>
         public float M41 { get { return this.m41; } set { this.m41 = value; } }
+        /// <summary>
+        /// Gets or sets the fourth row, second column.
+        /// </summary>
+        /// <value>
+        /// The M42.
+        /// </value>
         public float M42 { get { return this.m42; } set { this.m42 = value; } }
+        /// <summary>
+        /// Gets or sets the fourth row, third column.
+        /// </summary>
+        /// <value>
+        /// The M43.
+        /// </value>
         public float M43 { get { return this.m43; } set { this.m43 = value; } }
+        /// <summary>
+        /// Gets or sets the fourth row, fourth column.
+        /// </summary>
+        /// <value>
+        /// The M44.
+        /// </value>
         public float M44 { get { return this.m44; } set { this.m44 = value; } }
 
         /// <summary>
@@ -493,7 +588,7 @@ namespace nml
         /// </summary>
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
-        /// <param>The resulting subtraction of the two matrices.</param>
+        /// <param name="result">The resulting subtraction of the two matrices.</param>
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static void Subtract(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
