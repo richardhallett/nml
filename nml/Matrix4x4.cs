@@ -978,10 +978,10 @@ namespace nml
             if (near >= far)
                 throw new ArgumentOutOfRangeException("near");
 
-            float left = near * (float)Math.Tan(fovy * 0.5f);
-            float right = -left;
-            float bottom = left * aspect;
-            float top = right * aspect;
+            float top = near * (float)Math.Tan(fovy * 0.5f);
+            float bottom = -top;
+            float left = bottom * aspect;
+            float right = top * aspect;
 
             return PerspectiveProjectionRH(left, right, bottom, top, near, far);
         }
