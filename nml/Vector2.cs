@@ -599,7 +599,7 @@ namespace nml
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>Element value at specified index</returns>
-        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         private float GetElement(int index)
         {
             switch (index)
@@ -610,7 +610,7 @@ namespace nml
                     return this.y;
             }
 
-            throw new IndexOutOfRangeException();
+            throw new ArgumentOutOfRangeException();
         }
 
         /// <summary>
@@ -618,7 +618,7 @@ namespace nml
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The value.</param>
-        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         private void SetElement(int index, float value)
         {
             switch (index)
@@ -630,7 +630,7 @@ namespace nml
                     this.y = value;
                     break;
 
-                    throw new IndexOutOfRangeException();
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

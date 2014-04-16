@@ -1177,7 +1177,7 @@ namespace nml
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns></returns>
-        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         private float GetElement(int index)
         {
             switch (index)
@@ -1200,7 +1200,7 @@ namespace nml
                 case 15: return m44;
             }
 
-            throw new IndexOutOfRangeException();
+            throw new ArgumentOutOfRangeException();
         }
 
         /// <summary>
@@ -1209,7 +1209,7 @@ namespace nml
         /// <param name="row">The row.</param>
         /// <param name="column">The column.</param>
         /// <returns></returns>
-        /// <exception cref="System.IndexOutOfRangeException">
+        /// <exception cref="System.ArgumentOutOfRangeException">
         /// Rows must be in range 0 to 3
         /// or
         /// Columns must be in range 0 to 3
@@ -1217,9 +1217,9 @@ namespace nml
         private float GetElement(int row, int column)
         {
             if (row < 0 || row > 3)
-                throw new IndexOutOfRangeException("Rows must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("Rows must be in range 0 to 3");
             if (column < 0 || column > 3)
-                throw new IndexOutOfRangeException("Columns must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("Columns must be in range 0 to 3");
             return GetElement((row * 4) + column);
         }
 
@@ -1228,7 +1228,7 @@ namespace nml
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The value.</param>
-        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         private void SetElement(int index, float value)
         {
             switch (index)
@@ -1250,7 +1250,7 @@ namespace nml
                 case 14: m43 = value; break;
                 case 15: m44 = value; break;
 
-                throw new IndexOutOfRangeException();
+                throw new ArgumentOutOfRangeException();
             }            
         }
 
@@ -1260,7 +1260,7 @@ namespace nml
         /// <param name="row">The row.</param>
         /// <param name="column">The column.</param>
         /// <param name="value">The value.</param>
-        /// <exception cref="System.IndexOutOfRangeException">
+        /// <exception cref="System.ArgumentOutOfRangeException">
         /// Rows must be in range 0 to 3
         /// or
         /// Columns must be in range 0 to 3
@@ -1268,9 +1268,9 @@ namespace nml
         private void SetElement(int row, int column, float value)
         {
             if (row < 0 || row > 3)
-                throw new IndexOutOfRangeException("Rows must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("Rows must be in range 0 to 3");
             if (column < 0 || column > 3)
-                throw new IndexOutOfRangeException("Columns must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("Columns must be in range 0 to 3");
 
             SetElement((row * 4) + column, value);
         }
