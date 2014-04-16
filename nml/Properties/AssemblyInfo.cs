@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("nml")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A maths library for .NET specifically targeted for graphics based software.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("nml")]
-[assembly: AssemblyCopyright("Copyright © Richard Hallett 2013")]
+[assembly: AssemblyCopyright("Copyright © Richard Hallett 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
