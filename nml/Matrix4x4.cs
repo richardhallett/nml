@@ -59,7 +59,7 @@ namespace nml
             m42 = values[13];
             m43 = values[14];
             m44 = values[15];
-        }     
+        }        
 
         /// <summary>
         /// Provides array style indexing to matrix elements.
@@ -70,52 +70,12 @@ namespace nml
         {
             get
             {
-                switch (index)
-                {
-                    case 0: return m11;
-                    case 1: return m12;
-                    case 2: return m13;
-                    case 3: return m14;
-                    case 4: return m21;
-                    case 5: return m22;
-                    case 6: return m23;
-                    case 7: return m24;
-                    case 8: return m31;
-                    case 9: return m32;
-                    case 10: return m33;
-                    case 11: return m34;
-                    case 12: return m41;
-                    case 13: return m42;
-                    case 14: return m43;
-                    case 15: return m44;
-                }
-
-                throw new IndexOutOfRangeException();
+                return GetElement(index);
             }
 
             set
             {
-                switch (index)
-                {
-                    case 0: m11 = value; break;
-                    case 1: m12 = value; break;
-                    case 2: m13 = value; break;
-                    case 3: m14 = value; break;
-                    case 4: m21 = value; break;
-                    case 5: m22 = value; break;
-                    case 6: m23 = value; break;
-                    case 7: m24 = value; break;
-                    case 8: m31 = value; break;
-                    case 9: m32 = value; break;
-                    case 10: m33 = value; break;
-                    case 11: m34 = value; break;
-                    case 12: m41 = value; break;
-                    case 13: m42 = value; break;
-                    case 14: m43 = value; break;
-                    case 15: m44 = value; break;
-
-                    throw new IndexOutOfRangeException();
-                }                
+                SetElement(index, value);
             }
         }
 
@@ -130,20 +90,11 @@ namespace nml
         {
             get
             {
-                if (row < 0 || row > 3)
-                    throw new IndexOutOfRangeException("Rows must be in range 0 to 3");
-                if (column < 0 || column > 3)
-                    throw new IndexOutOfRangeException("Columns must be in range 0 to 3");
-                return this[(row * 4) + column];
+                return GetElement(row, column);
             }
             set
-            {
-                if (row < 0 || row > 3)
-                    throw new IndexOutOfRangeException("Rows must be in range 0 to 3");
-                if (column < 0 || column > 3)
-                    throw new IndexOutOfRangeException("Columns must be in range 0 to 3");
-
-                this[(row * 4) + column] = value;
+            {                
+                SetElement(row, column, value);
             }
         }
 
@@ -157,8 +108,7 @@ namespace nml
         /// <summary>
         /// Gets or sets the first row, second column.
         /// </summary>
-        /// <value>
-        /// The M12.
+        /// <value>The M12.</value>
         public float M12 { get { return this.m12; } set { this.m12 = value; } }
         /// <summary>
         /// Gets or sets the first row, third column.
@@ -1118,6 +1068,32 @@ namespace nml
         }
 
         /// <summary>
+        /// Determines whether two <see cref="Matrix4x4"/> are equal.
+        /// </summary>
+        /// <param name="a">First matrix.</param>
+        /// <param name="b">Second matrix.</param>
+        /// <returns>
+        /// <c>true</c> if the the two <see cref="Matrix4x4"/> are equal; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool operator ==(Matrix4x4 a, Matrix4x4 b)
+        {
+            return a.Equals(b);
+        }
+
+        /// <summary>
+        /// Determines whether two <see cref="Matrix4x4"/> are not equal.
+        /// </summary>
+        /// <param name="a">First matrix.</param>
+        /// <param name="b">Second matrix.</param>
+        /// <returns>
+        /// <c>true</c> if the the two <see cref="Matrix4x4"/> are not equal; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool operator !=(Matrix4x4 a, Matrix4x4 b)
+        {
+            return !(a == b);
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object"/> to compare.</param>
@@ -1154,7 +1130,7 @@ namespace nml
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Matrix4x4"/> to <see cref="System.Single[]"/>.
+        /// Performs an implicit conversion from <see cref="Matrix4x4"/> to <see cref="T:System.Single[]"/>.
         /// </summary>
         /// <param name="matrix">The matrix.</param>
         /// <returns>
@@ -1166,11 +1142,11 @@ namespace nml
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Vector2"/> is equal to this instance.
+        /// Determines whether the specified <see cref="Matrix4x4"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="Vector2"/> to compare with.</param>
+        /// <param name="other">The <see cref="Matrix4x4"/> to compare with.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="Vector2"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="Matrix4x4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Matrix4x4 other)
         {
@@ -1194,6 +1170,109 @@ namespace nml
                 m21.GetHashCode() ^ m22.GetHashCode() ^ m23.GetHashCode() ^ m24.GetHashCode() ^
                 m31.GetHashCode() ^ m32.GetHashCode() ^ m33.GetHashCode() ^ m34.GetHashCode() ^
                 m41.GetHashCode() ^ m42.GetHashCode() ^ m43.GetHashCode() ^ m44.GetHashCode();
+        }
+
+        /// <summary>
+        /// Get a matrix element.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
+        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        private float GetElement(int index)
+        {
+            switch (index)
+            {
+                case 0: return m11;
+                case 1: return m12;
+                case 2: return m13;
+                case 3: return m14;
+                case 4: return m21;
+                case 5: return m22;
+                case 6: return m23;
+                case 7: return m24;
+                case 8: return m31;
+                case 9: return m32;
+                case 10: return m33;
+                case 11: return m34;
+                case 12: return m41;
+                case 13: return m42;
+                case 14: return m43;
+                case 15: return m44;
+            }
+
+            throw new IndexOutOfRangeException();
+        }
+
+        /// <summary>
+        /// Gets a matrix element by array index
+        /// </summary>
+        /// <param name="row">The row.</param>
+        /// <param name="column">The column.</param>
+        /// <returns></returns>
+        /// <exception cref="System.IndexOutOfRangeException">
+        /// Rows must be in range 0 to 3
+        /// or
+        /// Columns must be in range 0 to 3
+        /// </exception>
+        private float GetElement(int row, int column)
+        {
+            if (row < 0 || row > 3)
+                throw new IndexOutOfRangeException("Rows must be in range 0 to 3");
+            if (column < 0 || column > 3)
+                throw new IndexOutOfRangeException("Columns must be in range 0 to 3");
+            return GetElement((row * 4) + column);
+        }
+
+        /// <summary>
+        /// Sets a matrix element.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        private void SetElement(int index, float value)
+        {
+            switch (index)
+            {
+                case 0: m11 = value; break;
+                case 1: m12 = value; break;
+                case 2: m13 = value; break;
+                case 3: m14 = value; break;
+                case 4: m21 = value; break;
+                case 5: m22 = value; break;
+                case 6: m23 = value; break;
+                case 7: m24 = value; break;
+                case 8: m31 = value; break;
+                case 9: m32 = value; break;
+                case 10: m33 = value; break;
+                case 11: m34 = value; break;
+                case 12: m41 = value; break;
+                case 13: m42 = value; break;
+                case 14: m43 = value; break;
+                case 15: m44 = value; break;
+
+                throw new IndexOutOfRangeException();
+            }            
+        }
+
+        /// <summary>
+        /// Sets a matrix element.
+        /// </summary>
+        /// <param name="row">The row.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.IndexOutOfRangeException">
+        /// Rows must be in range 0 to 3
+        /// or
+        /// Columns must be in range 0 to 3
+        /// </exception>
+        private void SetElement(int row, int column, float value)
+        {
+            if (row < 0 || row > 3)
+                throw new IndexOutOfRangeException("Rows must be in range 0 to 3");
+            if (column < 0 || column > 3)
+                throw new IndexOutOfRangeException("Columns must be in range 0 to 3");
+
+            SetElement((row * 4) + column, value);
         }
 
         private float m11;

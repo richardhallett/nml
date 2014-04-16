@@ -68,50 +68,22 @@ namespace nml
         /// <summary>
         /// w component.
         /// </summary>
-        public float w { get; set; }
+        public float w { get; set; }       
 
         /// <summary>
         /// Provides array style indexing to vectors components.
         /// </summary>
-        /// <param name="i">Element to get, must be either 0/1/2/3 which corresponds to x/y/z/w</param>
+        /// <param name="index">Element to get, must be either 0/1/2/3 which corresponds to x/y/z/w</param>
         /// <returns>Element value at specified index.</returns>
-        public float this[int i]
+        public float this[int index]
         {
             get
             {
-                switch (i)
-                {
-                    case 0:
-                        return this.x;
-                    case 1:
-                        return this.y;
-                    case 2:
-                        return this.z;
-                    case 3:
-                        return this.w;
-                }
-
-                throw new IndexOutOfRangeException();
+                return GetElement(index);
             }
             set
             {
-                switch (i)
-                {
-                    case 0:
-                        this.x = value;
-                        break;
-                    case 1:
-                        this.y = value;
-                        break;
-                    case 2:
-                        this.z = value;
-                        break;
-                    case 3:
-                        this.w = value;
-                        break;
-                }
-
-                throw new IndexOutOfRangeException();
+                SetElement(index, value);
             }
         }
 
@@ -661,6 +633,56 @@ namespace nml
         public override int GetHashCode()
         {
             return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode() ^ w.GetHashCode();
+        }
+
+        /// <summary>
+        /// Gets the component of the vector
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>Element value at specified index</returns>
+        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        private float GetElement(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return this.x;
+                case 1:
+                    return this.y;
+                case 2:
+                    return this.z;
+                case 3:
+                    return this.w;
+            }
+
+            throw new IndexOutOfRangeException();
+        }
+
+        /// <summary>
+        /// Sets the element of a vector.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.IndexOutOfRangeException"></exception>
+        private void SetElement(int index, float value)
+        {
+            switch (index)
+            {
+                case 0:
+                    this.x = value;
+                    break;
+                case 1:
+                    this.y = value;
+                    break;
+                case 2:
+                    this.z = value;
+                    break;
+                case 3:
+                    this.w = value;
+                    break;
+
+                    throw new IndexOutOfRangeException();
+            }
         }
     }
 }
