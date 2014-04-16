@@ -16,7 +16,7 @@ namespace nml
         /// <summary>
         /// A 4x4 identity matrix.
         /// </summary>
-        public static readonly Matrix4x4 Identity = new Matrix4x4() { m11 = 1.0f, m22 = 1.0f, m33 = 1.0f, m44 = 1.0f };
+        public static readonly Matrix4x4 Identity = new Matrix4x4() { _m11 = 1.0f, _m22 = 1.0f, _m33 = 1.0f, _m44 = 1.0f };
 
         /// <summary>
         /// Creates a new instance of <see cref="Matrix4x4"/> with scalar.
@@ -24,10 +24,10 @@ namespace nml
         /// <param name="value">A scalar value that will be assigned to all components.</param>
         public Matrix4x4(float value)
         {
-            m11 = m12 = m13 = m14 =
-            m21 = m22 = m23 = m24 =
-            m31 = m32 = m33 = m34 =
-            m41 = m42 = m43 = m44 = value;
+            _m11 = _m12 = _m13 = _m14 =
+            _m21 = _m22 = _m23 = _m24 =
+            _m31 = _m32 = _m33 = _m34 =
+            _m41 = _m42 = _m43 = _m44 = value;
         }
 
         /// <summary>
@@ -40,25 +40,25 @@ namespace nml
                 throw new ArgumentOutOfRangeException("values", "The size of the values collection must contain 16 elements.");
             }
             
-            m11 = values[0];
-            m12 = values[1];
-            m13 = values[2];
-            m14 = values[3];
+            _m11 = values[0];
+            _m12 = values[1];
+            _m13 = values[2];
+            _m14 = values[3];
 
-            m21 = values[4];
-            m22 = values[5];
-            m23 = values[6];
-            m24 = values[7];
+            _m21 = values[4];
+            _m22 = values[5];
+            _m23 = values[6];
+            _m24 = values[7];
 
-            m31 = values[8];
-            m32 = values[9];
-            m33 = values[10];
-            m34 = values[11];
+            _m31 = values[8];
+            _m32 = values[9];
+            _m33 = values[10];
+            _m34 = values[11];
 
-            m41 = values[12];
-            m42 = values[13];
-            m43 = values[14];
-            m44 = values[15];
+            _m41 = values[12];
+            _m42 = values[13];
+            _m43 = values[14];
+            _m44 = values[15];
         }        
 
         /// <summary>
@@ -104,110 +104,110 @@ namespace nml
         /// <value>
         /// The M11.
         /// </value>
-        public float M11 { get { return this.m11; } set { this.m11 = value; } }
+        public float M11 { get { return this._m11; } set { this._m11 = value; } }
         /// <summary>
         /// Gets or sets the first row, second column.
         /// </summary>
         /// <value>The M12.</value>
-        public float M12 { get { return this.m12; } set { this.m12 = value; } }
+        public float M12 { get { return this._m12; } set { this._m12 = value; } }
         /// <summary>
         /// Gets or sets the first row, third column.
         /// </summary>
         /// <value>
         /// The M13.
         /// </value>
-        public float M13 { get { return this.m13; } set { this.m13 = value; } }
+        public float M13 { get { return this._m13; } set { this._m13 = value; } }
         /// <summary>
         /// Gets or sets the first row, fourth column.
         /// </summary>
         /// <value>
         /// The M14.
         /// </value>
-        public float M14 { get { return this.m14; } set { this.m14 = value; } }
+        public float M14 { get { return this._m14; } set { this._m14 = value; } }
         /// <summary>
         /// Gets or sets the second row, first column.
         /// </summary>
         /// <value>
         /// The M21.
         /// </value>
-        public float M21 { get { return this.m21; } set { this.m21 = value; } }
+        public float M21 { get { return this._m21; } set { this._m21 = value; } }
         /// <summary>
         /// Gets or sets the second row, second column.
         /// </summary>
         /// <value>
         /// The M22.
         /// </value>
-        public float M22 { get { return this.m22; } set { this.m22 = value; } }
+        public float M22 { get { return this._m22; } set { this._m22 = value; } }
         /// <summary>
         /// Gets or sets the second row, third column.
         /// </summary>
         /// <value>
         /// The M23.
         /// </value>
-        public float M23 { get { return this.m23; } set { this.m23 = value; } }
+        public float M23 { get { return this._m23; } set { this._m23 = value; } }
         /// <summary>
         /// Gets or sets the second row, fourth column.
         /// </summary>
         /// <value>
         /// The M24.
         /// </value>
-        public float M24 { get { return this.m24; } set { this.m24 = value; } }
+        public float M24 { get { return this._m24; } set { this._m24 = value; } }
         /// <summary>
         /// Gets or sets the third row, first column.
         /// </summary>
         /// <value>
         /// The M31.
         /// </value>
-        public float M31 { get { return this.m31; } set { this.m31 = value; } }
+        public float M31 { get { return this._m31; } set { this._m31 = value; } }
         /// <summary>
         /// Gets or sets the third row, second column.
         /// </summary>
         /// <value>
         /// The M32.
         /// </value>
-        public float M32 { get { return this.m32; } set { this.m32 = value; } }
+        public float M32 { get { return this._m32; } set { this._m32 = value; } }
         /// <summary>
         /// Gets or sets the third row, third column.
         /// </summary>
         /// <value>
         /// The M33.
         /// </value>
-        public float M33 { get { return this.m33; } set { this.m33 = value; } }
+        public float M33 { get { return this._m33; } set { this._m33 = value; } }
         /// <summary>
         /// Gets or sets the third row, fourth column.
         /// </summary>
         /// <value>
         /// The M34.
         /// </value>
-        public float M34 { get { return this.m34; } set { this.m34 = value; } }
+        public float M34 { get { return this._m34; } set { this._m34 = value; } }
         /// <summary>
         /// Gets or sets the fourth row, first column.
         /// </summary>
         /// <value>
         /// The M41.
         /// </value>
-        public float M41 { get { return this.m41; } set { this.m41 = value; } }
+        public float M41 { get { return this._m41; } set { this._m41 = value; } }
         /// <summary>
         /// Gets or sets the fourth row, second column.
         /// </summary>
         /// <value>
         /// The M42.
         /// </value>
-        public float M42 { get { return this.m42; } set { this.m42 = value; } }
+        public float M42 { get { return this._m42; } set { this._m42 = value; } }
         /// <summary>
         /// Gets or sets the fourth row, third column.
         /// </summary>
         /// <value>
         /// The M43.
         /// </value>
-        public float M43 { get { return this.m43; } set { this.m43 = value; } }
+        public float M43 { get { return this._m43; } set { this._m43 = value; } }
         /// <summary>
         /// Gets or sets the fourth row, fourth column.
         /// </summary>
         /// <value>
         /// The M44.
         /// </value>
-        public float M44 { get { return this.m44; } set { this.m44 = value; } }
+        public float M44 { get { return this._m44; } set { this._m44 = value; } }
 
         /// <summary>
         /// Set all elements.
@@ -234,22 +234,22 @@ namespace nml
             float m31, float m32, float m33, float m34,
             float m41, float m42, float m43, float m44)
         {
-            this.m11 = m11;
-            this.m12 = m12;
-            this.m13 = m13;
-            this.m14 = m14;
-            this.m21 = m21;
-            this.m22 = m22;
-            this.m23 = m23;
-            this.m24 = m24;
-            this.m31 = m31;
-            this.m32 = m32;
-            this.m33 = m33;
-            this.m34 = m34;
-            this.m41 = m41;
-            this.m42 = m42;
-            this.m43 = m43;
-            this.m44 = m44;
+            this._m11 = m11;
+            this._m12 = m12;
+            this._m13 = m13;
+            this._m14 = m14;
+            this._m21 = m21;
+            this._m22 = m22;
+            this._m23 = m23;
+            this._m24 = m24;
+            this._m31 = m31;
+            this._m32 = m32;
+            this._m33 = m33;
+            this._m34 = m34;
+            this._m41 = m41;
+            this._m42 = m42;
+            this._m43 = m43;
+            this._m44 = m44;
         }
 
         /// <summary>
@@ -261,22 +261,22 @@ namespace nml
             get
             {
                 // Local variables for faster lookup.
-                float l11 = this.m11;
-                float l12 = this.m12;
-                float l13 = this.m13;
-                float l14 = this.m14;
-                float l21 = this.m21;
-                float l22 = this.m22;
-                float l23 = this.m23;
-                float l24 = this.m24;
-                float l31 = this.m31;
-                float l32 = this.m32;
-                float l33 = this.m33;
-                float l34 = this.m34;
-                float l41 = this.m41;
-                float l42 = this.m42;
-                float l43 = this.m43;
-                float l44 = this.m44;
+                float l11 = this._m11;
+                float l12 = this._m12;
+                float l13 = this._m13;
+                float l14 = this._m14;
+                float l21 = this._m21;
+                float l22 = this._m22;
+                float l23 = this._m23;
+                float l24 = this._m24;
+                float l31 = this._m31;
+                float l32 = this._m32;
+                float l33 = this._m33;
+                float l34 = this._m34;
+                float l41 = this._m41;
+                float l42 = this._m42;
+                float l43 = this._m43;
+                float l44 = this._m44;
 
                 float c1 = (l33 * l44) - (l34 * l43);
                 float c2 = (l32 * l44) - (l34 * l42);
@@ -497,25 +497,25 @@ namespace nml
 
             Matrix4x4 r = new Matrix4x4();
 
-            r.m11 = a11 + b11;
-            r.m12 = a12 + b12;
-            r.m13 = a13 + b13;
-            r.m14 = a14 + b14;
+            r._m11 = a11 + b11;
+            r._m12 = a12 + b12;
+            r._m13 = a13 + b13;
+            r._m14 = a14 + b14;
 
-            r.m21 = a21 + b21;
-            r.m22 = a22 + b22;
-            r.m23 = a23 + b23;
-            r.m24 = a24 + b24;
+            r._m21 = a21 + b21;
+            r._m22 = a22 + b22;
+            r._m23 = a23 + b23;
+            r._m24 = a24 + b24;
 
-            r.m31 = a31 + b31;
-            r.m32 = a32 + b32;
-            r.m33 = a33 + b33;
-            r.m34 = a34 + b34;
+            r._m31 = a31 + b31;
+            r._m32 = a32 + b32;
+            r._m33 = a33 + b33;
+            r._m34 = a34 + b34;
 
-            r.m41 = a41 + b41;
-            r.m42 = a42 + b42;
-            r.m43 = a43 + b43;
-            r.m44 = a44 + b44;
+            r._m41 = a41 + b41;
+            r._m42 = a42 + b42;
+            r._m43 = a43 + b43;
+            r._m44 = a44 + b44;
 
             result = r;
         }
@@ -579,25 +579,25 @@ namespace nml
 
             Matrix4x4 r = new Matrix4x4();
 
-            r.m11 = a11 - b11;
-            r.m12 = a12 - b12;
-            r.m13 = a13 - b13;
-            r.m14 = a14 - b14;
+            r._m11 = a11 - b11;
+            r._m12 = a12 - b12;
+            r._m13 = a13 - b13;
+            r._m14 = a14 - b14;
 
-            r.m21 = a21 - b21;
-            r.m22 = a22 - b22;
-            r.m23 = a23 - b23;
-            r.m24 = a24 - b24;
+            r._m21 = a21 - b21;
+            r._m22 = a22 - b22;
+            r._m23 = a23 - b23;
+            r._m24 = a24 - b24;
 
-            r.m31 = a31 - b31;
-            r.m32 = a32 - b32;
-            r.m33 = a33 - b33;
-            r.m34 = a34 - b34;
+            r._m31 = a31 - b31;
+            r._m32 = a32 - b32;
+            r._m33 = a33 - b33;
+            r._m34 = a34 - b34;
 
-            r.m41 = a41 - b41;
-            r.m42 = a42 - b42;
-            r.m43 = a43 - b43;
-            r.m44 = a44 - b44;
+            r._m41 = a41 - b41;
+            r._m42 = a42 - b42;
+            r._m43 = a43 - b43;
+            r._m44 = a44 - b44;
 
             result = r;
         }
@@ -697,22 +697,22 @@ namespace nml
 
             var invertedMatrix = new Matrix4x4();
 
-            invertedMatrix.m11 = l23 * l27;
-            invertedMatrix.m21 = l24 * l27;
-            invertedMatrix.m31 = l25 * l27;
-            invertedMatrix.m41 = l26 * l27;
-            invertedMatrix.m12 = -(((l2 * l17) - (l3 * l18)) + (l4 * l19)) * l27;
-            invertedMatrix.m22 = (((l1 * l17) - (l3 * l20)) + (l4 * l21)) * l27;
-            invertedMatrix.m32 = -(((l1 * l18) - (l2 * l20)) + (l4 * l22)) * l27;
-            invertedMatrix.m42 = (((l1 * l19) - (l2 * l21)) + (l3 * l22)) * l27;
-            invertedMatrix.m13 = (((l2 * l28) - (l3 * l29)) + (l4 * l30)) * l27;
-            invertedMatrix.m23 = -(((l1 * l28) - (l3 * l31)) + (l4 * l32)) * l27;
-            invertedMatrix.m33 = (((l1 * l29) - (l2 * l31)) + (l4 * l33)) * l27;
-            invertedMatrix.m43 = -(((l1 * l30) - (l2 * l32)) + (l3 * l33)) * l27;
-            invertedMatrix.m14 = -(((l2 * l34) - (l3 * l35)) + (l4 * l36)) * l27;
-            invertedMatrix.m24 = (((l1 * l34) - (l3 * l37)) + (l4 * l38)) * l27;
-            invertedMatrix.m34 = -(((l1 * l35) - (l2 * l37)) + (l4 * l39)) * l27;
-            invertedMatrix.m44 = (((l1 * l36) - (l2 * l38)) + (l3 * l39)) * l27;
+            invertedMatrix._m11 = l23 * l27;
+            invertedMatrix._m21 = l24 * l27;
+            invertedMatrix._m31 = l25 * l27;
+            invertedMatrix._m41 = l26 * l27;
+            invertedMatrix._m12 = -(((l2 * l17) - (l3 * l18)) + (l4 * l19)) * l27;
+            invertedMatrix._m22 = (((l1 * l17) - (l3 * l20)) + (l4 * l21)) * l27;
+            invertedMatrix._m32 = -(((l1 * l18) - (l2 * l20)) + (l4 * l22)) * l27;
+            invertedMatrix._m42 = (((l1 * l19) - (l2 * l21)) + (l3 * l22)) * l27;
+            invertedMatrix._m13 = (((l2 * l28) - (l3 * l29)) + (l4 * l30)) * l27;
+            invertedMatrix._m23 = -(((l1 * l28) - (l3 * l31)) + (l4 * l32)) * l27;
+            invertedMatrix._m33 = (((l1 * l29) - (l2 * l31)) + (l4 * l33)) * l27;
+            invertedMatrix._m43 = -(((l1 * l30) - (l2 * l32)) + (l3 * l33)) * l27;
+            invertedMatrix._m14 = -(((l2 * l34) - (l3 * l35)) + (l4 * l36)) * l27;
+            invertedMatrix._m24 = (((l1 * l34) - (l3 * l37)) + (l4 * l38)) * l27;
+            invertedMatrix._m34 = -(((l1 * l35) - (l2 * l37)) + (l4 * l39)) * l27;
+            invertedMatrix._m44 = (((l1 * l36) - (l2 * l38)) + (l3 * l39)) * l27;
 
             return invertedMatrix;
         }
@@ -958,22 +958,22 @@ namespace nml
         public static void Transform(ref Matrix4x4 matrix, ref Vector4 vec, out Vector4 result)
         {
             // Local variables for faster lookup.
-            float l11 = matrix.m11;
-            float l12 = matrix.m12;
-            float l13 = matrix.m13;
-            float l14 = matrix.m14;
-            float l21 = matrix.m21;
-            float l22 = matrix.m22;
-            float l23 = matrix.m23;
-            float l24 = matrix.m24;
-            float l31 = matrix.m31;
-            float l32 = matrix.m32;
-            float l33 = matrix.m33;
-            float l34 = matrix.m34;
-            float l41 = matrix.m41;
-            float l42 = matrix.m42;
-            float l43 = matrix.m43;
-            float l44 = matrix.m44;
+            float l11 = matrix._m11;
+            float l12 = matrix._m12;
+            float l13 = matrix._m13;
+            float l14 = matrix._m14;
+            float l21 = matrix._m21;
+            float l22 = matrix._m22;
+            float l23 = matrix._m23;
+            float l24 = matrix._m24;
+            float l31 = matrix._m31;
+            float l32 = matrix._m32;
+            float l33 = matrix._m33;
+            float l34 = matrix._m34;
+            float l41 = matrix._m41;
+            float l42 = matrix._m42;
+            float l43 = matrix._m43;
+            float l44 = matrix._m44;
 
             result = new Vector4(
                 Vector4.Dot(new Vector4(l11, l12, l13, l14), vec),
@@ -1117,7 +1117,7 @@ namespace nml
         /// <returns></returns>
         public override string ToString()
         {
-            return base.ToString() + String.Format(": \n[{0}, {1}, {2}, {3}]\n[{4}, {5}, {6}, {7}]\n[{8}, {9}, {10}, {11}]\n[{12}, {13}, {14}, {15}]", m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44);
+            return base.ToString() + String.Format(": \n[{0}, {1}, {2}, {3}]\n[{4}, {5}, {6}, {7}]\n[{8}, {9}, {10}, {11}]\n[{12}, {13}, {14}, {15}]", _m11, _m12, _m13, _m14, _m21, _m22, _m23, _m24, _m31, _m32, _m33, _m34, _m41, _m42, _m43, _m44);
         }
 
         /// <summary>
@@ -1126,7 +1126,7 @@ namespace nml
         /// <returns>An array of all sixteen matrix elements.</returns>
         public float[] ToArray()
         {
-            return new float[] { m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44 };
+            return new float[] { _m11, _m12, _m13, _m14, _m21, _m22, _m23, _m24, _m31, _m32, _m33, _m34, _m41, _m42, _m43, _m44 };
         }
 
         /// <summary>
@@ -1151,10 +1151,10 @@ namespace nml
         public bool Equals(Matrix4x4 other)
         {
             return 
-                (this.m11 == other.m11) && (this.m12 == other.m12) && (this.m13 == other.m13) && (this.m14 == other.m14) &&
-                (this.m21 == other.m21) && (this.m22 == other.m22) && (this.m23 == other.m23) && (this.m24 == other.m24) &&
-                (this.m31 == other.m31) && (this.m32 == other.m32) && (this.m33 == other.m33) && (this.m34 == other.m34) &&
-                (this.m41 == other.m41) && (this.m42 == other.m42) && (this.m43 == other.m43) && (this.m44 == other.m44);  
+                (this._m11 == other._m11) && (this._m12 == other._m12) && (this._m13 == other._m13) && (this._m14 == other._m14) &&
+                (this._m21 == other._m21) && (this._m22 == other._m22) && (this._m23 == other._m23) && (this._m24 == other._m24) &&
+                (this._m31 == other._m31) && (this._m32 == other._m32) && (this._m33 == other._m33) && (this._m34 == other._m34) &&
+                (this._m41 == other._m41) && (this._m42 == other._m42) && (this._m43 == other._m43) && (this._m44 == other._m44);  
         }
 
         /// <summary>
@@ -1166,10 +1166,10 @@ namespace nml
         public override int GetHashCode()
         {
             return
-                m11.GetHashCode() ^ m12.GetHashCode() ^ m13.GetHashCode() ^ m14.GetHashCode() ^
-                m21.GetHashCode() ^ m22.GetHashCode() ^ m23.GetHashCode() ^ m24.GetHashCode() ^
-                m31.GetHashCode() ^ m32.GetHashCode() ^ m33.GetHashCode() ^ m34.GetHashCode() ^
-                m41.GetHashCode() ^ m42.GetHashCode() ^ m43.GetHashCode() ^ m44.GetHashCode();
+                _m11.GetHashCode() ^ _m12.GetHashCode() ^ _m13.GetHashCode() ^ _m14.GetHashCode() ^
+                _m21.GetHashCode() ^ _m22.GetHashCode() ^ _m23.GetHashCode() ^ _m24.GetHashCode() ^
+                _m31.GetHashCode() ^ _m32.GetHashCode() ^ _m33.GetHashCode() ^ _m34.GetHashCode() ^
+                _m41.GetHashCode() ^ _m42.GetHashCode() ^ _m43.GetHashCode() ^ _m44.GetHashCode();
         }
 
         /// <summary>
@@ -1182,22 +1182,22 @@ namespace nml
         {
             switch (index)
             {
-                case 0: return m11;
-                case 1: return m12;
-                case 2: return m13;
-                case 3: return m14;
-                case 4: return m21;
-                case 5: return m22;
-                case 6: return m23;
-                case 7: return m24;
-                case 8: return m31;
-                case 9: return m32;
-                case 10: return m33;
-                case 11: return m34;
-                case 12: return m41;
-                case 13: return m42;
-                case 14: return m43;
-                case 15: return m44;
+                case 0: return _m11;
+                case 1: return _m12;
+                case 2: return _m13;
+                case 3: return _m14;
+                case 4: return _m21;
+                case 5: return _m22;
+                case 6: return _m23;
+                case 7: return _m24;
+                case 8: return _m31;
+                case 9: return _m32;
+                case 10: return _m33;
+                case 11: return _m34;
+                case 12: return _m41;
+                case 13: return _m42;
+                case 14: return _m43;
+                case 15: return _m44;
             }
 
             throw new ArgumentOutOfRangeException();
@@ -1233,22 +1233,22 @@ namespace nml
         {
             switch (index)
             {
-                case 0: m11 = value; break;
-                case 1: m12 = value; break;
-                case 2: m13 = value; break;
-                case 3: m14 = value; break;
-                case 4: m21 = value; break;
-                case 5: m22 = value; break;
-                case 6: m23 = value; break;
-                case 7: m24 = value; break;
-                case 8: m31 = value; break;
-                case 9: m32 = value; break;
-                case 10: m33 = value; break;
-                case 11: m34 = value; break;
-                case 12: m41 = value; break;
-                case 13: m42 = value; break;
-                case 14: m43 = value; break;
-                case 15: m44 = value; break;
+                case 0: _m11 = value; break;
+                case 1: _m12 = value; break;
+                case 2: _m13 = value; break;
+                case 3: _m14 = value; break;
+                case 4: _m21 = value; break;
+                case 5: _m22 = value; break;
+                case 6: _m23 = value; break;
+                case 7: _m24 = value; break;
+                case 8: _m31 = value; break;
+                case 9: _m32 = value; break;
+                case 10: _m33 = value; break;
+                case 11: _m34 = value; break;
+                case 12: _m41 = value; break;
+                case 13: _m42 = value; break;
+                case 14: _m43 = value; break;
+                case 15: _m44 = value; break;
 
                 throw new ArgumentOutOfRangeException();
             }            
@@ -1275,21 +1275,21 @@ namespace nml
             SetElement((row * 4) + column, value);
         }
 
-        private float m11;
-        private float m12;
-        private float m13;
-        private float m14;
-        private float m21;
-        private float m22;
-        private float m23;
-        private float m24;
-        private float m31;
-        private float m32;
-        private float m33;
-        private float m34;
-        private float m41;
-        private float m42;
-        private float m43;
-        private float m44;
+        private float _m11;
+        private float _m12;
+        private float _m13;
+        private float _m14;
+        private float _m21;
+        private float _m22;
+        private float _m23;
+        private float _m24;
+        private float _m31;
+        private float _m32;
+        private float _m33;
+        private float _m34;
+        private float _m41;
+        private float _m42;
+        private float _m43;
+        private float _m44;
     }
 }
