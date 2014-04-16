@@ -660,7 +660,7 @@ namespace nml
                     return this.w;
             }
 
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException("index", "Must be in the range 0-3");
         }
 
         /// <summary>
@@ -686,7 +686,7 @@ namespace nml
                     this.w = value;
                     break;
 
-                    throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("index", "Must be in the range 0-3");
             }
         }
     }

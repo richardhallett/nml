@@ -668,7 +668,7 @@ namespace nml
                     return this.z;
             }
 
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException("index", "Must be in the range 0-2");
         }
 
         /// <summary>
@@ -691,7 +691,7 @@ namespace nml
                     this.z = value;
                     break;
 
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("index", "Must be in the range 0-2");
             }
         }
     }
