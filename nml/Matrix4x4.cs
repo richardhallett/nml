@@ -1202,7 +1202,7 @@ namespace nml
                 case 15: return _m44;
             }
 
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException("index", "Argument must be in the range 0-15");
         }
 
         /// <summary>
@@ -1219,9 +1219,9 @@ namespace nml
         private float GetElement(int row, int column)
         {
             if (row < 0 || row > 3)
-                throw new ArgumentOutOfRangeException("Rows must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("row", "Rows must be in range 0 to 3");
             if (column < 0 || column > 3)
-                throw new ArgumentOutOfRangeException("Columns must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("column", "Columns must be in range 0 to 3");
             return GetElement((row * 4) + column);
         }
 
@@ -1270,9 +1270,9 @@ namespace nml
         private void SetElement(int row, int column, float value)
         {
             if (row < 0 || row > 3)
-                throw new ArgumentOutOfRangeException("Rows must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("row", "Rows must be in range 0 to 3");
             if (column < 0 || column > 3)
-                throw new ArgumentOutOfRangeException("Columns must be in range 0 to 3");
+                throw new ArgumentOutOfRangeException("column", "Columns must be in range 0 to 3");
 
             SetElement((row * 4) + column, value);
         }
