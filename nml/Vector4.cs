@@ -45,6 +45,9 @@ namespace nml
         public Vector4(float[] values)
             : this()
         {
+            if (values.Length != 4)
+                throw new ArgumentOutOfRangeException("values", "Values must be an array of exactly four elements");
+
             this.x = values[0];
             this.y = values[1];
             this.z = values[2];
