@@ -39,6 +39,8 @@ namespace nml
         public Vector2(float[] values)
             : this()
         {
+            if (values == null)
+                throw new ArgumentNullException("values");
             if (values.Length != 2)
                 throw new ArgumentOutOfRangeException("values", "Values must be an array of exactly two elements");
 

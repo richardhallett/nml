@@ -42,6 +42,8 @@ namespace nml
         public Vector3(float[] values)
             : this()
         {
+            if (values == null)
+                throw new ArgumentNullException("values");
             if (values.Length != 3)
                 throw new ArgumentOutOfRangeException("values", "Values must be an array of exactly three elements");
 

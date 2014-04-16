@@ -36,6 +36,8 @@ namespace nml
         /// <param name="values">The floats to initialise the values with</param>
         public Matrix4x4(float[] values)
         {
+            if (values == null)
+                throw new ArgumentNullException("values");
             if (values.Length != 16) {
                 throw new ArgumentOutOfRangeException("values", "The size of the values collection must contain 16 elements.");
             }
