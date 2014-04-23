@@ -311,7 +311,9 @@ namespace Nml
         /// <param name="matrix">The matrix to scale.</param>
         /// <param name="scalar">The value you want to scale the matrix by.</param>
         /// <param name="result">The resulting multiplication of the matrix</param>
+#if OPTIMISED        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Multiply(ref Matrix4x4 matrix, float scalar, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
@@ -376,8 +378,9 @@ namespace Nml
         /// <param name="a">First matrix</param>
         /// <param name="b">Second matrix</param>
         /// <param name="result">The product of the two matrices.</param>
-        /// 
+#if OPTIMISED        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Multiply(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
@@ -459,7 +462,9 @@ namespace Nml
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
         /// <param name="result">The resulting addition of the two matrices.</param>
+#if OPTIMISED        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Add(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
@@ -541,7 +546,9 @@ namespace Nml
         /// <param name="a">The first matrix.</param>
         /// <param name="b">The second matrix.</param>
         /// <param name="result">The resulting subtraction of the two matrices.</param>
+#if OPTIMISED        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Subtract(ref Matrix4x4 a, ref Matrix4x4 b, out Matrix4x4 result)
         {
             // Local variables for faster lookup.
@@ -621,7 +628,9 @@ namespace Nml
         /// </summary>
         /// <param name="matrix">The matrix to tranpose.</param>
         /// <param name="result">The transposed matrix</param>
+#if OPTIMISED        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Transpose(ref Matrix4x4 matrix, out Matrix4x4 result)
         {
             Matrix4x4 tMatrix = new Matrix4x4();
@@ -956,7 +965,9 @@ namespace Nml
         /// <param name="matrix">Matrix to transform with.</param>
         /// <param name="vec">Vector to transform.</param>
         /// <param name="result">The resulting <see cref="Vector4"/> transformed by this matrix i.e. M * (x, y, z, w)</param>
+#if OPTIMISED        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
         public static void Transform(ref Matrix4x4 matrix, ref Vector4 vec, out Vector4 result)
         {
             // Local variables for faster lookup.
