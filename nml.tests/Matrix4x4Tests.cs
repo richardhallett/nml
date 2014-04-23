@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace nml.tests
+namespace Nml.Tests
 {
     public class Matrix4x4Tests
     {

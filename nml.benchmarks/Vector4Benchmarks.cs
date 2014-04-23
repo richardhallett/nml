@@ -1,5 +1,5 @@
 ﻿
-namespace nml.benchmarks
+namespace Nml.Benchmarks
 {
     #pragma warning disable 219
     class Vector4Benchmarks

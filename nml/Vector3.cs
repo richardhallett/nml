@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace nml
+namespace Nml
 {
     /// <summary>
     /// A vector (x,y,z)

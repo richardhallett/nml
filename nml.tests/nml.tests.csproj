@@ -6,7 +6,7 @@
     <ProjectGuid>{B7EB695D-613A-439D-9876-CA0AF0E54855}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nml.tests</RootNamespace>
+    <RootNamespace>Nml.Tests</RootNamespace>
     <AssemblyName>nml.tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

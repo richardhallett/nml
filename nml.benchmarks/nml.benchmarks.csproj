@@ -7,7 +7,7 @@
     <ProjectGuid>{3588E422-3A60-414A-ABFF-B3717495DFAC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nml.benchmarks</RootNamespace>
+    <RootNamespace>Nml.Benchmarks</RootNamespace>
     <AssemblyName>nml.benchmarks</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

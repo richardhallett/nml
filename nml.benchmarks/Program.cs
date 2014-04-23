@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace nml.benchmarks
+namespace Nml.Benchmarks
 {
     /// <summary>
     /// Attribute that specifys whether a method is a benchmark test.
@@ -74,7 +74,7 @@ namespace nml.benchmarks
             {
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
                 {
-                    // Only interested in methods defined as benchmarks.
+                    // Only interested in methods defined as Benchmarks.
                     if (!System.Attribute.IsDefined(method, typeof(BenchmarkAttribute)))
                     {
                         continue;
@@ -94,7 +94,7 @@ namespace nml.benchmarks
 
                     var classInstance = Activator.CreateInstance(type);
 
-                    // As we know that all benchmarks have to be parameterless and return void, we can actually get the signature at compile time
+                    // As we know that all Benchmarks have to be parameterless and return void, we can actually get the signature at compile time
                     // We can however support static and non static methods.
                     // This is speedier than letting reflection doing it, otherwise it throws off the benchmarking results.   
                     Action func;

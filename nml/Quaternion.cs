@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace nml
+namespace Nml
 {
     /// <summary>
     /// Represents a rotation or orientation in 3d.
@@ -198,7 +198,7 @@ namespace nml
 
         /// <summary>
         /// Negate a quaternion so it faces the opposite direction, keeping the same orientation.
-        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Quaternion.Invert(nml.Quaternion)"/>.
+        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Quaternion.Invert(Nml.Quaternion)"/>.
         /// </summary>
         /// <param name="quat">The quaternion to negate.</param>
         /// <returns>A quaternion facing the opposite direction.</returns>
@@ -209,7 +209,7 @@ namespace nml
 
         /// <summary>
         /// Negate a quaternion so it faces the opposite direction, keeping the same orientation.
-        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Quaternion.Invert(nml.Quaternion)"/>.
+        /// Note: Negating a quaternion does not give you the opposite rotation use <see cref="Quaternion.Invert(Nml.Quaternion)"/>.
         /// </summary>
         /// <param name="quat">The quaternion to negate.</param>
         /// <param name="result">A quaternion facing the opposite direction.</param>

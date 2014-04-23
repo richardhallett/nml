@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace nml
+namespace Nml
 {
     /// <summary>
     /// This is a 4x4 matrix, used for working with affine transformations ( rotation, scaling, translation) as well as perspective projections in 3d space.

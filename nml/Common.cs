@@ -1,5 +1,5 @@
 ﻿
-namespace nml
+namespace Nml
 {
     /// <summary>
     /// Common mathematical functions.
