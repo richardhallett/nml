@@ -94,5 +94,35 @@ namespace Nml.Benchmarks
             Vector4 result;
             Matrix4x4.Transform(ref matrix, ref vector, out result);
         }
+
+        [Benchmark(Name = "Matrix4x4 RotateX")]
+        public void Matrix4RotateX()
+        {
+            var r = Matrix4x4.RotateX(1.0f);
+        }
+
+        [Benchmark(Name = "Matrix4x4 RotateY")]
+        public void Matrix4RotateY()
+        {
+            var r = Matrix4x4.RotateX(1.0f);
+        }
+
+        [Benchmark(Name = "Matrix4x4 RotateZ")]
+        public void Matrix4RotateZ()
+        {
+            var r = Matrix4x4.RotateX(1.0f);
+        }
+
+        [Benchmark(Name = "Matrix4x4 Scale")]
+        public void Matrix4Scale()
+        {
+            var r = Matrix4x4.Scale(2.0f);
+        }
+
+        [Benchmark(Name = "Matrix4x4 Translate")]
+        public void Matrix4Translate()
+        {
+            var r = Matrix4x4.Translate(1.0f, 2.0f, 3.0f);
+        }
     }
 }

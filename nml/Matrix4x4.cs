@@ -61,6 +61,51 @@ namespace Nml
             _m42 = values[13];
             _m43 = values[14];
             _m44 = values[15];
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Matrix4x4"/> struct.
+        /// </summary>
+        /// <param name="m11">First row, first column</param>
+        /// <param name="m12">First row, second column</param>
+        /// <param name="m13">First row, third column</param>
+        /// <param name="m14">First row, fourth column</param>
+        /// <param name="m21">Second row, first column</param>
+        /// <param name="m22">Second row, second column</param>
+        /// <param name="m23">Second row, third column</param>
+        /// <param name="m24">Second row, fourth column</param>
+        /// <param name="m31">Third row, first column</param>
+        /// <param name="m32">Third row, second column</param>
+        /// <param name="m33">Third row, third column</param>
+        /// <param name="m34">Third row, fourth column</param>
+        /// <param name="m41">Fourth row, first column</param>
+        /// <param name="m42">Fourth row, second column</param>
+        /// <param name="m43">Fourth row, third column</param>
+        /// <param name="m44">Fourth row, fourth column</param>
+        public Matrix4x4(float m11, float m12, float m13, float m14,
+                         float m21, float m22, float m23, float m24,
+                         float m31, float m32, float m33, float m34,
+                         float m41, float m42, float m43, float m44)
+        {           
+            _m11 = m11;
+            _m12 = m12;
+            _m13 = m13;
+            _m14 = m14;
+
+            _m21 = m21;
+            _m22 = m22;
+            _m23 = m23;
+            _m24 = m24;
+
+            _m31 = m31;
+            _m32 = m32;
+            _m33 = m33;
+            _m34 = m34;
+
+            _m41 = m41;
+            _m42 = m42;
+            _m43 = m43;
+            _m44 = m44;
         }        
 
         /// <summary>
@@ -737,10 +782,10 @@ namespace Nml
         /// <returns>The resulting translation matrix.</returns>
         public static Matrix4x4 Translate(float x, float y, float z)
         {
-            return new Matrix4x4(new float[] { 1.0f, 0.0f, 0.0f, x,
-                                             0.0f, 1.0f, 0.0f, y,
-                                             0.0f, 0.0f, 1.0f, z,
-                                             0.0f, 0.0f, 0.0f, 1.0f});
+            return new Matrix4x4(1.0f, 0.0f, 0.0f, x,
+                                 0.0f, 1.0f, 0.0f, y,
+                                 0.0f, 0.0f, 1.0f, z,
+                                 0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         /// <summary>
@@ -762,10 +807,11 @@ namespace Nml
         /// <returns></returns>
         public static Matrix4x4 Scale(float x, float y, float z)
         {
-            return new Matrix4x4(new float[] { x, 0.0f, 0.0f, 0.0f,
-                                             0.0f, y, 0.0f, 0.0f,
-                                             0.0f, 0.0f, z, 0.0f,
-                                             0.0f, 0.0f, 0.0f, 1.0f});
+            return new Matrix4x4(x, 0.0f, 0.0f, 0.0f,
+                                 0.0f, y, 0.0f, 0.0f,
+                                 0.0f, 0.0f, z, 0.0f,
+                                 0.0f, 0.0f, 0.0f, 1.0f);
+
         }
 
         /// <summary>
@@ -798,10 +844,10 @@ namespace Nml
             float cos = (float)Math.Cos(angle);
             float sin = (float)Math.Sin(angle);
 
-            return new Matrix4x4(new float[] { 1.0f, 0.0f, 0.0f, 0.0f,
-                                             0.0f, cos, -sin, 0.0f,
-                                             0.0f, sin, cos, 0.0f,
-                                             0.0f, 0.0f, 0.0f, 1.0f});
+            return new Matrix4x4(1.0f, 0.0f, 0.0f, 0.0f,
+                                 0.0f, cos, -sin, 0.0f,
+                                 0.0f, sin, cos, 0.0f,
+                                 0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         /// <summary>
@@ -815,10 +861,10 @@ namespace Nml
             float cos = (float)Math.Cos(angle);
             float sin = (float)Math.Sin(angle);
 
-            return new Matrix4x4(new float[] { cos, 0.0f, sin, 0.0f,
-                                             0.0f, 1.0f, 0.0f, 0.0f,
-                                             -sin, 0.0f, cos, 0.0f,
-                                             0.0f, 0.0f, 0.0f, 1.0f});
+            return new Matrix4x4(cos, 0.0f, sin, 0.0f,
+                                 0.0f, 1.0f, 0.0f, 0.0f,
+                                 -sin, 0.0f, cos, 0.0f,
+                                 0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         /// <summary>
@@ -832,10 +878,10 @@ namespace Nml
             float cos = (float)Math.Cos(angle);            
             float sin = (float)Math.Sin(angle);            
 
-            return new Matrix4x4(new float[] { cos, -sin, 0.0f, 0.0f,
-                                             sin, cos, 0.0f, 0.0f,
-                                             0.0f, 0.0f, 1.0f, 0.0f,
-                                             0.0f, 0.0f, 0.0f, 1.0f});
+            return new Matrix4x4(cos, -sin, 0.0f, 0.0f,
+                                 sin, cos, 0.0f, 0.0f,
+                                 0.0f, 0.0f, 1.0f, 0.0f,
+                                 0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         /// <summary>
@@ -866,10 +912,10 @@ namespace Nml
             float siny = y * sin;
             float sinz = z * sin;
 
-            return new Matrix4x4(new float[] { cos + xx1,     xy1 - sinz,     xz1 + siny, 0.0f,
-                                             xy1 + sinz,    cos + yy1,      yz1 - sinx, 0.0f,
-                                             xz1 - siny,    yz1 + sinx,     cos + zz1,  0.0f,
-                                             0.0f,          0.0f,           0.0f,       1.0f});
+            return new Matrix4x4(cos + xx1,     xy1 - sinz,     xz1 + siny, 0.0f,
+                                 xy1 + sinz,    cos + yy1,      yz1 - sinx, 0.0f,
+                                 xz1 - siny,    yz1 + sinx,     cos + zz1,  0.0f,
+                                 0.0f,          0.0f,           0.0f,       1.0f);
         }
 
         /// <summary>
@@ -885,10 +931,10 @@ namespace Nml
         /// <returns>A projection matrix.</returns>
         public static Matrix4x4 OrthographicProjectionRH(float left, float right, float bottom, float top, float near, float far)
         {            
-            return new Matrix4x4(new float[] { 2 / (right - left),    0.0f,               0.0f,               -(right + left) / (right - left),
-                                             0.0f,                  2 / (top - bottom), 0.0f,               -(top + bottom) / (top - bottom),
-                                             0.0f,                  0.0f,               -2 / (far - near),  -(far + near) / (far - near),
-                                             0.0f,                  0.0f,               0.0f,               1.0f});
+            return new Matrix4x4( 2 / (right - left),    0.0f,               0.0f,               -(right + left) / (right - left),
+                                 0.0f,                  2 / (top - bottom), 0.0f,               -(top + bottom) / (top - bottom),
+                                 0.0f,                  0.0f,               -2 / (far - near),  -(far + near) / (far - near),
+                                 0.0f,                  0.0f,               0.0f,               1.0f);
         }
 
         /// <summary>
@@ -911,10 +957,10 @@ namespace Nml
             if (near >= far)
                 throw new ArgumentOutOfRangeException("near");
 
-            return new Matrix4x4(new float[] { (2.0f * near) / (right - left),    0.0f,                           (right + left) / (right - left),    0.0f,
-                                             0.0f,                              (2.0f * near) / (top - bottom),  (top + bottom) / (top - bottom),    0.0f,
-                                             0.0f,                              0.0f,                           -(far + near) / (far - near),       -(2 * far * near) / (far - near),
-                                             0.0f,                              0.0f,                           -1.0f,                              0.0f});
+            return new Matrix4x4((2.0f * near) / (right - left),    0.0f,                           (right + left) / (right - left),    0.0f,
+                                 0.0f,                              (2.0f * near) / (top - bottom),  (top + bottom) / (top - bottom),    0.0f,
+                                 0.0f,                              0.0f,                           -(far + near) / (far - near),       -(2 * far * near) / (far - near),
+                                 0.0f,                              0.0f,                           -1.0f,                              0.0f);
         }
 
         /// <summary>

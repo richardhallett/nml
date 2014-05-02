@@ -29,6 +29,6 @@ This is at the moment does not have a stable release, there are still a few thin
 * 64bit versions of Vectors/Matrices/Quaternions.
 * SSE optimisations
 * Better documentation
-* More build targets - At the moment this is compiled against .NET 4.5 which is what I use, however I want to be provide options to build it to various .NET targets and ensure it works also across Mono versions.
+* More build targets
 
 **So if you decide to use this in your own projects, be aware it might change.**
