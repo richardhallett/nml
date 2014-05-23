@@ -1195,10 +1195,10 @@ namespace Nml
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator float[](Matrix4x4 matrix)
-        {
-            return matrix.ToArray();
-        }
+        //public static implicit operator float[](Matrix4x4 matrix)
+        //{
+        //    return matrix.ToArray();
+        //}
 
         /// <summary>
         /// Determines whether the specified <see cref="Matrix4x4"/> is equal to this instance.
@@ -1334,21 +1334,21 @@ namespace Nml
             SetElement((row * 4) + column, value);
         }
 
-        private float _m11;
-        private float _m12;
-        private float _m13;
-        private float _m14;
-        private float _m21;
-        private float _m22;
-        private float _m23;
-        private float _m24;
-        private float _m31;
-        private float _m32;
-        private float _m33;
-        private float _m34;
-        private float _m41;
-        private float _m42;
-        private float _m43;
-        private float _m44;
+        public float _m11;
+        public float _m12;
+        public float _m13;
+        public float _m14;
+        public float _m21;
+        public float _m22;
+        public float _m23;
+        public float _m24;
+        public float _m31;
+        public float _m32;
+        public float _m33;
+        public float _m34;
+        public float _m41;
+        public float _m42;
+        public float _m43;
+        public float _m44;
     }
 }
