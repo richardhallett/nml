@@ -505,9 +505,9 @@ namespace Nml
         /// Get a rotation quaternion around the specifieid euler angles.
         /// The order of the applied rotation is Yaw first, then pitch and finally roll.
         /// </summary>
-        /// <param name="yaw">Yaw in radians.</param>
-        /// <param name="pitch">Pitch in radians.</param>
-        /// <param name="roll">Roll in radians.</param>
+        /// <param name="yaw">Yaw (around the Y axis) in radians.</param>
+        /// <param name="pitch">Pitch (around the X axis) in radians.</param>
+        /// <param name="roll">Roll (around the Z axis) in radians.</param>
         /// <returns></returns>
         public static Quaternion RotateEuler(float yaw, float pitch, float roll)
         {
