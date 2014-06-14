@@ -623,10 +623,10 @@ namespace Nml
             float wy = w * y;
             float wz = w * z;
 
-            result = new Matrix4x4(new float[] { 1.0f - 2.0f * (y2 + z2),     2.0f * (xy - wz),           2.0f * (xz + wy),           0.0f,
-                                                 2.0f * (xy + wz),            1.0f - 2.0f * (x2 + z2),    2.0f * (yz - wx),           0.0f,
-                                                 2.0f * (xz - wy),            2.0f * (yz + wx),           1.0f - 2.0f * (x2 + y2),    0.0f,
-                                                 0.0f,                        0.0f,                       0.0f,                       1.0f }
+            result = new Matrix4x4( 1.0f - 2.0f * (y2 + z2),     2.0f * (xy - wz),           2.0f * (xz + wy),           0.0f,
+                                    2.0f * (xy + wz),            1.0f - 2.0f * (x2 + z2),    2.0f * (yz - wx),           0.0f,
+                                    2.0f * (xz - wy),            2.0f * (yz + wx),           1.0f - 2.0f * (x2 + y2),    0.0f,
+                                    0.0f,                        0.0f,                       0.0f,                       1.0f
             );
         }
 
