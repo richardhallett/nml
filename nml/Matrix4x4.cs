@@ -1148,18 +1148,6 @@ namespace Nml
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Matrix4x4"/> to <see cref="T:System.Single[]"/>.
-        /// </summary>
-        /// <param name="matrix">The matrix.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
-        //public static implicit operator float[](Matrix4x4 matrix)
-        //{
-        //    return matrix.ToArray();
-        //}
-
-        /// <summary>
         /// Determines whether the specified <see cref="Matrix4x4"/> is equal to this instance.
         /// </summary>
         /// <param name="other">The <see cref="Matrix4x4"/> to compare with.</param>
