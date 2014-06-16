@@ -515,12 +515,17 @@ namespace Nml
             float hPitch = pitch * 0.5f;            
             float hRoll = roll * 0.5f;
 
-            float sinRoll = (float)System.Math.Sin(hRoll);
-            float cosRoll = (float)System.Math.Cos(hRoll);
-            float sinPitch = (float)System.Math.Sin(hPitch);
-            float cosPitch = (float)System.Math.Cos(hPitch);
-            float sinYaw = (float)System.Math.Sin(hYaw);
-            float cosYaw = (float)System.Math.Cos(hYaw);
+            float sinRoll;
+            float cosRoll;
+            Common.SinCos(hRoll, out sinRoll, out cosRoll);
+
+            float sinPitch;
+            float cosPitch;
+            Common.SinCos(hPitch, out sinPitch, out cosPitch);
+
+            float sinYaw;
+            float cosYaw;
+            Common.SinCos(hYaw, out sinYaw, out cosYaw);
 
             return new Quaternion(
                     (cosYaw * sinPitch * cosRoll) + (sinYaw * cosPitch * sinRoll),

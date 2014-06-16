@@ -59,5 +59,21 @@ namespace Nml.Tests
 
             Assert.True(Math.Abs(r - expectedResult) < 1e-3f);
         }
+
+        [Fact]
+        public void CommonSinCosTest()
+        {
+            float a = Common.Pi;
+            float sin;
+            float cos;
+            
+            Common.SinCos(a, out sin, out cos);
+
+            var expectedResultSin = Math.Sin(a);
+            var expectedResultCos = Math.Cos(a);
+
+            Assert.True(Math.Abs(sin - expectedResultSin) < 1e-3f);
+            Assert.True(Math.Abs(cos - expectedResultCos) < 1e-3f);
+        }
     }
 }

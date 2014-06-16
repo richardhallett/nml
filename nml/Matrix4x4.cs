@@ -795,8 +795,9 @@ namespace Nml
         /// <returns>A rotation matrix.</returns>
         public static Matrix4x4 RotateX(float angle)
         {
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos;
+            float sin;
+            Common.SinCos(angle, out sin, out cos);
 
             return new Matrix4x4(1.0f, 0.0f, 0.0f, 0.0f,
                                  0.0f, cos, -sin, 0.0f,
@@ -812,8 +813,9 @@ namespace Nml
         /// <returns>A rotation matrix.</returns>
         public static Matrix4x4 RotateY(float angle)
         {
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos;
+            float sin;
+            Common.SinCos(angle, out sin, out cos);
 
             return new Matrix4x4(cos, 0.0f, sin, 0.0f,
                                  0.0f, 1.0f, 0.0f, 0.0f,
@@ -829,8 +831,9 @@ namespace Nml
         /// <returns>A rotation matrix.</returns>
         public static Matrix4x4 RotateZ(float angle)
         {
-            float cos = (float)Math.Cos(angle);            
-            float sin = (float)Math.Sin(angle);            
+            float cos;
+            float sin;
+            Common.SinCos(angle, out sin, out cos);           
 
             return new Matrix4x4(cos, -sin, 0.0f, 0.0f,
                                  sin, cos, 0.0f, 0.0f,
@@ -851,9 +854,11 @@ namespace Nml
             float y = axis.y;
             float z = axis.z;
 
-            float cos = (float)Math.Cos(angle);
+            float cos;
+            float sin;
+            Common.SinCos(angle, out sin, out cos);
+
             float cos1 = 1.0f - cos;
-            float sin = (float)Math.Sin(angle);
 
             float xx1 = x * x * cos1;
             float xy1 = x * y * cos1;

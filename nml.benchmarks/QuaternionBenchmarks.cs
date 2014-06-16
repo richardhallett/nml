@@ -91,5 +91,11 @@ namespace Nml.Benchmarks
         {
             var r = Quaternion.Slerp(a, b, 0.5f);
         }
+
+        [Benchmark(Name = "Quaternion RotateEuler")]
+        public void RotateEuler()
+        {
+            var r = Quaternion.RotateEuler(Common.Pi, Common.Pi, Common.Pi);
+        }
     }
 }

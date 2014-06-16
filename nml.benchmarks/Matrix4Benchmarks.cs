@@ -104,13 +104,13 @@ namespace Nml.Benchmarks
         [Benchmark(Name = "Matrix4x4 RotateY")]
         public void Matrix4RotateY()
         {
-            var r = Matrix4x4.RotateX(1.0f);
+            var r = Matrix4x4.RotateY(1.0f);
         }
 
         [Benchmark(Name = "Matrix4x4 RotateZ")]
         public void Matrix4RotateZ()
         {
-            var r = Matrix4x4.RotateX(1.0f);
+            var r = Matrix4x4.RotateZ(1.0f);
         }
 
         [Benchmark(Name = "Matrix4x4 Scale")]

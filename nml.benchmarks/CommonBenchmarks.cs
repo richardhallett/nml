@@ -17,5 +17,13 @@ namespace Nml.Benchmarks
             double b = 1.0E+7; 
             var r = Common.Lerp(a, b, 0.5f);
         }
+
+        [Benchmark(Name = "Common SinCos")]
+        public void SinCos()
+        {
+            float sin;
+            float cos;
+            Common.SinCos(Common.Pi, out sin, out cos);
+        }
     }
 }
