@@ -167,7 +167,7 @@ namespace Nml
         /// <param name="a">The first vector.</param>
         /// <param name="b">The second vector.</param>
         /// <param name="result">The cross product of the two vectors</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Cross(ref Vector3 a, ref Vector3 b, out Vector3 result)
@@ -197,7 +197,7 @@ namespace Nml
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
         /// <param name="result">The addition of the two vectors (a.x+b.x, a.y+b.y, a.z+b.z)</param>
-#if OPTIMISED
+#if !COMPAT
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Add(ref Vector3 a, ref Vector3 b, out Vector3 result)
@@ -224,7 +224,7 @@ namespace Nml
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
         /// <param name="result">The subtraction of the two vectors (a.x-b.x, a.y-b.y, a.z-b.z)</param>
-#if OPTIMISED                
+#if !COMPAT                
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Subtract(ref Vector3 a, ref Vector3 b, out Vector3 result)
@@ -251,7 +251,7 @@ namespace Nml
         /// <param name="vector">The vector to scale.</param>
         /// <param name="scalar">The value you want to scale the vector by.</param>
         /// <param name="result">The multiplication of the vector (v.x*s, v.y*s, v.z*s)</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Multiply(ref Vector3 vector, float scalar, out Vector3 result)
@@ -278,7 +278,7 @@ namespace Nml
         /// <param name="vector">The vector to scale.</param>
         /// <param name="scalar">The value you want to scale the vector by.</param>
         /// <param name="result">The division of the vector (v.x/s, v.y/s, v.z/s)</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Divide(ref Vector3 vector, float scalar, out Vector3 result)
@@ -305,7 +305,7 @@ namespace Nml
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
         /// <param name="result">The dot product of the two vectors (a.x*b.x + a.y*b.y + a.z*b.z)</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Dot(ref Vector3 a, ref Vector3 b, out float result)
@@ -330,7 +330,7 @@ namespace Nml
         /// </summary>
         /// <param name="a">The vector to normalise</param>
         /// <param name="result">The normalised vector.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Normalise(ref Vector3 a, out Vector3 result)
@@ -383,7 +383,7 @@ namespace Nml
         /// <param name="b">Second vector.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Vector A and 1 is Vector B</param>
         /// <param name="result">A linear combination: a when t=0 or b when t=1 else a point between.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Lerp(ref Vector3 a, ref Vector3 b, float t, out Vector3 result)
@@ -425,7 +425,7 @@ namespace Nml
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
         /// <param name="result">The euclidean distance between a and b, you can also consider this the length of the distance (displacement) vector (a-b).Length.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Distance(ref Vector3 a, ref Vector3 b, out float result)
@@ -469,7 +469,7 @@ namespace Nml
         /// <param name="a">First vector.</param>
         /// <param name="b">Second vector.</param>
         /// <param name="result">The squared distance between a and b</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void DistanceSquared(ref Vector3 a, ref Vector3 b, out float result)

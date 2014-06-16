@@ -140,7 +140,7 @@ namespace Nml
         /// <param name="a">First quaternion.</param>
         /// <param name="b">Second quaternion.</param>
         /// <param name="result">The addition of the two quaternions (a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w)</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Add(ref Quaternion a, ref Quaternion b, out Quaternion result)
@@ -167,7 +167,7 @@ namespace Nml
         /// <param name="a">First quaternion.</param>
         /// <param name="b">Second quaternion.</param>
         /// <param name="result">The subtraction of the two quaternions (a.x-b.x, a.y-b.y, a.z-b.z, a.w-b.w)</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Subtract(ref Quaternion a, ref Quaternion b, out Quaternion result)
@@ -194,7 +194,7 @@ namespace Nml
         /// <param name="a">First quaternion.</param>
         /// <param name="b">Second quaternion.</param>
         /// <param name="result">The dot product of the two quaternions (a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w)</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Dot(ref Quaternion a, ref Quaternion b, out float result)
@@ -219,7 +219,7 @@ namespace Nml
         /// </summary>
         /// <param name="quat">The quaternion to negate.</param>
         /// <param name="result">A quaternion facing the opposite direction.</param>
-#if OPTIMISED
+#if !COMPAT
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Negate(Quaternion quat, ref Quaternion result)
@@ -253,7 +253,7 @@ namespace Nml
         /// </summary>
         /// <param name="quat">The quaternion to normalise</param>
         /// <param name="result">The normalised quaternion.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Normalise(ref Quaternion quat, out Quaternion result)
@@ -303,7 +303,7 @@ namespace Nml
         /// </summary>
         /// <param name="quat">A quaternion</param>
         /// <param name="result">The conjugated quaternion.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Conjugate(ref Quaternion quat, out Quaternion result)
@@ -343,7 +343,7 @@ namespace Nml
         /// </summary>
         /// <param name="quat">The quaternion to invert.</param>
         /// <param name="result">The inverted quaternion.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Invert(ref Quaternion quat, out Quaternion result)
@@ -389,7 +389,7 @@ namespace Nml
         /// <param name="a">First quaternion</param>
         /// <param name="b">Second quaternion</param>
         /// <param name="result">The product of the two quaternions.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Multiply(ref Quaternion a, ref Quaternion b, out Quaternion result)
@@ -429,7 +429,7 @@ namespace Nml
         /// <param name="quaternion">Quaternion to scale</param>
         /// <param name="scalar">Amount to scale by</param>
         /// <param name="result">The scaled quaternion.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Multiply(ref Quaternion quaternion, float scalar, out Quaternion result)
@@ -455,7 +455,7 @@ namespace Nml
         /// <param name="quat">A quaternion to transform with.</param>
         /// <param name="vec">A vector to rotate.</param>
         /// <param name="result">The resulting <see cref="Vector3"/> transformed by this quaternion</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Transform(ref Quaternion quat, ref Vector3 vec, out Vector3 result)
@@ -489,7 +489,7 @@ namespace Nml
         /// <param name="axis">Normalised axis vector.</param>
         /// <param name="angle">Angle in radians.</param>
         /// <param name="result">A quaternion representing a rotation.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void RotateAxis(ref Vector3 axis, float angle, out Quaternion result)
@@ -552,7 +552,7 @@ namespace Nml
         /// </summary>
         /// <param name="quat">The quaternion we want to get the axis and angle from.</param>
         /// <param name="result">A vector4 representing the axis and angle.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void GetAxisAngle(ref Quaternion quat, out Vector4 result)
@@ -608,7 +608,7 @@ namespace Nml
         /// </summary>
         /// <param name="quat">A normalised quaternion.</param>
         /// <param name="result">A matrix representing the quaternion</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void GetMatrix4x4(ref Quaternion quat, out Matrix4x4 result)
@@ -668,7 +668,7 @@ namespace Nml
         /// <param name="b">Second quaternion.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
         /// <param name="result">A linear combination: a when t=0 or b when t=1 else a point between.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Lerp(ref Quaternion a, ref Quaternion b, float t, out Quaternion result)
@@ -719,7 +719,7 @@ namespace Nml
         /// <param name="b">Second quaternion.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
         /// <param name="result">A linear combination: a when t=0 or b when t=1 else a point between.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void NLerp(ref Quaternion a, ref Quaternion b, float t, out Quaternion result)
@@ -766,7 +766,7 @@ namespace Nml
         /// <param name="b">Second quaternion.</param>
         /// <param name="t">The interpolation weighting applied in the range 0 to 1, where 0 is Quaternion A and 1 is Quaternion B</param>
         /// <param name="result">An interpolated quaternion between the two points.</param>
-#if OPTIMISED        
+#if !COMPAT        
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Slerp(ref Quaternion a, ref Quaternion b, float t, out Quaternion result)
