@@ -4,10 +4,8 @@ nml
 What is nml?
 ------------
 
-nml is linear algebra maths library built for .NET and working specifically with 3D space.
+nml is linear algebra maths library built for .NET.
 I originally created it as a learning exercise for myself and to use in projects that require a 3d maths library. 
-
-There are a few C# maths libraries that exist however they mostly reside within existing projects, however I wanted to create a standalone maths library.
 
 Current Requirements
 --------------------
@@ -24,11 +22,11 @@ Goals
 The current state & plans
 -------------------------
 
-This is at the moment does not have a stable release, there are still a few things I want to add, namely:
+There is currently no stable release, there are still a few things I want to add, namely:
 
 * 64bit versions of Vectors/Matrices/Quaternions.
 * SSE optimisations
 * Better documentation
 * More build targets
 
-**So if you decide to use this in your own projects, be aware it might change.**
+**If you decide to use this in your own projects, be aware it might change.**
