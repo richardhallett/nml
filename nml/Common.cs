@@ -30,6 +30,7 @@ namespace Nml
         /// <summary>
         /// A faster combined implementation of SinCos 
         /// Useful for when SSE is not available and you want something significantly faster than separate System.Math.Sin/Cos
+        /// This is based upon the implementation by Stephen L. Moshier in the Cephes library see http://www.netlib.org/cephes/
         /// </summary>
         /// <param name="x">An angle in radians</param>
         /// <param name="sin">The sine.</param>
