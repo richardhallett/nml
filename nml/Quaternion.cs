@@ -508,8 +508,26 @@ namespace Nml
         /// <param name="yaw">Yaw (around the Y axis) in radians.</param>
         /// <param name="pitch">Pitch (around the X axis) in radians.</param>
         /// <param name="roll">Roll (around the Z axis) in radians.</param>
-        /// <returns></returns>
+        /// <returns>A quaternion representing a rotation.</returns>
         public static Quaternion RotateEuler(float yaw, float pitch, float roll)
+        {
+            Quaternion result;
+            Quaternion.RotateEuler(yaw, pitch, roll, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Get a rotation quaternion around the specifieid euler angles.
+        /// The order of the applied rotation is Yaw first, then pitch and finally roll.
+        /// </summary>
+        /// <param name="yaw">Yaw (around the Y axis) in radians.</param>
+        /// <param name="pitch">Pitch (around the X axis) in radians.</param>
+        /// <param name="roll">Roll (around the Z axis) in radians.</param>
+        /// <param name="result">A quaternion representing a rotation.</param>
+#if !COMPAT        
+        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static void RotateEuler(float yaw, float pitch, float roll, out Quaternion result)
         {
             float hYaw = yaw * 0.5f;
             float hPitch = pitch * 0.5f;            
@@ -527,12 +545,11 @@ namespace Nml
             float cosYaw;
             Common.SinCos(hYaw, out sinYaw, out cosYaw);
 
-            return new Quaternion(
-                    (cosYaw * sinPitch * cosRoll) + (sinYaw * cosPitch * sinRoll),
-                    (sinYaw * cosPitch * cosRoll) - (cosYaw * sinPitch * sinRoll),
-                    (cosYaw * cosPitch * sinRoll) - (sinYaw * sinPitch * cosRoll),
-                    (cosYaw * cosPitch * cosRoll) + (sinYaw * sinPitch * sinRoll)
-            );                       
+            result = Quaternion.Identity;
+            result.x = (cosYaw * sinPitch * cosRoll) + (sinYaw * cosPitch * sinRoll);
+            result.y = (sinYaw * cosPitch * cosRoll) - (cosYaw * sinPitch * sinRoll);
+            result.z = (cosYaw * cosPitch * sinRoll) - (sinYaw * sinPitch * cosRoll);
+            result.w = (cosYaw * cosPitch * cosRoll) + (sinYaw * sinPitch * sinRoll);         
         }
 
         /// <summary>
@@ -629,11 +646,15 @@ namespace Nml
             float wz = w * z;
 
             result = Matrix4x4.Identity;
-            result.Set( 1.0f - 2.0f * (y2 + z2), 2.0f * (xy - wz), 2.0f * (xz + wy), 0.0f,
-                        2.0f * (xy + wz), 1.0f - 2.0f * (x2 + z2), 2.0f * (yz - wx), 0.0f,
-                        2.0f * (xz - wy), 2.0f * (yz + wx), 1.0f - 2.0f * (x2 + y2), 0.0f,
-                        0.0f, 0.0f, 0.0f, 1.0f
-           );
+            result.M11 = 1.0f - 2.0f * (y2 + z2);
+            result.M12 = 2.0f * (xy - wz);
+            result.M13 = 2.0f * (xz + wy);
+            result.M21 = 2.0f * (xy + wz);
+            result.M22 = 1.0f - 2.0f * (x2 + z2);
+            result.M23 = 2.0f * (yz - wx);
+            result.M31 = 2.0f * (xz - wy);
+            result.M32 = 2.0f * (yz + wx);
+            result.M33 = 1.0f - 2.0f * (x2 + y2);
         }
 
         /// <summary>
