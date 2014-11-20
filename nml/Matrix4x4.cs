@@ -209,6 +209,27 @@ namespace Nml
                 SetElement(row, column, value);
             }
         }
+
+        /// <summary>
+        /// Gets or sets the translate vector part of the matrix.
+        /// </summary>
+        /// <value>
+        /// The translate part.
+        /// </value>
+        public Vector3 TranslatePart
+        {
+            get
+            {
+                return new Vector3(this.M14, this.M24, this.M23);
+            }
+            set
+            {
+                this.M14 = value.x;
+                this.M24 = value.y;
+                this.M34 = value.z;
+            }
+        }
+
       
         /// <summary>
         /// Set all elements.
