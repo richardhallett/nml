@@ -4,8 +4,7 @@ nml
 What is nml?
 ------------
 
-nml is linear algebra maths library built for .NET.
-I originally created it as a learning exercise for myself and to use in projects that require a 3d maths library. 
+nml is linear algebra maths library built for .NET, mainly intended for projects that require a 3d maths library. 
 
 Current Requirements
 --------------------
@@ -19,10 +18,34 @@ Goals
 * Fast - As fast as I can make it.
 * Interoperable - So it can be used with other existing frameworks.
 
+Building
+-----
+
+## Windows
+
+1. Load VS2015
+2. Load the nml.sln - Build
+
+Testing:
+1. nuget restore
+2. Xunit visual studio runner is included so tests should just work.
+
+## Linux
+
+1. Ensure you have the latest version of mono installed > 4
+2. xbuild nml.sln
+
+Testing:
+2. Get a copy of nuget
+	wget http://dist.nuget.org/win-x86-commandline/latest/nuget.exe -P ~/
+3. mono ~/nuget.exe restore
+4. mono packages/xunit.runner.console.2.1.0/tools/xunit.console.exe nml.tests/bin/Debug/nml.tests.dll
+
+
 The current state & plans
 -------------------------
 
-There is currently no stable release, there are still a few things I want to add, namely:
+There is currently no stable release and there are still a few things I want to add:
 
 * 64bit versions of Vectors/Matrices/Quaternions.
 * SSE optimisations
