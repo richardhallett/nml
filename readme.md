@@ -27,19 +27,30 @@ Building
 2. Load the nml.sln - Build
 
 Testing:
+
 1. nuget restore
 2. Xunit visual studio runner is included so tests should just work.
 
 ## Linux
 
 1. Ensure you have the latest version of mono installed > 4
-2. xbuild nml.sln
+2. Build
+	
+	xbuild nml.sln
 
 Testing:
-2. Get a copy of nuget
+
+1. Get a copy of nuget
+	
 	wget http://dist.nuget.org/win-x86-commandline/latest/nuget.exe -P ~/
-3. mono ~/nuget.exe restore
-4. mono packages/xunit.runner.console.2.1.0/tools/xunit.console.exe nml.tests/bin/Debug/nml.tests.dll
+
+3. Run restore for nuget
+	
+	mono ~/nuget.exe restore
+
+4. Run the tests
+	
+	mono packages/xunit.runner.console.2.1.0/tools/xunit.console.exe nml.tests/bin/Debug/nml.tests.dll
 
 
 The current state & plans
