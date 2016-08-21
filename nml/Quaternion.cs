@@ -7,7 +7,6 @@ namespace Nml
     /// <summary>
     /// Represents a rotation or orientation in 3d.
     /// </summary>
-    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Quaternion : IEquatable<Quaternion>
     {

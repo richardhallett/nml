@@ -6,7 +6,6 @@ namespace Nml
     /// <summary>
     /// A vector (x,y)
     /// </summary>
-    [Serializable]   
     public struct Vector2 : IEquatable<Vector2>
     {       
         /// <summary>

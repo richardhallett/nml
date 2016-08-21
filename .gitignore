@@ -2,3 +2,6 @@ bin/
 obj/
 nlm.v11.suo
 packages/
+.vs
+*.xproj.user
+project.lock.json

@@ -9,7 +9,6 @@ namespace Nml
     /// The data is stored in row-major order, e.g. m12 refers to first row second column.
     /// The mathematical operations on vector transforms are suitable for the order of M*v.
     /// </summary>
-    [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Matrix4x4 : IEquatable<Matrix4x4>
     {

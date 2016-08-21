@@ -68,14 +68,15 @@ namespace Nml.Benchmarks
 
         static void ExecuteBenchmarks()
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            var assembly = typeof(BenchmarkAttribute).GetTypeInfo().Assembly;
 
             foreach (var type in assembly.GetTypes())
             {
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
                 {
+                    var benchmarkAttr = method.GetCustomAttribute<BenchmarkAttribute>();
                     // Only interested in methods defined as Benchmarks.
-                    if (!System.Attribute.IsDefined(method, typeof(BenchmarkAttribute)))
+                    if (benchmarkAttr == null)
                     {
                         continue;
                     }
@@ -96,19 +97,16 @@ namespace Nml.Benchmarks
 
                     // As we know that all Benchmarks have to be parameterless and return void, we can actually get the signature at compile time
                     // We can however support static and non static methods.
-                    // This is speedier than letting reflection doing it, otherwise it throws off the benchmarking results.   
                     Action func;
                     if (method.IsStatic)
                     {
-                        func = (Action)Delegate.CreateDelegate(typeof(Action), method);
+                        func = (Action)method.CreateDelegate(typeof(Action));
                     }
                     else
                     {
-                        func = (Action)Delegate.CreateDelegate(typeof(Action), classInstance, method, true);
+                        func = (Action)method.CreateDelegate(typeof(Action), classInstance);
                     }
-
-                    BenchmarkAttribute benchmarkAttr = (BenchmarkAttribute)method.GetCustomAttributes(typeof(BenchmarkAttribute), true)[0];
-
+                    
                     // If we've specified a name to use, use that otherwise use the methods own name
                     string name = method.Name;
                     if (!String.IsNullOrEmpty(benchmarkAttr.Name))
