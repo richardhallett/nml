@@ -34,10 +34,8 @@ XUnit should be acquired via nuget and in built test runner should work.
 The current state & plans
 -------------------------
 
-There is currently no stable release and there are still a few things I want to add:
+The current release 1.0.0 is reasonably stable as it suits my own use cases, at some point I want to look at adding:
 
 * 64bit versions of Vectors/Matrices/Quaternions.
 * SSE optimisations
 * Better documentation
-
-**If you decide to use this in your own projects, be aware it might change.**
