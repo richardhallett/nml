@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "nml", "nml\nml.xproj", "{22EB3904-B487-4CBF-A5FF-B895CF6D50A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nml", "nml\nml.csproj", "{22EB3904-B487-4CBF-A5FF-B895CF6D50A6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "nml-tests", "nml.tests\nml-tests.xproj", "{C91A501E-6DDD-4279-B11C-6CD322B5A921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nml.tests", "nml.tests\nml.tests.csproj", "{C91A501E-6DDD-4279-B11C-6CD322B5A921}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "nml.benchmarks", "nml.benchmarks\nml.benchmarks.xproj", "{80AA0890-938F-4C1C-AB7B-C054C8AE6683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nml.benchmarks", "nml.benchmarks\nml.benchmarks.csproj", "{80AA0890-938F-4C1C-AB7B-C054C8AE6683}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
