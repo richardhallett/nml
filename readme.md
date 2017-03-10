@@ -16,14 +16,14 @@ Goals
 Building
 -----
 
-## Visual Studio 2015
+## Visual Studio 2017
 
-1. Load VS2015
+1. Load VS2017
 2. Load the nml.sln - Build
 
 Testing:
 
-XUnit should be acquired via nuget and in built test runner should work.
+VS2017 natively supports xunit test projects, just build to discover and run tests.
 
 ## dotnet CLI
 
