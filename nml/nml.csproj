@@ -4,14 +4,12 @@
     <TargetFrameworks>netstandard1.4;net452</TargetFrameworks>
     <AssemblyName>nml</AssemblyName>
     <PackageId>nml</PackageId>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <Authors>Richard Hallett</Authors>
+    <Version>1.0.1</Version>
+    <PackageLicenseUrl>https://github.com/richardhallett/nml/blob/master/license.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/richardhallett/nml/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/richardhallett/nml/</RepositoryUrl>
+    <RepositoryType />
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
